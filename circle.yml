@@ -1,0 +1,9 @@
+deployment:
+  demo:
+    branch: master
+    commands:
+      - heroku maintenance:on --app sampierson
+      - "git push git@heroku.com:sampierson.git $CIRCLE_SHA1:master":
+          {timeout: 600}
+      - heroku run rake db:migrate --app sampierson
+      - heroku maintenance:off --app sampierson
