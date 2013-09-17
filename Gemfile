@@ -18,6 +18,8 @@ gem 'sdoc', require: false, group:[:doc]        # bundle exec rake doc:rails gen
 # gem 'capistrano', group: :development         # Use Capistrano for deployment
 # gem 'debugger', group: [:development, :test]  # Use debugger
 
+gem 'haml'
+
 group :development, :test do
   gem 'rspec-rails'
 end
