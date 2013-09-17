@@ -27,6 +27,10 @@ module SamPierson
 
     config.generators do |g|
       # g.template_engine :haml     - not required - the haml-rails gem takes care of this
+      g.helper false
+      g.assets false
+      g.javascripts false
+      g.view_specs false
     end
   end
 end
