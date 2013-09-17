@@ -20,6 +20,10 @@ gem 'sdoc', require: false, group:[:doc]        # bundle exec rake doc:rails gen
 
 gem 'haml'
 
+group :development do
+  gem 'haml-rails'                              # use haml as templating engine in generators
+end
+
 group :development, :test do
   gem 'rspec-rails'
 end
