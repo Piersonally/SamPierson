@@ -30,3 +30,7 @@ end
 group :development, :test do
   gem 'rspec-rails'
 end
+
+group :production do
+  gem 'rails_12factor'                          # make Heroku happy (log to stdout, servce static assets)
+end
