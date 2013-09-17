@@ -22,6 +22,8 @@ gem 'haml'
 
 group :development do
   gem 'haml-rails'                              # use haml as templating engine in generators
+  gem 'guard-rspec'
+  gem 'terminal-notifier-guard'                 # Have Guard send Mac OS X system notifications
 end
 
 group :development, :test do
