@@ -30,6 +30,7 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'capybara-screenshot'
 end
 
 group :production do
