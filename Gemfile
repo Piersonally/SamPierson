@@ -20,6 +20,7 @@ gem 'sdoc', require: false, group:[:doc]        # bundle exec rake doc:rails gen
 # gem 'debugger', group: [:development, :test]  # Use debugger
 
 gem 'haml'
+gem 'bootstrap-sass'
 
 group :development do
   gem 'haml-rails'                              # use haml as templating engine in generators
