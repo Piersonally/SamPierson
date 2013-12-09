@@ -6,4 +6,21 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    = yield
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container
+          %button.btn.btn-navbar{ type: 'button', data: { toggle: 'collapse', target: '.nav-collapse' } }
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.brand{ href: '/' } SamPierson
+          .nav-collapse.collapse
+            %ul.nav
+              %li.active
+                = link_to 'Home', '#'
+              %li
+                = link_to 'About', '#'
+              %li
+                = link_to 'Contact', '#'
+    .container
+      = yield
