@@ -14,7 +14,7 @@ gem 'jquery-rails'                              # Use jquery as the JavaScript l
 gem 'turbolinks'                                # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'jbuilder', '~> 1.2'                        # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'sdoc', require: false, group:[:doc]        # bundle exec rake doc:rails generates the API under doc/api.
-# gem 'bcrypt-ruby', '~> 3.0.0'                 # Use ActiveModel has_secure_password
+gem 'bcrypt-ruby', '~> 3.1.2'                   # Use ActiveModel has_secure_password
 # gem 'unicorn'                                 # Use unicorn as the app server
 # gem 'capistrano', group: :development         # Use Capistrano for deployment
 # gem 'debugger', group: [:development, :test]  # Use debugger
