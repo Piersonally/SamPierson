@@ -35,11 +35,12 @@ group :development, :test do
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'poltergeist'
+  gem 'factory_girl_rails'                      # If you use factory_girl for fixture replacement, ensure that factory_girl_rails is available in the development group. If it's not, Rails will generate standard yml files instead of factory files.
 end
 
 group :test do
   gem 'shoulda-matchers'
-  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :production do
