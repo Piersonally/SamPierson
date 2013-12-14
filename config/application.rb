@@ -7,6 +7,15 @@ require "action_mailer/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
+# Try to load environment variables before we initialized everything else.  If the file is
+# not there, do not throw an error.  In development, make sure the file is there.  Add this
+# file to .slugignore so it is not deployed on Heroku
+begin
+  require File.expand_path("../preinitializer.rb", __FILE__)
+rescue Exception
+  # do nothing.  Rely on external setting of environment variables
+end
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)

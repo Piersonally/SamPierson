@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-SamPierson::Application.config.secret_key_base = 'bb65425ba2cc8ecb3e6cf0c30a017c40b30b0cf94527fe6b728ba267a8d9ceaf9f01cf8e8051cf159aaad441332ca017cd1a478fdeb27b3dd0b8332b7e4114dd'
+SamPierson::Application.config.secret_key_base = ENV['RAILS_SECRET_KEY_BASE']
