@@ -26,6 +26,7 @@ gem 'meta-tags', require: 'meta_tags'
 group :development do
   gem 'haml-rails'                              # use haml as templating engine in generators
   gem 'guard-rspec'
+  gem 'guard-livereload', require: false
   gem 'terminal-notifier-guard'                 # Have Guard send Mac OS X system notifications
   gem 'quiet_assets'
 end
