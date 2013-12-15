@@ -45,6 +45,8 @@ describe AccountsController do
       end
 
       it { expect(subject).to redirect_to root_path }
+
+      it { subject ; expect(flash[:notice]).not_to be_blank }
     end
   end
 end
