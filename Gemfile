@@ -27,6 +27,7 @@ group :development do
   gem 'haml-rails'                              # use haml as templating engine in generators
   gem 'guard-rspec'
   gem 'guard-livereload', require: false
+  gem 'rack-livereload'
   gem 'terminal-notifier-guard'                 # Have Guard send Mac OS X system notifications
   gem 'quiet_assets'
 end
