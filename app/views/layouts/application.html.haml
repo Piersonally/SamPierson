@@ -3,7 +3,8 @@
   %head
     = display_meta_tags site: site_title_helper, reverse: true
     %meta{name:'viewport', content:'width=device-width, initial-scale=1.0'}
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'application', media: 'all',
+                                            'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
@@ -11,7 +12,9 @@
     %nav.navbar.navbar-default{role: "navigation"}
       / Brand and toggle get grouped for better mobile display
       .navbar-header
-        %button.navbar-toggle{ data: { target: '#bs-navbar-collapse-1', toggle: 'collapse', type: 'button' } }
+        %button.navbar-toggle{ data: { target: '#bs-navbar-collapse-1',
+                                       toggle: 'collapse',
+                                       type: 'button' } }
           %span.sr-only Toggle navigation
           %span.icon-bar
           %span.icon-bar
@@ -36,4 +39,15 @@
               %li
 
     .container
+      - flash.each do |type, msg|
+        .alert{ class: "alert-#{type == :notice ? 'success' : 'danger'}" }
+          %button.close{ type: 'button',
+                         data: { dismiss: 'alert'},
+                         'aria-hidden' => 'true'}
+            &times;
+
+          = msg.gsub("\n", '<br>').html_safe
+
+      %h1= title
+
       = yield
