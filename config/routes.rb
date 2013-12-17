@@ -2,6 +2,10 @@ SamPierson::Application.routes.draw do
 
   root 'home#index'
 
+  get 'login', to: 'sessions#new', as: 'login'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy', as: 'logout'
+
   get 'signup', to: 'accounts#new', as: 'signup'
 
   resources :accounts, only: [:new, :create]
