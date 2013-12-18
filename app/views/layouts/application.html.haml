@@ -9,34 +9,7 @@
     = csrf_meta_tags
 
   %body
-    %nav.navbar.navbar-default{role: "navigation"}
-      / Brand and toggle get grouped for better mobile display
-      .navbar-header
-        %button.navbar-toggle{ data: { target: '#bs-navbar-collapse-1',
-                                       toggle: 'collapse',
-                                       type: 'button' } }
-          %span.sr-only Toggle navigation
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        %a.navbar-brand{ href: root_path } Sam Pierson
-
-      / Collect the nav links, forms, and other content for toggling
-      #bs-navbar-collapse-1.collapse.navbar-collapse
-
-        %ul.nav.navbar-nav
-          %li.active
-            %a{ href: root_path } Home
-
-        %ul.nav.navbar-nav.navbar-right
-          %li.dropdown
-            %a.dropdown-toggle{ data: { toggle: 'dropdown', href: '#' } }
-              Cog
-              %b.caret
-            %ul.dropdown-menu
-              %li
-                %a{ href: '#' } Logout
-              %li
+    = navbar_helper main_navbar_content_data
 
     .container
       - flash.each do |type, msg|
