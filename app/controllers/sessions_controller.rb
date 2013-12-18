@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   def create
     account = Account.find_by_email params[:email]
     if account && account.authenticate(params[:password])
-      session[:account_id] = account.id
+      log_user_in account
       redirect_to root_url, notice: "You logged in successfully."
     else
       flash.now.alert = "Email or password is invalid."
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    reset_session
+    log_out
     redirect_to root_path, notice: "You are now logged out."
   end
 end

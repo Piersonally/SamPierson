@@ -6,6 +6,7 @@ class AccountsController < ApplicationController
 
   def create
     if create_account
+      log_user_in @account
       redirect_to root_url, notice: 'Thank you for signing up!'
     else
       render 'new'

@@ -44,8 +44,12 @@ describe AccountsController do
         expect(account.full_name).to eq 'First Last'
       end
 
-      it { expect(subject).to redirect_to root_path }
+      it "should leave the new user logged in" do
+        subject
+        session[:account_id].should == assigns(:account).id
+      end
 
+      it { expect(subject).to redirect_to root_path }
       it { subject ; expect(flash[:notice]).not_to be_blank }
     end
   end
