@@ -24,10 +24,12 @@ on run argv     # the 'on run' is required to read argv, which in this case, is 
   # {"RESQ-SCHED",    "zeus rake resque:scheduler"}, ¬
 
   set tabs to {¬
-    {"CONSOLE",       "rails console"}, ¬
-    {"SERVER",        "rails server"}, ¬
+    {"ZEUS",          "env RUBYLIB=~/Applications/RubyMine.app/rb/testing/patch/common:~/Applications/RubyMine.app/rb/testing/patch/bdd zeus start"}, ¬
+    {"CONSOLE",       "zeus console"}, ¬
+    {"SERVER",        "zeus server"}, ¬
     {"GUARD",         "bundle exec guard"} ¬
   }
+
   # /usr/local/etc/redis.conf <= this was the default location for redis.conf for me. You may need to edit this
 
   # tell application "Terminal"
