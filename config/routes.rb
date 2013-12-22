@@ -1,5 +1,7 @@
 SamPierson::Application.routes.draw do
 
+  resources :posts
+
   root 'home#index'
 
   get 'login', to: 'sessions#new', as: 'login'

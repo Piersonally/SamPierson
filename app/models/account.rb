@@ -1,4 +1,6 @@
 class Account < ActiveRecord::Base
+  has_many :posts, foreign_key: 'author_id', inverse_of: :author
+
   has_secure_password
 
   validates :email, :first_name, :last_name, presence: true

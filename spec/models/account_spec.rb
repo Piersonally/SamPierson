@@ -5,7 +5,9 @@ describe Account do
     it { should have_db_index(:email).unique(true) }
   end
 
-  describe "associations"
+  describe "associations" do
+    it { should have_many :posts }
+  end
 
   describe "attributes"
 
