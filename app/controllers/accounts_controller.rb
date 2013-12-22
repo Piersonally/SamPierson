@@ -5,12 +5,13 @@ class AccountsController < ApplicationController
   end
 
   def create
-    if create_account
-      log_user_in @account
-      redirect_to root_url, notice: 'Thank you for signing up!'
-    else
-      render 'new'
-    end
+    redirect_to root_path, alert: 'Sign up is currently disabled.'
+    #if create_account
+    #  log_user_in @account
+    #  redirect_to root_url, notice: 'Thank you for signing up!'
+    #else
+    #  render 'new'
+    #end
   end
 
   private
