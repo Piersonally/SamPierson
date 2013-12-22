@@ -72,6 +72,8 @@ GEM
     ffi (1.9.3)
     foreigner (1.6.0)
       activerecord (>= 3.0.0)
+    foreigner-matcher (0.2.3)
+      foreigner (>= 1.0.0)
     formatador (0.2.4)
     guard (2.2.5)
       formatador (>= 0.2.4)
@@ -238,6 +240,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   foreigner
+  foreigner-matcher
   guard-livereload
   guard-rspec
   haml
