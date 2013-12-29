@@ -1,46 +1,12 @@
 - title 'Sign Up'
 
-= form_for @account, html: { class:'form-horizontal', role: 'form' } do |f|
-  - if @account.errors.any?
-    .error_messages
-      %h2 Form is invalid
-      %ul
-        - @account.errors.full_messages.each do |message|
-          %li= message
+= bootstrap_form_for @account, html: { class: 'col-sm-offset-1 col-sm-10' } do |f|
+  = f.input :email
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :password
+  = f.input :password_confirmation, label: 'Retype password', placeholder: 'Password'
 
-  .col-sm-offset-2.col-sm-8
-    .form-group
-      = f.label :email, class: 'col-sm-3 control-label'
-      .col-sm-6
-        = f.text_field :email, class: 'form-control', placeholder: 'Email',
-                               type: 'email'
-
-    .form-group
-      = f.label :first_name, class: 'col-sm-3 control-label'
-      .col-sm-4
-        = f.text_field :first_name, class: 'form-control',
-                                    placeholder: 'First name'
-
-    .form-group
-      = f.label :last_name, class: 'col-sm-3 control-label'
-      .col-sm-4
-        = f.text_field :last_name, class: 'form-control',
-                                   placeholder: 'Last name'
-
-    .form-group
-      = f.label :password, class: 'col-sm-3 control-label'
-      .col-sm-4
-        = f.text_field :password, class: 'form-control',
-                                  placeholder: 'Password', type: 'password'
-
-    .form-group
-      = f.label :password_confirmation, 'Retype password',
-                                        class: 'col-sm-3 control-label'
-      .col-sm-4
-        = f.text_field :password_confirmation, class: 'form-control',
-                                               placeholder: 'Password',
-                                               type: 'password'
-
-    .form-group
-      .col-sm-offset-3.col-sm-2
-        = f.submit 'Sign Up', class: 'btn btn-primary'
+  .form-group
+    .col-sm-offset-3.col-sm-2
+      = f.submit 'Sign Up', class: 'btn btn-primary'
