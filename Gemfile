@@ -23,6 +23,7 @@ gem 'bcrypt-ruby', '~> 3.1.2'                   # Use ActiveModel has_secure_pas
 gem 'haml'
 gem 'bootstrap-sass'
 gem 'meta-tags', require: 'meta_tags'
+gem 'redcarpet'
 
 group :development do
   gem 'haml-rails'                              # use haml as templating engine in generators
