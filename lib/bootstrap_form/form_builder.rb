@@ -22,20 +22,26 @@ module BootstrapForm
     end
 
     def derive_field_class_prefix(attr)
-      field_class_prefix_based_on_column_type(attr) ||
-      field_class_prefix_based_on_column_name(attr) ||
-      'Text'
+      case attr_column_type(attr)
+      when :string; string_field_class_prefix_based_on_column_name(attr)
+      when :text  ; 'Textarea'
+      else 'Text'
+      end
     end
 
-    def field_class_prefix_based_on_column_type(attr)
-      nil
+    def attr_column_type(attr)
+      attr_column_info(attr).try(:type) || :string
     end
 
-    def field_class_prefix_based_on_column_name(attr)
-      case
-      when attr.to_sym == :email    ; 'Email'
+    def attr_column_info(attr)
+      object.class.columns.detect { |c| c.name == attr.to_s }
+    end
+
+    def string_field_class_prefix_based_on_column_name(attr)
+      x = case
+      when attr.to_s =~ /email/i    ; 'Email'
       when attr.to_s =~ /password/i ; 'Password'
-      else nil
+      else 'Text'
       end
     end
   end
