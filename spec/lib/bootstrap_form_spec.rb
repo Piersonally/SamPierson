@@ -57,6 +57,12 @@ describe BootstrapForm, type: :helper do
     describe "f.input" do
       let(:field_id) { "account_email" }
 
+      describe "form-group" do
+        it "should add a class describing the form group" do
+          should have_selector ".form-group.account_email_group"
+        end
+      end
+
       describe "label" do
         it { should have_selector "form##{form_id} > .form-group > label.control-label[for=#{field_id}]" }
 

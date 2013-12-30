@@ -24,9 +24,13 @@ module BootstrapForm
       private
 
       def group_options
-        css_classes = CssClassList.new 'form-group'
+        css_classes = CssClassList.new 'form-group', group_name
         css_classes << 'has-error' if has_error?
         { class: css_classes }
+      end
+
+      def group_name # added as a class on form group to make it more testable
+        "#{@form_builder.object_name.to_s.underscore}_#{@name}_group"
       end
 
       def field_label
