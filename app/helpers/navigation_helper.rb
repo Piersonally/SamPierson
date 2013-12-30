@@ -10,6 +10,16 @@ module NavigationHelper
       },
       {
         type: :nav,
+        items: [
+          {
+            label: 'Posts', href: posts_path,
+            active: /^\/posts/,
+            if: user_logged_in?
+          }
+        ]
+      },
+      {
+        type: :nav,
         class: 'navbar-right',
         items: [
           { label: 'Log In', href: login_path }

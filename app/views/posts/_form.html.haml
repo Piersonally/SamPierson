@@ -1,0 +1,7 @@
+= bootstrap_form_for @post do |f|
+  = f.input :title
+  = f.input :body, rows: 10
+
+  .form-group
+    .col-sm-offset-3.col-sm-2
+      = f.submit 'Save', class: 'btn btn-primary'
