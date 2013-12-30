@@ -11,6 +11,19 @@ describe Post do
     it { should belong_to(:author).class_name('Account') }
   end
 
+  describe "scopes" do
+    describe "published_at" do
+      let!(:unpublished_post) { FactoryGirl.create :post }
+      let!(:post1) { FactoryGirl.create :post, published_at: 2.days.ago }
+      let!(:post2) { FactoryGirl.create :post, published_at: 1.day.ago }
+      subject { Post.published }
+
+      it "should return published posts in reverse chronoligical order" do
+        subject.should eq [post2, post1]
+      end
+    end
+  end
+
   describe "attributes"
 
   describe "validations" do
