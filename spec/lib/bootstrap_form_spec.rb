@@ -12,6 +12,7 @@ describe BootstrapForm, type: :helper do
   def post_form
     helper.bootstrap_form_for model do |f|
       f.input(:title) +
+      f.input(:published_at) +
       f.input(:body)
     end
   end
@@ -87,22 +88,32 @@ describe BootstrapForm, type: :helper do
         it { should have_input("##{field_id}").with_attr_value(:required, 'required') }
       end
 
-      describe "for an optional text field" do
-        let(:model) { Post.new }
-        let(:field_id) { 'post_body' }
-        subject { post_form }
-
-        it { should have_tag(:textarea).with_id(field_id) }
-        it { should have_tag(:textarea).with_id(field_id)
-                                       .with_placeholder('Body') }
-        it { should_not have_tag(:textarea).with_id(field_id)
-                                           .with_attr_value(:required, 'required') }
-      end
-
-      describe "for a string field whose name contains the word 'password'" do
+      describe "password field, (string field whose name contains the word 'password')" do
         let(:field_id) { "account_password" }
 
         it { should have_input("##{field_id}").with_type('password') }
+      end
+
+      describe "using the posts form" do
+        let(:model) { Post.new }
+        subject { post_form }
+
+        describe "for an optional text field" do
+          let(:field_id) { 'post_body' }
+
+          it { should have_tag(:textarea).with_id(field_id) }
+          it { should have_tag(:textarea).with_id(field_id)
+                                         .with_placeholder('Body') }
+          it { should_not have_tag(:textarea).with_id(field_id)
+                                             .with_attr_value(:required, 'required') }
+        end
+
+
+        describe "datetime field" do
+          let(:field_id) { "post_published_at" }
+
+          it { should have_input("##{field_id}").with_type('datetime') }
+        end
       end
     end
   end

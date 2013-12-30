@@ -16,3 +16,16 @@
 //= require bootstrap
 //= require jquery.datetimepicker
 //= require_tree .
+
+$(document).on('page:change', function() {
+  $('input[type=datetime]').datetimepicker({
+    allowBlank: true
+  });
+
+  $('[data-activate-datepicker]').each(function() {
+    var dateTimePickerSelector = $(this).data('activate-datepicker');
+    $(this).click(function() {
+      $(dateTimePickerSelector).datetimepicker('show');
+    });
+  })
+});
