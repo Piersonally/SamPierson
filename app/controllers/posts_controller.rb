@@ -1,55 +1,42 @@
 class PostsController < LoggedInController
+  respond_to :html
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @posts = current_user.posts.order 'published_at DESC'
+    respond_with @posts
   end
 
   def show
+    respond_with @post
   end
 
   def new
     @post = current_user.posts.new
+    respond_with @post
   end
 
   def edit
+    respond_with @post
   end
 
   def create
     @post = current_user.posts.new post_params
-
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @post }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = 'Post was successfully created.' if @post.save
+    respond_with @post
   end
 
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    if @post.update(post_params)
+      flash[:notice] = 'Post was successfully updated.'
     end
+    respond_with @post
   end
 
   def destroy
     @post.destroy
-    respond_to do |format|
-      format.html {
-        redirect_to posts_url,
-                    notice: "Post \"#{@post.title}\" was successfully destroyed."
-      }
-      format.json { head :no_content }
-    end
+    flash[:notice] = "Post \"#{@post.title}\" was successfully destroyed."
+    respond_with @post
   end
 
   private
