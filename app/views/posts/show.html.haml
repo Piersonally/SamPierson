@@ -4,14 +4,14 @@
   %b Title:
   = @post.title
 %p
-  %b Body:
-  = @post.body
-%p
   %b Author:
   = @post.author_id
 %p
   %b Published at:
   = @post.published_at
+%p
+  %b Body:
+  = markdown @post.body
 
 = link_to 'Edit', edit_post_path(@post)
 \|
