@@ -34,6 +34,7 @@ module BootstrapForm
     end
 
     def attr_column_info(attr)
+      return nil unless object.class.respond_to? :columns
       object.class.columns.detect { |c| c.name == attr.to_s }
     end
 

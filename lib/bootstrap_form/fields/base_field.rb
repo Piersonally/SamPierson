@@ -75,18 +75,24 @@ module BootstrapForm
                                      class: 'help-block col-sm-3'
       end
 
+      def model
+        @form_builder.object
+      end
+
       def errors
-        @cached_errors ||= @form_builder.object.errors[@name.to_sym]
+        return [] unless model
+        @cached_errors ||= model.errors[@name.to_sym]
       end
 
       def required?
-        @form_builder.object.class.validators_on(@name).any? do |validator|
+        return false unless model
+        model.class.validators_on(@name).any? do |validator|
           validator.kind_of? ActiveModel::Validations::PresenceValidator
         end
       end
 
       def has_error?
-        @form_builder.object.errors[@name].any?
+        errors.any?
       end
     end
   end
