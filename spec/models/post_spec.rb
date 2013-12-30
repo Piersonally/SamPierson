@@ -37,5 +37,21 @@ describe Post do
 
   describe "class methods"
 
-  describe "instance methods"
+  describe "instance methods" do
+    describe "published?" do
+      subject { post.published? }
+
+      context "for an unpublished post" do
+        let(:post) { FactoryGirl.create :post }
+
+        it { should be_false }
+      end
+
+      context "for a published post" do
+        let(:post) { FactoryGirl.create :published_post }
+
+        it { should be_true }
+      end
+    end
+  end
 end

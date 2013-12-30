@@ -7,4 +7,8 @@ class Post < ActiveRecord::Base
   scope :published, -> {
     where('published_at IS NOT NULL').order('published_at DESC')
   }
+
+  def published?
+    !!published_at
+  end
 end
