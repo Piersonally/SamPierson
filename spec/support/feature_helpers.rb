@@ -6,6 +6,10 @@ module FeatureHelpers
     click_button 'Log In'
     expect(page).to have_content "You logged in successfully."
   end
+
+  def rails_dom_id(model)
+    ActionView::RecordIdentifier.dom_id model
+  end
 end
 
 RSpec.configure do |config|

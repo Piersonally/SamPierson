@@ -112,10 +112,12 @@ describe PostsController do
       it "destroys the requested post"  do
         expect { subject }.to change(Post, :count).by(-1)
       end
-  
-      it "redirects to the posts list" do
-        subject
-        response.should redirect_to posts_url
+
+      describe "and" do
+        before { subject }
+
+        it { response.should redirect_to posts_url }
+        it { expect(flash[:notice]).to be_present }
       end
     end
   end

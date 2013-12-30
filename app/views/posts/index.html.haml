@@ -10,7 +10,7 @@
     %th
 
   - @posts.each do |post|
-    %tr
+    %tr{ id: dom_id(post) }
       %td= link_to post.title, post
       %td= post.author.full_name
       %td= post.published_at
