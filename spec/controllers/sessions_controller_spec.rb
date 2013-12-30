@@ -14,7 +14,7 @@ describe SessionsController do
 
     context "with invalid params" do
       let(:create_params) {
-        { email: 'foo@bar.com', password: 'wrong password' }
+        { login: { email: 'foo@bar.com', password: 'wrong password' } }
       }
       before { subject }
 
@@ -25,7 +25,9 @@ describe SessionsController do
     end
 
     context "with valid params" do
-      let(:create_params) { {email: account.email, password: 'secret' } }
+      let(:create_params) {
+        { login: {email: account.email, password: 'secret' } }
+      }
       before { subject }
 
       it { expect(response).to redirect_to root_path }

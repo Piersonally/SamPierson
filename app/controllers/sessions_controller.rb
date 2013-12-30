@@ -4,8 +4,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    account = Account.find_by_email params[:email]
-    if account && account.authenticate(params[:password])
+    account = Account.find_by_email params[:login][:email]
+    if account && account.authenticate(params[:login][:password])
       log_user_in account
       redirect_to root_url, notice: "You logged in successfully."
     else

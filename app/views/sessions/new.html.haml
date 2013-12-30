@@ -1,22 +1,30 @@
 - title 'Log In'
 
-= form_tag login_path, class:'form-horizontal', role: 'form' do |f|
+= bootstrap_form_for :login, url: login_path do |f|
+  = f.input :email
+  = f.input :password
+  .form-group
+    .col-sm-offset-3.col-sm-2
+      = submit_tag 'Log In', class: 'btn btn-primary'
 
-  .col-sm-offset-2.col-sm-8
-    .form-group
-      = label_tag :email, nil, class: 'col-sm-3 control-label'
-      .col-sm-6
-        = text_field_tag :email, nil, class: 'form-control',
-                                      placeholder: 'Email',
-                                      type: 'email'
 
-    .form-group
-      = label_tag :password, nil, class: 'col-sm-3 control-label'
-      .col-sm-4
-        = text_field_tag :password, nil, class: 'form-control',
-                                         placeholder: 'Password',
-                                         type: 'password'
-
-    .form-group
-      .col-sm-offset-3.col-sm-2
-        = submit_tag 'Log In', class: 'btn btn-primary'
+-#= form_tag login_path, class:'form-horizontal', role: 'form' do |f|
+-#
+-#  .col-sm-offset-2.col-sm-8
+-#    .form-group
+-#      = label_tag :email, nil, class: 'col-sm-3 control-label'
+-#      .col-sm-6
+-#        = text_field_tag :email, nil, class: 'form-control',
+-#                                      placeholder: 'Email',
+-#                                      type: 'email'
+-#
+-#    .form-group
+-#      = label_tag :password, nil, class: 'col-sm-3 control-label'
+-#      .col-sm-4
+-#        = text_field_tag :password, nil, class: 'form-control',
+-#                                         placeholder: 'Password',
+-#                                         type: 'password'
+-#
+-#    .form-group
+-#      .col-sm-offset-3.col-sm-2
+-#        = submit_tag 'Log In', class: 'btn btn-primary'
