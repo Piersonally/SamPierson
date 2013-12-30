@@ -120,5 +120,34 @@ describe PostsController do
         it { expect(flash[:notice]).to be_present }
       end
     end
+
+    describe "PATCH publish" do
+      let(:post) { authors_post }
+
+      subject { patch :publish, id: post.to_param }
+
+      context "for an already published post" do
+        before { post.update_column :published_at, 1.day.ago }
+
+        it "should not change the post's published_at" do
+          expect {
+            subject
+          }.not_to change(post.reload, :published_at)
+        end
+      end
+
+      context "for an unpublished post" do
+        it "should set published_at" do
+          subject
+          expect(post.reload.published_at).to be_within(3.seconds).of(Time.now)
+        end
+
+        context "and" do
+          before { subject }
+          it { expect(flash[:notice]).to be_present }
+          it { expect(response).to redirect_to authors_post }
+        end
+      end
+    end
   end
 end

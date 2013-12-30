@@ -1,7 +1,5 @@
 SamPierson::Application.routes.draw do
 
-  resources :posts
-
   root 'home#index'
 
   get 'login', to: 'sessions#new', as: 'login'
@@ -11,6 +9,12 @@ SamPierson::Application.routes.draw do
   get 'signup', to: 'accounts#new', as: 'signup'
 
   resources :accounts, only: [:new, :create]
+
+  resources :posts do
+    member do
+      patch :publish
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

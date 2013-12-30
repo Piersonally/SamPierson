@@ -1,6 +1,6 @@
 class PostsController < LoggedInController
   respond_to :html
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :publish]
 
   def index
     @posts = current_user.posts.order 'published_at DESC'
@@ -37,6 +37,14 @@ class PostsController < LoggedInController
     @post.destroy
     flash[:notice] = "Post \"#{@post.title}\" was successfully destroyed."
     respond_with @post
+  end
+
+  def publish
+    unless @post.published?
+      @post.update_attributes! published_at: Time.now
+      flash[:notice] = "Post \"#{@post.title}\" has been published."
+    end
+    redirect_to @post
   end
 
   private
