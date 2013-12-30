@@ -19,6 +19,15 @@ describe BootstrapHelper do
     '</nav>'
   end
 
+  RSpec::Matchers.define :be_navbar_with_content do |expected_content|
+    match do |actual|
+      expect(actual).to eq navbar_with_content(expected_content)
+    end
+    failure_message_for_should do |actual|
+      "expected #{actual} to contain #{expected_content}"
+    end
+  end
+
   describe "#navbar_helper" do
     subject { helper.navbar_helper content_data }
     before { helper.stub_chain(:request, :path).and_return('/foo') }
@@ -32,13 +41,11 @@ describe BootstrapHelper do
       }
 
       it "should do something" do
-        expect(subject).to eq(
-         navbar_with_content(
-           '<ul class="nav navbar-nav">' +
-             '<li><a href="/">Home</a></li>' +
-             '<li><a href="/contact">Contact</a></li>' +
-           '</ul>'
-          )
+        expect(subject).to be_navbar_with_content(
+         '<ul class="nav navbar-nav">' +
+           '<li><a href="/">Home</a></li>' +
+           '<li><a href="/contact">Contact</a></li>' +
+         '</ul>'
         )
       end
     end
@@ -51,12 +58,10 @@ describe BootstrapHelper do
       }
 
       it "should do something" do
-        expect(subject).to eq(
-         navbar_with_content(
-           '<ul class="nav navbar-nav">' +
-             '<li class="someclass"><a href="/">Home</a></li>' +
-           '</ul>'
-          )
+        expect(subject).to be_navbar_with_content(
+         '<ul class="nav navbar-nav">' +
+           '<li class="someclass"><a href="/">Home</a></li>' +
+         '</ul>'
         )
       end
     end
@@ -68,6 +73,82 @@ describe BootstrapHelper do
 
       it "should raise an error" do
         expect { subject }.to raise_error(RuntimeError)
+      end
+    end
+
+    describe "marking items active" do
+      context "for an item without an 'active' regex" do
+        let(:content_data) {
+          [
+            {
+              type: :nav,
+              items: [
+                { label: 'Posts', href: '/posts' }
+              ]
+            }
+          ]
+        }
+
+        context "when the request path matches exactly" do
+          before { helper.stub_chain(:request, :path).and_return('/posts') }
+
+          it "should be marked active" do
+            expect(subject).to be_navbar_with_content(
+             '<ul class="nav navbar-nav">' +
+               '<li class="active"><a href="/posts">Posts</a></li>' +
+             '</ul>'
+            )
+          end
+        end
+
+        context "when the request path doesn't match exactly" do
+          before { helper.stub_chain(:request, :path).and_return('/posts/1') }
+
+          it "should not be marked active" do
+            expect(subject).to be_navbar_with_content(
+             '<ul class="nav navbar-nav">' +
+               '<li><a href="/posts">Posts</a></li>' +
+             '</ul>'
+            )
+          end
+        end
+      end
+
+      context "for an item with 'active' regex" do
+        let(:content_data) {
+          [
+            {
+              type: :nav,
+              items: [
+                { label: 'Posts', href: '/posts', active: /^\/posts/ }
+              ]
+            }
+          ]
+        }
+
+        context "when the request path matches exactly" do
+          before { helper.stub_chain(:request, :path).and_return('/posts') }
+
+          it "should be marked active" do
+            expect(subject).to be_navbar_with_content(
+             '<ul class="nav navbar-nav">' +
+               '<li class="active"><a href="/posts">Posts</a></li>' +
+             '</ul>'
+            )
+          end
+        end
+
+        context "when the request path doesn't match exactly" do
+          before { helper.stub_chain(:request, :path).and_return('/posts/1') }
+
+          it "should be marked active" do
+            expect(subject).to be_navbar_with_content(
+             '<ul class="nav navbar-nav">' +
+               '<li class="active"><a href="/posts">Posts</a></li>' +
+             '</ul>'
+            )
+          end
+        end
       end
     end
   end

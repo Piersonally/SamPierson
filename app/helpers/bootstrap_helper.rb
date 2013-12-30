@@ -163,7 +163,11 @@ module BootstrapHelper
   end
 
   def item_is_active?(item)
-    item[:href] == request.path
+    if item[:active]
+      request.path =~ item[:active]
+    else
+      item[:href] == request.path
+    end
   end
 
   # If given a Proc, run it.
