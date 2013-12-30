@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe "Sign Up", type: :feature, js: true do
+feature "Sign Up", type: :feature, js: true do
 
   # Signup is now disabled.
 
-  #it "unsuccessful signup" do
+  #scenario "unsuccessful signup" do
   #  visit signup_path
   #  within('h1') { page.should have_content "Sign Up" }
   #  fill_in 'Email', with: 'foo@example.com'
@@ -18,7 +18,7 @@ describe "Sign Up", type: :feature, js: true do
   #  take_screenshot 'signup_unsuccessful'
   #end
   #
-  #it "successful signup" do
+  #scenario "successful signup" do
   #  visit signup_path
   #  within('h1') { page.should have_content "Sign Up" }
   #  fill_in 'Email', with: 'foo@example.com'

@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe "Log In", type: :feature, js: true do
+feature "Log In", type: :feature, js: true do
   let(:account) {
     FactoryGirl.create :account, first_name: 'Fred', last_name: 'Bloggs'
   }
 
-  it "unsuccessful login" do
+  scenario "unsuccessful login" do
     visit login_path
     within('h1') { expect(page).to have_content "Log In" }
     fill_in 'Email', with: account.email
@@ -16,7 +16,7 @@ describe "Log In", type: :feature, js: true do
     take_screenshot 'login_unsuccessful'
   end
 
-  it "successful login" do
+  scenario "successful login" do
     visit login_path
     within('h1') { expect(page).to have_content "Log In" }
     fill_in 'Email', with: account.email
@@ -26,7 +26,7 @@ describe "Log In", type: :feature, js: true do
     take_screenshot 'login_successful'
   end
 
-  it "logout" do
+  scenario "logout" do
     login_as account
     click_link account.full_name
     click_link 'Log Out'
