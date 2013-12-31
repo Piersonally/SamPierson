@@ -6,7 +6,10 @@ describe AccountsController do
     subject { get :new }
 
     context "if signup is disabled" do
-      before { controller.stub(:signup_enabled?){ false } }
+      # This is currently the default
+      # before { controller.stub(:signup_enabled?){ false } }
+      # Don't stub out signup_enabled?
+      # This way we get test covreage of the signup_enabled?
 
       before { subject }
       it { should redirect_to root_path }
