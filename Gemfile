@@ -47,8 +47,9 @@ end
 group :test do
   gem 'shoulda-matchers'
   gem 'faker'
-  gem 'codeclimate-test-reporter', require: nil
   gem 'foreigner-matcher'
+  #gem 'codeclimate-test-reporter', require: nil
+  gem 'simplecov', require: false
 end
 
 group :production do
