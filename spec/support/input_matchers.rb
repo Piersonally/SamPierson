@@ -26,7 +26,7 @@ RSpec::Matchers.define :have_input do |input_id|
   def selector(input_id)
     s = "input#{input_id}"
     attrs.each do |attr, value|
-      s << "[#{attr}=#{value}]"
+      s << "[#{attr}=\"#{value}\"]"
     end
     s
   end

@@ -5,6 +5,7 @@ describe BootstrapForm, type: :helper do
   def account_form
     helper.bootstrap_form_for model do |f|
       f.input(:email) +
+      f.input(:first_name) +
       f.input(:password)
     end
   end
@@ -72,15 +73,32 @@ describe BootstrapForm, type: :helper do
         end
       end
 
-      it "should give the input an ID, and class form-control" do
-        should have_selector "input##{field_id}.form-control[name=\"account[email]\"]"
+      describe "string field" do
+        let(:field_id) { 'account_first_name' }
+
+        it "should give the input an ID, and class form-control" do
+          should have_selector "input##{field_id}.form-control[name=\"account[first_name]\"]"
+        end
+
+        it "should place the input inside a 6 column div" do
+          should have_selector "form##{form_id} > .form-group > .col-sm-6 > input##{field_id}"
+        end
+
+        it { should have_input("##{field_id}").with_type('text') }
+        it { should have_input("##{field_id}").with_placeholder('First name') }
       end
 
-      it "should place the input inside a 6 column div" do
-        should have_selector "form##{form_id} > .form-group > .col-sm-6 > input##{field_id}"
+      describe "integer field" do
+        let(:field_id) { "account_id" }
+        subject do
+          helper.bootstrap_form_for model do |f|
+            f.input :id
+          end
+        end
+        it { should have_input("##{field_id}").with_type('text') }
       end
 
-      context "for a required string field containing name 'email'" do
+      describe "email field (required)" do
         let(:field_id) { "account_email" }
 
         it { should have_input("##{field_id}").with_type('email') }
@@ -88,32 +106,42 @@ describe BootstrapForm, type: :helper do
         it { should have_input("##{field_id}").with_attr_value(:required, 'required') }
       end
 
-      describe "password field, (string field whose name contains the word 'password')" do
+      describe "option :as =>" do
+        let(:field_id) { "account_email" }
+        subject do
+          helper.bootstrap_form_for model do |f|
+            f.input :email, as: :text
+          end
+        end
+        it "should override the type" do
+          should have_input("##{field_id}").with_type('text')
+        end
+      end
+
+      describe "password field" do
         let(:field_id) { "account_password" }
 
         it { should have_input("##{field_id}").with_type('password') }
       end
 
-      describe "using the posts form" do
+      describe "text field (optional)" do
         let(:model) { Post.new }
         subject { post_form }
+        let(:field_id) { 'post_body' }
 
-        describe "for an optional text field" do
-          let(:field_id) { 'post_body' }
+        it { should have_tag(:textarea).with_id(field_id) }
+        it { should have_tag(:textarea).with_id(field_id)
+                                       .with_placeholder('Body') }
+        it { should_not have_tag(:textarea).with_id(field_id)
+                                           .with_attr_value(:required, 'required') }
+      end
 
-          it { should have_tag(:textarea).with_id(field_id) }
-          it { should have_tag(:textarea).with_id(field_id)
-                                         .with_placeholder('Body') }
-          it { should_not have_tag(:textarea).with_id(field_id)
-                                             .with_attr_value(:required, 'required') }
-        end
+      describe "datetime field" do
+        let(:model) { Post.new }
+        subject { post_form }
+        let(:field_id) { "post_published_at" }
 
-
-        describe "datetime field" do
-          let(:field_id) { "post_published_at" }
-
-          it { should have_input("##{field_id}").with_type('datetime') }
-        end
+        it { should have_input("##{field_id}").with_type('datetime') }
       end
     end
   end
