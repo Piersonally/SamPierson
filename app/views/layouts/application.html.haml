@@ -21,6 +21,6 @@
 
           = msg.gsub("\n", '<br>').html_safe
 
-      %h1= title
+      = page_heading_helper
 
       = yield
