@@ -23,6 +23,7 @@ module BootstrapForm
 
     def derive_field_class_prefix(attr)
       case attr_column_type(attr)
+      when :boolean; 'Boolean'
       when :datetime; 'Datetime'
       when :string; string_field_class_prefix_based_on_column_name(attr)
       when :text  ; 'Textarea'

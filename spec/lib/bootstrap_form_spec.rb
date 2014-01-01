@@ -14,6 +14,7 @@ describe BootstrapForm, type: :helper do
     helper.bootstrap_form_for model do |f|
       f.input(:title) +
       f.input(:published_at) +
+      f.input(:visible) +
       f.input(:body)
     end
   end
@@ -124,24 +125,31 @@ describe BootstrapForm, type: :helper do
         it { should have_input("##{field_id}").with_type('password') }
       end
 
-      describe "text field (optional)" do
+      context "Using the Article form" do
         let(:model) { Article.new }
         subject { article_form }
-        let(:field_id) { 'article_body' }
 
-        it { should have_tag(:textarea).with_id(field_id) }
-        it { should have_tag(:textarea).with_id(field_id)
-                                       .with_placeholder('Body') }
-        it { should_not have_tag(:textarea).with_id(field_id)
-                                           .with_attr_value(:required, 'required') }
-      end
+        describe "text field (optional)" do
+          let(:field_id) { 'article_body' }
 
-      describe "datetime field" do
-        let(:model) { Article.new }
-        subject { article_form }
-        let(:field_id) { "article_published_at" }
+          it { should have_tag(:textarea).with_id(field_id) }
+          it { should have_tag(:textarea).with_id(field_id)
+                                         .with_placeholder('Body') }
+          it { should_not have_tag(:textarea).with_id(field_id)
+                                             .with_attr_value(:required, 'required') }
+        end
 
-        it { should have_input("##{field_id}").with_type('datetime') }
+        describe "datetime field" do
+          let(:field_id) { "article_published_at" }
+
+          it { should have_input("##{field_id}").with_type('datetime') }
+        end
+
+        describe "boolean field" do
+          let(:field_id) { 'article_visible' }
+
+          it { should have_input("##{field_id}").with_type('checkbox') }
+        end
       end
     end
   end
