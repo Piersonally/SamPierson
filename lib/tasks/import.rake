@@ -1,3 +1,5 @@
+require 'open-uri'
+
 namespace :sam do
   namespace :import do
     namespace :wordpress do
