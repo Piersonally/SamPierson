@@ -10,7 +10,7 @@ describe BootstrapForm, type: :helper do
     end
   end
 
-  def post_form
+  def article_form
     helper.bootstrap_form_for model do |f|
       f.input(:title) +
       f.input(:published_at) +
@@ -125,9 +125,9 @@ describe BootstrapForm, type: :helper do
       end
 
       describe "text field (optional)" do
-        let(:model) { Post.new }
-        subject { post_form }
-        let(:field_id) { 'post_body' }
+        let(:model) { Article.new }
+        subject { article_form }
+        let(:field_id) { 'article_body' }
 
         it { should have_tag(:textarea).with_id(field_id) }
         it { should have_tag(:textarea).with_id(field_id)
@@ -137,9 +137,9 @@ describe BootstrapForm, type: :helper do
       end
 
       describe "datetime field" do
-        let(:model) { Post.new }
-        subject { post_form }
-        let(:field_id) { "post_published_at" }
+        let(:model) { Article.new }
+        subject { article_form }
+        let(:field_id) { "article_published_at" }
 
         it { should have_input("##{field_id}").with_type('datetime') }
       end

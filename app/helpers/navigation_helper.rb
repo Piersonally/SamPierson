@@ -12,8 +12,8 @@ module NavigationHelper
         type: :nav,
         items: [
           {
-            label: 'Posts', href: posts_path,
-            active: /^\/posts/,
+            label: 'Articles', href: articles_path,
+            active: /^\/articles/,
             if: user_logged_in?
           }
         ]

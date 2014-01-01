@@ -10,7 +10,7 @@ SamPierson::Application.routes.draw do
 
   resources :accounts, only: [:new, :create]
 
-  resources :posts do
+  resources :articles do
     member do
       patch :publish
     end

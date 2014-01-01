@@ -1,0 +1,25 @@
+- title "Listing Articles"
+
+%table.table
+  %tr
+    %th Title
+    %th Author
+    %th Published at
+    %th
+    %th
+    %th
+
+  - @articles.each do |article|
+    %tr{ id: dom_id(article) }
+      %td= link_to article.title, article
+      %td= article.author.full_name
+      %td= article.published_at
+      %td
+        = link_to 'Edit', edit_article_path(article), class: 'btn btn-xs btn-info'
+        = link_to 'Destroy', article, method: :delete,
+                                   class: 'btn btn-xs btn-danger',
+                                   data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Article', new_article_path, class: 'btn btn-primary'

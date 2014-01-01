@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Post do
+describe Article do
   describe "database" do
     it { should have_db_index(:author_id) }
     it { should have_db_index(:published_at) }
@@ -13,13 +13,13 @@ describe Post do
 
   describe "scopes" do
     describe "published_at" do
-      let!(:unpublished_post) { FactoryGirl.create :post }
-      let!(:post1) { FactoryGirl.create :post, published_at: 2.days.ago }
-      let!(:post2) { FactoryGirl.create :post, published_at: 1.day.ago }
-      subject { Post.published }
+      let!(:unpublished_article) { FactoryGirl.create :article }
+      let!(:article1) { FactoryGirl.create :article, published_at: 2.days.ago }
+      let!(:article2) { FactoryGirl.create :article, published_at: 1.day.ago }
+      subject { Article.published }
 
-      it "should return published posts in reverse chronoligical order" do
-        subject.should eq [post2, post1]
+      it "should return published articles in reverse chronoligical order" do
+        subject.should eq [article2, article1]
       end
     end
   end
@@ -39,16 +39,16 @@ describe Post do
     let(:author) { FactoryGirl.create :account }
 
     it "should set a slug when created" do
-      post = Post.new title: "A Title", author: author
-      post.save!
-      expect(post.slug).to eq 'a-title'
+      article = Article.new title: "A Title", author: author
+      article.save!
+      expect(article.slug).to eq 'a-title'
     end
 
     it "should not change an exisiting slug on save" do
-      post = FactoryGirl.create :post, title: 'Title One'
-      expect(post.slug).to eq 'title-one'
-      post.update_attributes! title: 'Title Two'
-      expect(post.slug).to eq 'title-one'
+      article = FactoryGirl.create :article, title: 'Title One'
+      expect(article.slug).to eq 'title-one'
+      article.update_attributes! title: 'Title Two'
+      expect(article.slug).to eq 'title-one'
     end
   end
 
@@ -56,16 +56,16 @@ describe Post do
 
   describe "instance methods" do
     describe "published?" do
-      subject { post.published? }
+      subject { article.published? }
 
-      context "for an unpublished post" do
-        let(:post) { FactoryGirl.create :post }
+      context "for an unpublished article" do
+        let(:article) { FactoryGirl.create :article }
 
         it { should be_false }
       end
 
-      context "for a published post" do
-        let(:post) { FactoryGirl.create :published_post }
+      context "for a published article" do
+        let(:article) { FactoryGirl.create :published_article }
 
         it { should be_true }
       end

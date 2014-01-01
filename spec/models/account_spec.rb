@@ -6,7 +6,7 @@ describe Account do
   end
 
   describe "associations" do
-    it { should have_many :posts }
+    it { should have_many :articles }
   end
 
   describe "attributes"

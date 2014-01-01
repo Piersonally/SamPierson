@@ -1,6 +1,6 @@
-class Post < ActiveRecord::Base
+class Article < ActiveRecord::Base
 
-  belongs_to :author, class_name: 'Account', inverse_of: :posts
+  belongs_to :author, class_name: 'Account', inverse_of: :articles
 
   before_validation :generate_slug
 
