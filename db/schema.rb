@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140101161836) do
+ActiveRecord::Schema.define(version: 20140101204024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,11 +35,13 @@ ActiveRecord::Schema.define(version: 20140101161836) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+    t.boolean  "visible",      default: false
   end
 
   add_index "articles", ["author_id"], name: "index_articles_on_author_id", using: :btree
   add_index "articles", ["published_at"], name: "index_articles_on_published_at", using: :btree
   add_index "articles", ["slug"], name: "index_articles_on_slug", using: :btree
+  add_index "articles", ["visible"], name: "index_articles_on_visible", using: :btree
 
   add_foreign_key "articles", "accounts", name: "articles_author_id_fk", column: "author_id"
 

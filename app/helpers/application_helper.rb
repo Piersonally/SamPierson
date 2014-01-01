@@ -14,4 +14,8 @@ module ApplicationHelper
       content_tag :h1, heading
     end
   end
+
+  def tick_helper(bool)
+    bool ? "\u2713" : ''
+  end
 end

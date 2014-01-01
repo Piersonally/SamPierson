@@ -9,5 +9,6 @@ FactoryGirl.define do
 
   factory :published_article, parent: :article do
     published_at { Time.now }
+    visible true
   end
 end
