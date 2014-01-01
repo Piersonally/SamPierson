@@ -16,6 +16,24 @@ describe ArticlesController do
       it { expect(subject).to redirect_to login_path }
       it { subject; expect(flash[:alert]).to be_present }
     end
+
+    describe "GET show" do
+      subject { get :show, id: article.to_param }
+
+      context "for an invisible article" do
+        let(:article) { FactoryGirl.create :article }
+
+        it "should raise an error" do
+          expect { subject }.to raise_error ActiveRecord::RecordNotFound
+        end
+      end
+
+      context "for a visible article" do
+        let(:article) { FactoryGirl.create :published_article }
+
+        it { should render_template 'show' }
+      end
+    end
   end
   
   context "while logged in as the blog author" do

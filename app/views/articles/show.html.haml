@@ -1,18 +1,15 @@
 - title @article.title
 
-%p
-  %b Author:
-  = @article.author_id
-%p
-  %b Published at:
-  = @article.published_at
-%p
-  %b Body:
+%p= @article.published_at.try :strftime, '%B %e, %Y'
+
+.article_body
   = markdown @article.body
 
-= link_to 'Edit', [:edit, @article], class: 'btn btn-info'
+- if user_logged_in?
+  = link_to 'Edit', [:edit, @article], class: 'btn btn-info'
 
-= link_to 'Publish', [:publish, @article], method: :patch,
-                     class: 'btn btn-warning' unless @article.published?
-\|
+  = link_to 'Publish', [:publish, @article], method: :patch,
+                       class: 'btn btn-warning' unless @article.published?
+  \|
+
 = link_to 'Back', articles_path

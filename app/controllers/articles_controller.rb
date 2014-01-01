@@ -1,6 +1,7 @@
 class ArticlesController < LoggedInController
   respond_to :html
   before_action :load_article, only: [:show, :edit, :update, :destroy, :publish]
+  skip_before_filter :require_user_is_logged_in, only: :show
 
   def index
     @articles = current_user.articles.order 'published_at DESC'
@@ -49,7 +50,11 @@ class ArticlesController < LoggedInController
 
   private
     def load_article
-      @article = current_user.articles.find_by_slug params[:id]
+      if user_logged_in?
+        @article = Article.find_by_slug! params[:id]
+      else
+        @article = Article.visible.find_by_slug! params[:id]
+      end
     end
 
     def article_params
