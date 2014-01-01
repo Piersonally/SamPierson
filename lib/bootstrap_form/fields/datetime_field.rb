@@ -25,7 +25,7 @@ module BootstrapForm
       end
 
       def value_suitable_for_use_by_jquery_datetimepicker
-        @form_builder.object.send(@name).try(:strftime, '%Y:%m:%d %H:%M')
+        @form_builder.object.send(@name).try(:strftime, '%Y/%m/%d %H:%M')
       end
 
       # Adapted from module ActionView::Helpers::Tags::Base
