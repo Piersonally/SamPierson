@@ -12,14 +12,15 @@ describe Article do
   end
 
   describe "scopes" do
-    describe "published_at" do
+    describe "visible" do
       let!(:unpublished_article) { FactoryGirl.create :article }
-      let!(:article1) { FactoryGirl.create :article, published_at: 2.days.ago }
-      let!(:article2) { FactoryGirl.create :article, published_at: 1.day.ago }
-      subject { Article.published }
+      let!(:visible_article1) { FactoryGirl.create :published_article, published_at: 2.days.ago }
+      let!(:visible_article2) { FactoryGirl.create :published_article, published_at: 1.day.ago }
+      let!(:invisible_article) { FactoryGirl.create :published_article, visible: false }
+      subject { Article.visible }
 
-      it "should return published articles in reverse chronoligical order" do
-        subject.should eq [article2, article1]
+      it "should return visible articles in reverse chronoligical order of publishing date" do
+        subject.should eq [visible_article2,  visible_article1]
       end
     end
   end

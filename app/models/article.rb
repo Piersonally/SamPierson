@@ -7,8 +7,8 @@ class Article < ActiveRecord::Base
   validates :title, :author_id, :slug, presence: true
   validates :slug, uniqueness: true
 
-  scope :published, -> {
-    where('published_at IS NOT NULL').order('published_at DESC')
+  scope :visible, -> {
+    where(visible: true).order('published_at DESC')
   }
 
   def published?
