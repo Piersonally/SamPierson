@@ -2,7 +2,11 @@
 - @heading = false
 
 - @articles.each do |article|
-  .article
-    %h2= article.title
-    .article_body
-      = markdown article.body
+  %article
+    .article_title= link_to article.title, article
+    .article_date
+      = article.published_at.to_date.strftime('%b %e, %Y')
+    .article_synopsis
+      = markdown article.synopsis
+    - unless article.synopsis_covers_everything?
+      = link_to "Read more...", article

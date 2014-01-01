@@ -19,6 +19,16 @@ class Article < ActiveRecord::Base
     slug
   end
 
+  PARAGRAPH_DIVIDER = "\r\n\r\n"  # What the <textarea> tag uses.
+
+  def synopsis
+    body.split(PARAGRAPH_DIVIDER).first
+  end
+
+  def synopsis_covers_everything?
+    body.split(PARAGRAPH_DIVIDER).count == 1
+  end
+
   private
 
   def generate_slug

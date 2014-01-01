@@ -71,5 +71,23 @@ describe Article do
         it { should be_true }
       end
     end
+
+    describe "#synopsis_covers_everthing?" do
+      subject { article.synopsis_covers_everything? }
+
+      context "for a single paragraph article" do
+        let(:article) {
+          FactoryGirl.create :article, body: "Single. Paragraph."
+        }
+        it { should be_true }
+      end
+
+      context "for a multi paragraph article" do
+        let(:article) {
+          FactoryGirl.create :article, body: "Multiple.\r\n\r\nParagraphs."
+        }
+        it { should be_false }
+      end
+    end
   end
 end

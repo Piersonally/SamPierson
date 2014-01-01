@@ -1,0 +1,19 @@
+article {
+  margin-bottom: 15px;
+}
+
+.article_title {
+  float: left;
+  font-size: 150%;
+  a { color: $font_color }
+}
+
+.article_date {
+  float: left;
+  padding: 8px 0 0 10px;
+  color: $light_gray;
+}
+
+.article_synopsis {
+  clear: both;
+}
