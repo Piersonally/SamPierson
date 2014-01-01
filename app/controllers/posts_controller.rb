@@ -49,7 +49,7 @@ class PostsController < LoggedInController
 
   private
     def set_post
-      @post = current_user.posts.find params[:id]
+      @post = current_user.posts.find_by_slug params[:id]
     end
 
     def post_params

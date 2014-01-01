@@ -29,11 +29,28 @@ describe Post do
   describe "validations" do
     it { should validate_presence_of :title }
     it { should validate_presence_of :author_id }
+    it { should validate_presence_of :slug }
+    it { should validate_uniqueness_of :slug }
   end
 
   describe "authorization"
 
-  describe "lifecycle"
+  describe "lifecycle" do
+    let(:author) { FactoryGirl.create :account }
+
+    it "should set a slug when created" do
+      post = Post.new title: "A Title", author: author
+      post.save!
+      expect(post.slug).to eq 'a-title'
+    end
+
+    it "should not change an exisiting slug on save" do
+      post = FactoryGirl.create :post, title: 'Title One'
+      expect(post.slug).to eq 'title-one'
+      post.update_attributes! title: 'Title Two'
+      expect(post.slug).to eq 'title-one'
+    end
+  end
 
   describe "class methods"
 
