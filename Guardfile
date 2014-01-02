@@ -22,10 +22,14 @@ guard :rspec, failed_mode: :keep do # all_on_start: false, all_after_pass: false
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$})   { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
 end
 
-guard 'livereload' do
+guard :livereload do
   watch(%r{app/views/.+\.(erb|haml|slim)})
   watch(%r{app/helpers/.+\.rb})
   watch(%r{config/locales/.+\.yml})
   # Rails Assets Pipeline
   watch(%r{(app|vendor)(/assets/\w+/(.+\.(css|js|html))).*}) { |m| "/assets/#{m[3]}" }
+end
+
+guard :markdown, convert_on_start: true do
+  watch(/(README)\.md/) { |match| "#{match[1]}.md|tmp/#{match[1]}.html" }
 end
