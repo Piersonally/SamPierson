@@ -5,7 +5,7 @@ module NavigationHelper
       {
         type: :nav,
         items: [
-          { label: 'Home', href: root_path, if: user_logged_in? }
+          { label: 'Blog', href: root_path }
         ]
       },
       {
