@@ -7,11 +7,12 @@
                                             'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    = navbar_random_image_helper
 
   %body
-    = navbar_helper main_navbar_content_data
-
     .container
+      = navbar_helper main_navbar_content_data
+
       - flash.each do |type, msg|
         .alert{ class: "alert-#{type == :notice ? 'success' : 'danger'}" }
           %button.close{ type: 'button',
