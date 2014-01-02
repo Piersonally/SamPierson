@@ -245,6 +245,7 @@ DEPENDENCIES
   byebug
   capybara
   capybara-screenshot
+  coderay
   coffee-rails (~> 4.0.0)
   factory_girl_rails
   faker
