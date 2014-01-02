@@ -7,6 +7,6 @@
     .article_date
       = article.published_at.to_date.strftime('%b %e, %Y')
     .article_synopsis
-      = markdown article.synopsis
+      ~ markdown article.synopsis
     - unless article.synopsis_covers_everything?
       = link_to "Read more...", article

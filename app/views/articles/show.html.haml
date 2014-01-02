@@ -3,7 +3,7 @@
 %p= @article.published_at.try :strftime, '%B %e, %Y'
 
 .article_body
-  = markdown @article.body
+  ~ markdown @article.body
 
 - if user_logged_in?
   = link_to 'Edit', [:edit, @article], class: 'btn btn-info'

@@ -8,7 +8,8 @@ module MarkdownHelper
 
   def markdown_engine
     @redcarpet_mardown ||= begin
-      renderer = Redcarpet::Render::HTML.new hard_wrap: true, filter_html: true
+      renderer = RendererWithSyntaxHighlighting.new hard_wrap: true,
+                                                    filter_html: true
       Redcarpet::Markdown.new renderer, redcarpet_options
     end
   end
@@ -22,5 +23,11 @@ module MarkdownHelper
       strikethrough: true,
       superscript: true
     }
+  end
+
+  class RendererWithSyntaxHighlighting < Redcarpet::Render::HTML
+    def block_code(code, language)
+      CodeRay.scan(code, language).div(css: :class)
+    end
   end
 end
