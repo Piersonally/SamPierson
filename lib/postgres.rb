@@ -1,5 +1,5 @@
 module Postgres
-  def Postgres.load(dumpfile)
+  def self.load(dumpfile)
     db = YAML.load_file(Rails.root.join 'config/database.yml')[Rails.env]
     command = "pg_restore --clean --no-owner -d #{db['database']}"
     command += ENV['PW'] ? ' -W' : ' --no-password'

@@ -36,14 +36,14 @@ class ArticlesController < LoggedInController
 
   def destroy
     @article.destroy
-    flash[:notice] = "Article \"#{@article.title}\" was successfully destroyed."
+    flash[:notice] = %(Article "#{@article.title}" was successfully destroyed.)
     respond_with @article
   end
 
   def publish
     unless @article.published?
       @article.update_attributes! published_at: Time.now
-      flash[:notice] = "Article \"#{@article.title}\" has been published."
+      flash[:notice] = %(Article "#{@article.title}" has been published.)
     end
     redirect_to @article
   end

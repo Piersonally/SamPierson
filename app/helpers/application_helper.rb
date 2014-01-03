@@ -23,7 +23,7 @@ module ApplicationHelper
     images = %w[beams chair corridor painted-desert-1 trees wall]
     image = images.sample
     content_tag :style do
-      "nav.navbar { background-image: url(\"/assets/#{image}.jpg\"); }".html_safe
+      %(nav.navbar { background-image: url("/assets/#{image}.jpg"); }).html_safe
     end
   end
 end

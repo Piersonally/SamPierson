@@ -21,6 +21,9 @@ work.
 
 ## Methodology
 
+* Follow the [GitHub Ruby Styleguide](https://github.com/styleguide/ruby),
+  with the following exception:
+  * It's okay to use JSON format for Hashes instead of hashrockets
 * Maintain 100% code coverage
 * Maintain a CodeClimate GPA of 4.0
   [![Code Climate](https://codeclimate.com/github/Piersonally/SamPierson.png)](https://codeclimate.com/github/Piersonally/SamPierson)

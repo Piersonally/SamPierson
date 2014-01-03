@@ -1,6 +1,6 @@
 class Heroku
   class Backup
-    attr_reader :id, :backup_at, :status, :junk, :status_at, :size, :db
+    attr_reader :id, :backup_at, :status, :status_at, :size, :db
 
     # Process a like like line 3 of the following:
     #
@@ -11,7 +11,7 @@ class Heroku
     def initialize(pgbackups_output_line, heroku)
       @heroku = heroku
       words = pgbackups_output_line.split(' ')
-      @id, @size, @db = words[0], words[7], words[8]
+      @id, @status, @size, @db = words[0], words[3], words[7], words[8]
       Time.zone ||= 'UTC'
       @backup_at = Time.zone.parse "#{words[1]} #{words[2]} UTC"
       @status_at = Time.zone.parse "#{words[5]} #{words[6]} UTC"

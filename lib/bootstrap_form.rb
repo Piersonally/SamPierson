@@ -25,7 +25,7 @@ module BootstrapForm
     end
   end
 
-  def BootstrapForm.noop_field_error_proc(html_tag, instance)
+  def self.noop_field_error_proc(html_tag, instance)
     html_tag
   end
 end

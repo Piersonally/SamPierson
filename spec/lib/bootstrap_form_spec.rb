@@ -45,7 +45,7 @@ describe BootstrapForm, type: :helper do
 
     describe "the form" do
       it "should have and ID" do
-        should have_selector "form##{form_id}[action=\"/accounts\"]"
+        should have_selector %(form##{form_id}[action="/accounts"])
       end
 
       it "should be a horizontal form" do
@@ -78,7 +78,7 @@ describe BootstrapForm, type: :helper do
         let(:field_id) { 'account_first_name' }
 
         it "should give the input an ID, and class form-control" do
-          should have_selector "input##{field_id}.form-control[name=\"account[first_name]\"]"
+          should have_selector %(input##{field_id}.form-control[name="account[first_name]"])
         end
 
         it "should place the input inside a 6 column div" do

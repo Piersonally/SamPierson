@@ -10,6 +10,7 @@ describe Heroku::Backup do
     it "should correctly process a line from pgbackups" do
       expect(subject).to be_a Heroku::Backup
       expect(subject.id).to eq 'b002'
+      expect(subject.status).to eq 'Finished'
       expect(subject.backup_at).to eq Time.at 1388693880
       expect(subject.status_at).to eq Time.at 1388693940
       expect(subject.size).to eq "45.2KB"
@@ -27,7 +28,7 @@ describe Heroku::Backup do
       it "should execute a command to get a URI for the backup" do
         heroku.should_receive(:run)
               .with("pgbackups:url b002")
-              .and_return("\"#{backup_url}\"")
+              .and_return(%("#{backup_url}"))
         expect(subject).to be_a URI
         expect(subject.host).to eq "s3.amazonaws.com"
         expect(subject.path).to eq "/hkpgbackups/app18176416@heroku.com/b002.dump"
