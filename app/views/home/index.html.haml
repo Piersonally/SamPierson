@@ -1,12 +1,19 @@
 - title 'Blog'
 - @heading = false
 
-- @articles.each do |article|
-  %article
-    .article_title= link_to article.title, article
-    .article_date
-      = article.published_at.to_date.strftime('%b %e, %Y')
-    .article_synopsis
-      ~ markdown article.synopsis
-    - unless article.synopsis_covers_everything?
-      = link_to "Read more...", article
+.row
+  .col-sm-9
+    - @articles.limit(10).each do |article|
+      %article
+        .article_title= link_to article.title, article
+        .article_date
+          = article.published_at.to_date.strftime('%b %e, %Y')
+        .article_synopsis
+          ~ markdown article.synopsis
+        - unless article.synopsis_covers_everything?
+          = link_to "Read more...", article
+
+  .col-sm-3
+    %h3 More Articles
+    - @articles.offset(10).each do |article|
+      %div= link_to article.title, article
