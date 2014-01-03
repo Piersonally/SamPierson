@@ -9,7 +9,7 @@ work.
 ## Technology
 
 * Ruby 2.1
-* Rails 4.0
+* Edge Rails (\>= 4.0.1.beta1)
 * PostgreSQL, foreigner
 * RSpec 3, FactoryGirl, Capybara, Poltergeist (phanjomjs), SimpleCov
 * Zeus, Guard, guard-rspec, guard-livereload
