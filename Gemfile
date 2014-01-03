@@ -50,7 +50,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', github: 'Piersonally/shoulda-matchers'
   gem 'faker'
   gem 'foreigner-matcher'
   #gem 'codeclimate-test-reporter', require: nil
