@@ -12,7 +12,7 @@ require "sprockets/railtie"
 # file to .slugignore so it is not deployed on Heroku
 begin
   require File.expand_path("../preinitializer.rb", __FILE__)
-rescue StandardError
+rescue Exception
   # do nothing.  Rely on external setting of environment variables
 end
 
