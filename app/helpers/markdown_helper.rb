@@ -27,7 +27,7 @@ module MarkdownHelper
 
   class RendererWithSyntaxHighlighting < Redcarpet::Render::HTML
     def block_code(code, language)
-      CodeRay.scan(code, language).div(css: :class)
+      CodeRay.scan(code, language || "nolang").div(css: :class)
     end
   end
 end

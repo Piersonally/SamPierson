@@ -24,5 +24,15 @@ describe MarkdownHelper do
         helper.markdown(markdown).should eq rendered_markdown
       end
     end
+
+    context "given a code block with no language" do
+      let(:markdown) { "```\nx = 1;\n```\n" }
+
+      it "shouldn't puke" do
+        expect {
+          helper.markdown(markdown)
+        }.not_to raise_exception
+      end
+    end
   end
 end
