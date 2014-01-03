@@ -26,6 +26,7 @@ gem 'meta-tags', require: 'meta_tags'
 gem 'redcarpet'                                 # markdown
 gem 'coderay'                                   # Syntax highlighting
 gem 'kaminari'                                  # Pagination
+gem 'kaminari-bootstrap'
 gem 'newrelic_rpm'
 
 group :development do

@@ -114,6 +114,9 @@ GEM
     kaminari (0.15.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    kaminari-bootstrap (3.0.1)
+      kaminari (>= 0.13.0)
+      rails
     kramdown (0.13.8)
     launchy (2.4.2)
       addressable (~> 2.3)
@@ -263,6 +266,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   kaminari
+  kaminari-bootstrap
   meta-tags
   newrelic_rpm
   pg
