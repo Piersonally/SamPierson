@@ -15,7 +15,7 @@ b002  2014/01/02 20:18.59  Finished @ 2014/01/02 20:19.03  45.2KB  HEROKU_POSTGR
     }
 
     before do
-      heroku.stub(:execute_and_capture_output)
+      heroku.stub(:`)
             .with('heroku pgbackups --app fakeapp')
             .and_return { pgbackups_output }
     end
