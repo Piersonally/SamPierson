@@ -25,6 +25,7 @@ gem 'bootstrap-sass'
 gem 'meta-tags', require: 'meta_tags'
 gem 'redcarpet'                                 # markdown
 gem 'coderay'                                   # Syntax highlighting
+gem 'kaminari'                                  # Pagination
 
 group :development do
   gem 'haml-rails'                              # use haml as templating engine in generators
