@@ -11,9 +11,12 @@
         .article_synopsis
           ~ markdown article.synopsis
         - unless article.synopsis_covers_everything?
-          = link_to "Read more...", article
+          .article_more
+            = link_to "Read more", article
+        .clearfix
 
-  .col-sm-3
-    %h3 More Articles
-    - @articles.offset(10).each do |article|
-      %div= link_to article.title, article
+  .col-sm-3.archive
+    %h4 More Articles
+    %ul
+      - @articles.offset(10).each do |article|
+        %li= link_to article.title, article

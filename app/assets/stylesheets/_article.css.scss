@@ -1,11 +1,14 @@
 article {
   margin-bottom: 15px;
+  padding: 10px;
+  background-color: #f8f8f8;
+  border-radius: 5px;
 }
 
 .article_title {
   float: left;
   font-size: 150%;
-  a { color: $font_color }
+  a { color: #333388 }
 }
 
 .article_date {
@@ -16,4 +19,20 @@ article {
 
 .article_synopsis {
   clear: both;
+}
+
+.article_more {
+  float: right;
+  margin-right: 10px;
+}
+
+.archive {
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 5px;
+  }
 }
