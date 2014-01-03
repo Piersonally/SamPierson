@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4'
+gem 'rails', github: 'rails/rails'
 
 gem 'pg'
 gem 'foreigner'
@@ -50,7 +50,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', github: 'Piersonally/shoulda-matchers'
   gem 'faker'
   gem 'foreigner-matcher'
   #gem 'codeclimate-test-reporter', require: nil
