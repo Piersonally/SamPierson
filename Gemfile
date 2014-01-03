@@ -58,5 +58,6 @@ group :test do
 end
 
 group :production do
+  gem 'passenger'
   gem 'rails_12factor'                          # make Heroku happy (log to stdout, servce static assets)
 end
