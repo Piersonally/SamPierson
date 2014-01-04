@@ -1,6 +1,11 @@
 module BootstrapForm
   class FormBuilder < ActionView::Helpers::FormBuilder
 
+    # Context inherited from ActionView::Helpers::FormBuilder:
+    #
+    #   @template
+    #   object
+
     def input(name, options = {})
       klass = map_object_attribute_to_field_class name, options
       klass.new(self, @template, name, options).to_s
@@ -32,7 +37,7 @@ module BootstrapForm
     end
 
     def attr_column_type(attr)
-      attr_column_info(attr).try(:type) || :string
+      object.try(:column_for_attribute, attr).try(:type) || :string
     end
 
     def attr_column_info(attr)
