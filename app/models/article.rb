@@ -1,6 +1,7 @@
 class Article < ActiveRecord::Base
 
   belongs_to :author, class_name: 'Account', inverse_of: :articles
+  has_and_belongs_to_many :topics
 
   before_validation :generate_slug
 

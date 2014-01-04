@@ -7,7 +7,7 @@ describe Topic do
   end
 
   describe "associations" do
-    #it { should have_many(:bar).through(:baz) }
+    #it { should have_and_belong_to_many :articles }  # Broken matcher with Rails 4.1
   end
 
   describe "attributes"

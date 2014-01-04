@@ -9,6 +9,7 @@ describe Article do
 
   describe "associations" do
     it { should belong_to(:author).class_name('Account') }
+    # it { should have_and_belong_to_many :topics } # Broken matcher with Rails 4.1
   end
 
   describe "scopes" do
