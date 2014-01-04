@@ -1,6 +1,5 @@
 class ArticlesController < LoggedInController
   respond_to :html, :js
-  before_action :load_article, only: [:show, :edit, :update, :destroy, :publish]
   skip_before_filter :require_user_is_logged_in, only: :show
 
   def index
@@ -11,52 +10,53 @@ class ArticlesController < LoggedInController
   end
 
   def show
-    respond_with @article
+    respond_with @article = article
   end
 
   def new
-    @article = current_user.articles.new
-    respond_with @article
+    @article_form = ArticleForm.new current_user.articles.new
   end
 
   def edit
-    respond_with @article
+    @article_form = ArticleForm.new article
   end
 
   def create
-    @article = current_user.articles.new article_params
-    flash[:notice] = 'Article was successfully created.' if @article.save
-    respond_with @article
+    @article_form = ArticleForm.new current_user.articles.new, article_params
+    flash[:notice] = 'Article was successfully created.' if @article_form.save
+    respond_with @article_form
   end
 
   def update
-    if @article.update article_params
+    @article_form = ArticleForm.new article
+    if @article_form.update article_params
       flash[:notice] = 'Article was successfully updated.'
     end
-    respond_with @article
+    respond_with @article_form
   end
 
   def destroy
-    @article.destroy
-    flash[:notice] = %(Article "#{@article.title}" was successfully destroyed.)
-    respond_with @article
+    article.destroy
+    flash[:notice] = %(Article "#{article.title}" was successfully destroyed.)
+    respond_with article
   end
 
   def publish
-    unless @article.published?
+    unless article.published?
       @article.update_attributes! published_at: Time.now
-      flash[:notice] = %(Article "#{@article.title}" has been published.)
+      flash[:notice] = %(Article "#{article.title}" has been published.)
     end
-    redirect_to @article
+    redirect_to article
   end
 
   private
 
-  def load_article
+  def article
+    @article ||=
     if user_logged_in?
-      @article = Article.find_by_slug! params[:id]
+      Article.find_by_slug! params[:id]
     else
-      @article = Article.visible.find_by_slug! params[:id]
+      Article.visible.find_by_slug! params[:id]
     end
   end
 

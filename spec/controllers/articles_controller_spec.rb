@@ -7,10 +7,9 @@ describe ArticlesController do
   
   let(:valid_attributes) { {title: "Sex life of the Ping Pong ball" } }
 
-  # TODO it should require user to be logged in to access ALL actions
-  
   context "while not logged in" do
     describe "GET index" do
+      # TODO test it requires user to be logged in to access ALL actions
       subject { get :index }
       
       it { expect(subject).to redirect_to login_path }
@@ -56,14 +55,16 @@ describe ArticlesController do
     describe "GET new" do
       before { get :new }
 
-      it { expect(assigns(:article)).to be_a_new Article }
+      it { expect(assigns :article_form).to be_a ArticleForm }
+      it { expect(assigns(:article_form).article).to be_a_new Article }
       it { expect(response).to render_template 'new' }
     end
   
     describe "GET edit" do
       before { get :edit, id: authors_article.to_param }
 
-      it { expect(assigns(:article)).to eq authors_article }
+      it { expect(assigns :article_form).to be_a ArticleForm }
+      it { expect(assigns(:article_form).article).to eq authors_article }
       it { expect(response).to render_template 'edit' }
     end
   
@@ -76,27 +77,27 @@ describe ArticlesController do
         let(:created_article) { Article.last }
 
         it "creates a new Article" do
-          expect {
-            subject
-          }.to change(Article, :count).by(1)
+          expect { subject }.to change(Article, :count).by(1)
         end
 
         describe "and" do
           before { subject }
 
-          it { expect(assigns :article).to eq created_article }
+          it { expect(assigns(:article_form).article).to eq created_article }
           it { expect(created_article.author_id).to eq author.id }
           it { expect(created_article.title).to eq title }
-          it { should redirect_to created_article }
           it { expect(flash[:notice]).to be_present }
+          it { should redirect_to created_article }
         end
       end
   
       describe "with invalid params" do
-        let(:article_attributes) { {title: nil} }
+        let(:article_attributes) { { title: nil } }
         before { subject }
 
-        it { expect(assigns(:article)).to be_a_new Article }
+        it { expect(assigns :article_form).to be_a ArticleForm }
+        it { expect(assigns(:article_form).article).to be_a_new Article }
+        it { expect(flash[:notice]).to be_blank }
         it { expect(response).to render_template 'new' }
       end
     end
