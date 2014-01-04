@@ -1,0 +1,16 @@
+%table.table
+  %thead
+    %tr
+      %th Name
+      %th
+  %tbody
+    - topics.each do |topic|
+      %tr{ id: dom_id(topic) }
+        %td= link_to topic.name, topic
+        %td
+          = link_to 'Edit', edit_topic_path(topic), class: 'btn btn-xs btn-info'
+          = link_to 'Destroy', topic, method: :delete,
+                                     class: 'btn btn-xs btn-danger',
+                                     data: { confirm: 'Are you sure?' }
+
+= paginate topics, remote: true

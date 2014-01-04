@@ -1,0 +1,9 @@
+- title @topic.name
+
+= @topic.name
+
+- if user_logged_in?
+  = link_to 'Edit', [:edit, @topic], class: 'btn btn-info'
+  \|
+
+= link_to 'Back', topics_path

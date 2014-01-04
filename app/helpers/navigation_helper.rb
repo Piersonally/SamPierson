@@ -20,6 +20,16 @@ module NavigationHelper
       },
       {
         type: :nav,
+        items: [
+          {
+            label: 'Topics', href: topics_path,
+            active: /^\/topics/,
+            if: user_logged_in?
+          }
+        ]
+      },
+      {
+        type: :nav,
         class: 'navbar-right',
         items: [
           { label: 'Log In', href: login_path }
