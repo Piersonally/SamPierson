@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe ArticleForm do
-  let(:article) { FactoryGirl.create :article }
+  let(:topic1) { FactoryGirl.create :topic }
+  let(:topic2) { FactoryGirl.create :topic }
+  let!(:article) { FactoryGirl.create :article, topics: [topic1, topic2] }
   let(:article_form) { ArticleForm.new article }
   subject { article_form }
 
@@ -38,6 +40,22 @@ describe ArticleForm do
 
       it { expect { subject }.to change(article, :title).to('new title') }
       it { subject ; expect(article_form).to be_valid }
+
+      context "with a topics attribute (words, seperated by spaces)" do
+        let!(:existing_topic) { FactoryGirl.create :topic }
+        let(:topics) { [topic1.name, existing_topic.name, "new_topic"].join(" ") }
+        let(:article_attributes) { { title: "new title", topic_names: topics } }
+
+        it "should create new topics where necessary" do
+          expect { subject }.to change(Topic, :count).by(1)
+        end
+
+        it "should set the topic list appropriately" do
+          subject
+          new_topic = Topic.find_by_name 'new_topic'
+          expect(article.topics.to_a).to eq [topic1, existing_topic, new_topic]
+        end
+      end
     end
   end
 

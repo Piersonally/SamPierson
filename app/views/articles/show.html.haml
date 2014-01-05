@@ -1,6 +1,12 @@
 - title @article.title
 
-%p= @article.published_at.try :strftime, '%B %e, %Y'
+%p
+  %b Posted:
+  = succeed '.' do
+    = @article.published_at.try :strftime, '%B %e, %Y'
+
+  %b Tags:
+  = @article.topics.map { |t| t.name }.join ', '
 
 .article_body
   ~ markdown @article.body

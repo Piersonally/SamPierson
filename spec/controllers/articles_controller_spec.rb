@@ -73,7 +73,7 @@ describe ArticlesController do
 
       describe "with valid params" do
         let(:title) { 'The Sex Life of the Ping Pong Ball' }
-        let(:article_attributes) { { title: title } }
+        let(:article_attributes) { { title: title, topic_names: "tag1 tag2" } }
         let(:created_article) { Article.last }
 
         it "creates a new Article" do
@@ -86,6 +86,8 @@ describe ArticlesController do
           it { expect(assigns(:article_form).article).to eq created_article }
           it { expect(created_article.author_id).to eq author.id }
           it { expect(created_article.title).to eq title }
+          it { expect(created_article.topics.size).to eq 2 }
+          it { expect(created_article.topics.map(&:name)).to eq %w(tag1 tag2) }
           it { expect(flash[:notice]).to be_present }
           it { should redirect_to created_article }
         end

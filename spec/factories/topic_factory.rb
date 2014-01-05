@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :topic do
-    name Faker::Lorem.word
+    name
   end
 end

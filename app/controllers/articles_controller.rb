@@ -61,6 +61,8 @@ class ArticlesController < LoggedInController
   end
 
   def article_params
-    params.require(:article).permit(:title, :body, :published_at, :visible)
+    params.require(:article).permit(
+      :title, :body, :published_at, :visible, :topic_names
+    )
   end
 end
