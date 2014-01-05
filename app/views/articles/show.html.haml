@@ -6,7 +6,7 @@
     = @article.published_at.try :strftime, '%B %e, %Y'
 
   %b Tags:
-  = @article.topics.map { |t| t.name }.join ', '
+  = @article.topics.map { |t| link_to t.name, t }.join(', ').html_safe
 
 .article_body
   ~ markdown @article.body
