@@ -3,10 +3,7 @@ require 'spec_helper'
 describe Topic do
 
   describe "mixins" do
-    describe "Sluggable" do
-      it { expect(Topic.ancestors).to include Sluggable }
-      it { expect(Topic.generate_slugs_from_column).to eq :name }
-    end
+    it_should_behave_like "a model that slugs column", :name
   end
 
   describe "database" do
