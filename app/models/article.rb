@@ -3,10 +3,10 @@ class Article < ActiveRecord::Base
   belongs_to :author, class_name: 'Account', inverse_of: :articles
   has_and_belongs_to_many :topics
 
-  before_validation :generate_slug
+  include Sluggable
+  self.generate_slugs_from_column = :title
 
-  validates :title, :author_id, :slug, presence: true
-  validates :slug, uniqueness: true
+  validates :title, :author_id, presence: true
 
   scope :visible, -> {
     where(visible: true).order('published_at DESC')
@@ -14,10 +14,6 @@ class Article < ActiveRecord::Base
 
   def published?
     !!published_at
-  end
-
-  def to_param
-    slug
   end
 
   PARAGRAPH_DIVIDER = "\r\n\r\n"  # What the <textarea> tag uses.
@@ -28,11 +24,5 @@ class Article < ActiveRecord::Base
 
   def synopsis_covers_everything?
     body.split(PARAGRAPH_DIVIDER).count == 1
-  end
-
-  private
-
-  def generate_slug
-    self.slug = title.parameterize if slug.blank? && title.present?
   end
 end

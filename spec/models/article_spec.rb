@@ -31,28 +31,11 @@ describe Article do
   describe "validations" do
     it { should validate_presence_of :title }
     it { should validate_presence_of :author_id }
-    it { should validate_presence_of :slug }
-    it { should validate_uniqueness_of :slug }
   end
 
   describe "authorization"
 
-  describe "lifecycle" do
-    let(:author) { FactoryGirl.create :account }
-
-    it "should set a slug when created" do
-      article = Article.new title: "A Title", author: author
-      article.save!
-      expect(article.slug).to eq 'a-title'
-    end
-
-    it "should not change an exisiting slug on save" do
-      article = FactoryGirl.create :article, title: 'Title One'
-      expect(article.slug).to eq 'title-one'
-      article.update_attributes! title: 'Title Two'
-      expect(article.slug).to eq 'title-one'
-    end
-  end
+  describe "lifecycle"
 
   describe "class methods"
 
