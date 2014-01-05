@@ -1,6 +1,6 @@
 - title @topic.name
 
-= render 'home/articles', articles: @topic.articles
+= render 'home/articles', articles: @topic.articles.visible
 
 - if user_logged_in?
   = link_to 'Edit', [:edit, @topic], class: 'btn btn-info'
