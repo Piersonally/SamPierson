@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe ArticlesController do
   let(:author) { FactoryGirl.create :account }
-  let!(:authors_article) { FactoryGirl.create :article, author: author }
-  let!(:other_article) { FactoryGirl.create :article }
+  let!(:article1) { FactoryGirl.create :article, author: author }
+  let!(:article2) { FactoryGirl.create :article }
   
   let(:valid_attributes) { {title: "Sex life of the Ping Pong ball" } }
 
@@ -35,20 +35,20 @@ describe ArticlesController do
     end
   end
   
-  context "while logged in as the blog author" do
+  context "while logged in" do
     before { session[:account_id] = author.id }
     
     describe "GET index" do
       before { get :index }
 
-      it { expect(assigns(:articles)).to eq [authors_article] }
+      it { expect(assigns(:articles)).to eq [article1, article2] }
       it { expect(response).to render_template 'index' }
     end
   
     describe "GET show" do
-      before { get :show, id: authors_article.to_param }
+      before { get :show, id: article1.to_param }
 
-      it { expect(assigns(:article)).to eq authors_article }
+      it { expect(assigns(:article)).to eq article1 }
       it { expect(response).to render_template 'show' }
     end
   
@@ -61,10 +61,10 @@ describe ArticlesController do
     end
   
     describe "GET edit" do
-      before { get :edit, id: authors_article.to_param }
+      before { get :edit, id: article1.to_param }
 
       it { expect(assigns :article_form).to be_a ArticleForm }
-      it { expect(assigns(:article_form).article).to eq authors_article }
+      it { expect(assigns(:article_form).article).to eq article1 }
       it { expect(response).to render_template 'edit' }
     end
   
@@ -105,16 +105,16 @@ describe ArticlesController do
     end
   
     describe "PUT update" do
-      subject { patch :update, id: authors_article.to_param, article: article_attributes }
+      subject { patch :update, id: article1.to_param, article: article_attributes }
 
       describe "with valid params" do
         let(:new_body) { 'New Body' }
         let(:article_attributes) { { body: new_body } }
         before { subject }
 
-        it { expect(authors_article.reload.body).to eq new_body }
-        it { expect(assigns(:article)).to eq authors_article }
-        it { expect(response).to redirect_to authors_article }
+        it { expect(article1.reload.body).to eq new_body }
+        it { expect(assigns(:article)).to eq article1 }
+        it { expect(response).to redirect_to article1 }
         it { expect(flash[:notice]).to be_present }
       end
   
@@ -122,13 +122,13 @@ describe ArticlesController do
         let(:article_attributes) { { title: nil } }
         before { subject }
 
-        it { expect(assigns(:article)).to eq authors_article }
+        it { expect(assigns(:article)).to eq article1 }
         it { expect(response).to render_template 'edit' }
       end
     end
   
     describe "DELETE destroy" do
-      subject { delete :destroy, id: authors_article.to_param }
+      subject { delete :destroy, id: article1.to_param }
 
       it "destroys the requested article"  do
         expect { subject }.to change(Article, :count).by(-1)
@@ -143,7 +143,7 @@ describe ArticlesController do
     end
 
     describe "PATCH publish" do
-      let(:article) { authors_article }
+      let(:article) { article1 }
 
       subject { patch :publish, id: article.to_param }
 
@@ -166,7 +166,7 @@ describe ArticlesController do
         context "and" do
           before { subject }
           it { expect(flash[:notice]).to be_present }
-          it { expect(response).to redirect_to authors_article }
+          it { expect(response).to redirect_to article1 }
         end
       end
     end
