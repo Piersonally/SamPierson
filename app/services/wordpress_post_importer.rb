@@ -1,4 +1,7 @@
+require 'diagnostic_messaging'
+
 class WordpressPostImporter
+  include ::DiagnosticMessaging
 
   def initialize(author, options={})
     @author = author
@@ -29,14 +32,6 @@ class WordpressPostImporter
     rescue StandardError => e
       error "ERROR importing article #{article.title}: #{e.class.name} #{e.message}"
     end
-  end
-
-  def notice(message)
-    puts message if @verbose
-  end
-
-  def error(message)
-    puts message
   end
 
   class WordpressPost

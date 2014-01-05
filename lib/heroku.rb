@@ -1,4 +1,7 @@
+require 'diagnostic_messaging'
+
 class Heroku
+  include ::DiagnosticMessaging
 
   def initialize(application_name=nil, options={})
     @application_name = application_name
@@ -31,9 +34,5 @@ class Heroku
     command = "heroku #{heroku_command}"
     command << " --app #{@application_name}" if @application_name
     command
-  end
-
-  def notice(message)
-    puts message if @verbose
   end
 end
