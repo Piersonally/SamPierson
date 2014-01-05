@@ -25,6 +25,6 @@
     %ul
       - @index_page_data[:topics].each do |topic|
         %li
-          = topic.name
+          = link_to topic.name, topic
           = surround("(", ")") do
             = topic.article_count

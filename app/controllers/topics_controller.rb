@@ -43,7 +43,7 @@ class TopicsController < LoggedInController
   private
 
   def load_topic
-    @topic = Topic.find params[:id]
+    @topic = Topic.find_by_slug params[:id]
   end
 
   def topic_params

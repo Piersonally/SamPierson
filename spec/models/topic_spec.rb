@@ -2,8 +2,16 @@ require 'spec_helper'
 
 describe Topic do
 
+  describe "mixins" do
+    describe "Sluggable" do
+      it { expect(Topic.ancestors).to include Sluggable }
+      it { expect(Topic.generate_slugs_from_column).to eq :name }
+    end
+  end
+
   describe "database" do
     it { should have_db_index(:name).unique(true) }
+    it { should have_db_index(:slug).unique(true) }
   end
 
   describe "associations" do

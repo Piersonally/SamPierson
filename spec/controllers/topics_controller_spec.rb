@@ -91,7 +91,7 @@ describe TopicsController do
 
         it { expect(topic.reload.name).to eq new_name }
         it { expect(assigns(:topic)).to eq topic }
-        it { expect(response).to redirect_to topic }
+        it { expect(response).to redirect_to topic.reload }
         it { expect(flash[:notice]).to be_present }
       end
   
