@@ -3,7 +3,7 @@
 
 .row
   .col-sm-9
-    - @articles.limit(10).each do |article|
+    - @index_page_data[:articles].limit(10).each do |article|
       %article
         .article_title= link_to article.title, article
         .article_date
@@ -18,5 +18,13 @@
   .col-sm-3.archive
     %h4 More Articles
     %ul
-      - @articles.offset(10).each do |article|
+      - @index_page_data[:articles].offset(10).each do |article|
         %li= link_to article.title, article
+
+    %h4 Tags
+    %ul
+      - @index_page_data[:topics].each do |topic|
+        %li
+          = topic.name
+          = surround("(", ")") do
+            = topic.article_count

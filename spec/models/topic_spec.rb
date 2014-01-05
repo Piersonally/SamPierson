@@ -21,7 +21,23 @@ describe Topic do
 
   describe "lifecycle"
 
-  describe "class methods"
+  describe "class methods" do
+    describe ".topics_with_article_counts" do
+      subject { Topic.topics_with_article_counts }
+
+      it "should return topics with article counts" do
+        topic1 = FactoryGirl.create :topic
+        topic2 = FactoryGirl.create :topic
+        FactoryGirl.create :article, topics: [topic1, topic2]
+        FactoryGirl.create :article, topics: [topic2]
+        expect(subject.to_a.size).to eq 2
+        expect(subject.first.name).to eq topic2.name
+        expect(subject.first.article_count).to eq 2
+        expect(subject.last.name).to eq topic1.name
+        expect(subject.last.article_count).to eq 1
+      end
+    end
+  end
 
   describe "instance methods"
 end

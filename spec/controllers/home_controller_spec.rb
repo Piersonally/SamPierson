@@ -9,7 +9,13 @@ describe HomeController do
     before { subject }
 
     it "should display published articles" do
-      assigns(:articles).should == [article2, article1]
+      expect(assigns(:index_page_data)[:articles]).to eq [article2, article1]
+    end
+
+    it "should display topics" do
+      expect(
+        assigns(:index_page_data)[:topics]
+      ).to eq Topic.topics_with_article_counts
     end
 
     it { response.should render_template 'index' }
