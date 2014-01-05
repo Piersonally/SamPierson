@@ -1,5 +1,9 @@
 # README
 
+![CiecleCI Build Status](https://circleci.com/gh/Piersonally/SamPierson.png?circle-token=602cdb7505a807118fe29db1dba3b4e489e12dff)
+
+[![Code Climate](https://codeclimate.com/github/Piersonally/SamPierson.png)](https://codeclimate.com/github/Piersonally/SamPierson)
+
 This is the source for the website [sampierson.com](http://www.sampierson.com).
 
 I use it as a platform for experimentation, therefore some of the technology
@@ -26,8 +30,7 @@ work.
   * It's okay to use JSON format for Hashes instead of hashrockets
 * Maintain 100% code coverage
 * Maintain a CodeClimate GPA of 4.0
-  [![Code Climate](https://codeclimate.com/github/Piersonally/SamPierson.png)](https://codeclimate.com/github/Piersonally/SamPierson)
-* Comply with [Sandy Metz' 5 Rules](https://www.youtube.com/watch?v=npOGOmkxuio).
+* Comply with [Sandy Metz's 5 Rules](https://www.youtube.com/watch?v=npOGOmkxuio).
   1. Classes can be no longer than 100 lines of code
   2. Methods can be no longer than five lines of code
   3. Pass no more than four parameters into a method
