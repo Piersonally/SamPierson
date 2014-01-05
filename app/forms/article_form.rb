@@ -2,7 +2,6 @@ class ArticleForm
   include ActiveModel::Model
 
   attr_reader :article
-  attr_accessor :topic_names
 
   validates :title, presence: true
 
@@ -30,6 +29,15 @@ class ArticleForm
     end
   end
 
+  def topic_names
+    @topic_names.join ", "
+  end
+
+  def topic_names=(names_string)
+    # topic_names is stored as an array of strings
+    @topic_names = names_string.split(/, \s*/)
+  end
+
   # used in polymorphic_url
   def to_model
     @article
@@ -40,7 +48,7 @@ class ArticleForm
   def assign_attributes(attributes)
     attrs = attributes.with_indifferent_access
     if attrs.has_key? :topic_names
-      self.topic_names = attrs.delete(:topic_names).split(' ')
+      self.topic_names = attrs.delete :topic_names
     end
     @article.assign_attributes attrs
   end
@@ -53,13 +61,20 @@ class ArticleForm
   end
 
   def update_article_topics
-    return unless topic_names
-    topics = Topic.where name: topic_names
-    topic_names.each do |topic_name|
+    topics = retrieve_existing_topics_matching_names
+    create_new_topics_where_necessary! topics
+    @article.topics = topics # HABTM: this line updates DB
+  end
+
+  def retrieve_existing_topics_matching_names
+    Topic.where name: @topic_names
+  end
+
+  def create_new_topics_where_necessary!(topics)
+    @topic_names.each do |topic_name|
       unless topics.detect { |t| t.name == topic_name }
         topics << Topic.create!(name: topic_name)
       end
     end
-    @article.topics = topics
   end
 end

@@ -43,7 +43,7 @@ describe ArticleForm do
 
       context "with a topics attribute (words, seperated by spaces)" do
         let!(:existing_topic) { FactoryGirl.create :topic }
-        let(:topics) { [topic1.name, existing_topic.name, "new_topic"].join(" ") }
+        let(:topics) { [topic1.name, existing_topic.name, "new_topic"].join(", ") }
         let(:article_attributes) { { title: "new title", topic_names: topics } }
 
         it "should create new topics where necessary" do

@@ -73,7 +73,7 @@ describe ArticlesController do
 
       describe "with valid params" do
         let(:title) { 'The Sex Life of the Ping Pong Ball' }
-        let(:article_attributes) { { title: title, topic_names: "tag1 tag2" } }
+        let(:article_attributes) { { title: title, topic_names: "tag1, tag2" } }
         let(:created_article) { Article.last }
 
         it "creates a new Article" do

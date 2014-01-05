@@ -30,7 +30,7 @@ feature "Articles", type: :feature, js: true do
     scenario "successfully" do
       fill_in 'Title', with: "New Article Title"
       fill_in 'Body', with: "New Article Body"
-      fill_in 'Tags', with: "tag1 tag2"
+      fill_in 'Tags', with: "tag1, tag2"
       take_screenshot 'articles_new_before'
       click_button 'Save'
       page.should have_content 'Article was successfully created'
