@@ -3,17 +3,7 @@
 
 .row
   .col-sm-9
-    - @index_page_data[:articles].limit(10).each do |article|
-      %article
-        .article_title= link_to article.title, article
-        .article_date
-          = article.published_at.to_date.strftime('%b %e, %Y')
-        .article_synopsis
-          ~ markdown article.synopsis
-        - unless article.synopsis_covers_everything?
-          .article_more
-            = link_to "Read more", article
-        .clearfix
+    = render 'articles', articles: @index_page_data[:articles].limit(10)
 
   .col-sm-3.archive
     %h4 More Articles

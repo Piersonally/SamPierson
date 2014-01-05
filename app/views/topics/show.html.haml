@@ -1,9 +1,8 @@
 - title @topic.name
 
-= @topic.name
+= render 'home/articles', articles: @topic.articles
 
 - if user_logged_in?
   = link_to 'Edit', [:edit, @topic], class: 'btn btn-info'
   \|
-
-= link_to 'Back', topics_path
+  = link_to 'Back', topics_path
