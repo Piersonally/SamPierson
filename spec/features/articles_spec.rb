@@ -56,10 +56,9 @@ feature "Articles", type: :feature, js: true do
 
   scenario "delete a article" do
     click_link 'Articles'
+    click_link authors_article1.title
     take_screenshot 'articles_destroy_before'
-    within "##{rails_dom_id authors_article1}" do
-      click_link 'Destroy'
-    end
+    click_link 'Destroy'
     page.should have_content "was successfully destroyed"
     take_screenshot 'articles_destroy_after'
   end

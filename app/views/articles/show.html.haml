@@ -16,6 +16,7 @@
 
   = link_to 'Publish', [:publish, @article], method: :patch,
                        class: 'btn btn-warning' unless @article.published?
-  \|
 
-= link_to 'Back', articles_path
+  = link_to 'Destroy', @article, method: :delete,
+                             class: 'btn btn-danger',
+                             data: { confirm: 'Are you sure?' }

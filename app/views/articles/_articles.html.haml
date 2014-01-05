@@ -1,24 +1,19 @@
 %table.table
   %thead
     %tr
-      %th{style: 'width: 40%'} Title
-      %th Author
+      %th Title
+      %th Tags
       %th Published at
-      %th Visible
-      %th
-      %th
+      %th.center Visible
       %th
   %tbody
     - articles.each do |article|
       %tr{ id: dom_id(article) }
         %td= link_to article.title, article
-        %td= article.author.full_name
-        %td= article.published_at
-        %td= tick_helper article.visible
+        %td= article.topics.map(&:name).join(", ")
+        %td= article.published_at.try :to_date
+        %td.center= tick_helper article.visible
         %td
           = link_to 'Edit', edit_article_path(article), class: 'btn btn-xs btn-info'
-          = link_to 'Destroy', article, method: :delete,
-                                     class: 'btn btn-xs btn-danger',
-                                     data: { confirm: 'Are you sure?' }
 
 = paginate articles, remote: true

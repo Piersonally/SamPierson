@@ -3,7 +3,8 @@ class ArticlesController < LoggedInController
   skip_before_filter :require_user_is_logged_in, only: :show
 
   def index
-    @articles = Article.order('published_at DESC')
+    @articles = Article.includes(:topics)
+                       .order('published_at DESC')
                        .page(params[:page]).per(15)
     respond_with @articles
   end
