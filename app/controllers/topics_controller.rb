@@ -40,14 +40,6 @@ class TopicsController < LoggedInController
     respond_with @topic
   end
 
-  def publish
-    unless @topic.published?
-      @topic.update_attributes! published_at: Time.now
-      flash[:notice] = %(Topic "#{@topic.name}" has been published.)
-    end
-    redirect_to @topic
-  end
-
   private
 
   def load_topic
