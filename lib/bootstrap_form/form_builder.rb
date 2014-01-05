@@ -40,11 +40,6 @@ module BootstrapForm
       object.try(:column_for_attribute, attr).try(:type) || :string
     end
 
-    def attr_column_info(attr)
-      return nil unless object.class.respond_to? :columns
-      object.class.columns.detect { |c| c.name == attr.to_s }
-    end
-
     def string_field_class_prefix_based_on_column_name(attr)
       x = case
       when attr.to_s =~ /email/i    ; 'Email'
