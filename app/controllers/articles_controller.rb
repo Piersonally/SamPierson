@@ -43,7 +43,7 @@ class ArticlesController < LoggedInController
 
   def publish
     unless article.published?
-      @article.update_attributes! published_at: Time.now
+      @article.publish!
       flash[:notice] = %(Article "#{article.title}" has been published.)
     end
     redirect_to article

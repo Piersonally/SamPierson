@@ -61,6 +61,18 @@ describe Article do
       end
     end
 
+    describe "publish!" do
+      let(:article) { FactoryGirl.create :article }
+      subject { article.publish! }
+
+      it "should update published_at" do
+        expect { subject }.to change(article, :published_at).from(nil)
+      end
+      it "should set visible to true" do
+        expect { subject }.to change(article, :visible).from(false).to(true)
+      end
+    end
+
     describe "#synopsis_covers_everthing?" do
       subject { article.synopsis_covers_everything? }
 

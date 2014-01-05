@@ -16,6 +16,12 @@ class Article < ActiveRecord::Base
     !!published_at
   end
 
+  def publish!
+    self.published_at = Time.now
+    self.visible = true
+    save!
+  end
+
   PARAGRAPH_DIVIDER = "\r\n\r\n"  # What the <textarea> tag uses.
 
   def synopsis
