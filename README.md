@@ -33,6 +33,7 @@ work.
   3. Pass no more than four parameters into a method
   4. Rails controller actions can only instantiate one object
   5. You can pass only one instance variable to a view
+* Use Form Objects for all non-trivial forms.
 * Screenshot every page in integration tests.  This allows for rapid scanning
   for problems when sweeping CSS changes are made.  The goal is to to eventually
   compile these images into a single PDF.  If you know how to automatically do
