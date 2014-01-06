@@ -1,0 +1,13 @@
+#login-panel {
+  height: 300px;
+  background-color: #fafafa;
+
+  .panel-body { height: 100%; }
+  .nav-tabs li a { font-weight: bold; }
+  .tab-content { height: 225px; }
+  .tab-pane { height: 100%; }
+  .tab-pane.active {
+    padding-top: 30px;
+    background-color: white;
+  }
+}
