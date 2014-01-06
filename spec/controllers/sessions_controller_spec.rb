@@ -36,6 +36,25 @@ describe SessionsController do
     end
   end
 
+  describe "GET create_oauth" do
+    let(:oauth_response) { YAML::load_file fixture_file_path('oauth_response.yml') }
+    let(:provider) { 'github' }
+    before { request.env["omniauth.auth"] = oauth_response }
+    subject { get :create_oauth, provider: provider }
+
+    context "given oauth data for an existing user" do
+      let(:uid) { "123456" }
+      let!(:account) { FactoryGirl.create :account, oauth_provider: provider,
+                                                    oauth_uid: uid }
+      before { oauth_response['uid'] = uid }
+
+      it "should log the user in" do
+        subject
+        session[:account_id].should == account.id
+      end
+    end
+  end
+
   describe "DELETE destroy" do
     subject { delete :destroy }
 
