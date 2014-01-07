@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ArticlesController do
-  let(:author) { FactoryGirl.create :account }
+  let(:author) { FactoryGirl.create :admin_account }
   let!(:article1) { FactoryGirl.create :article, author: author }
   let!(:article2) { FactoryGirl.create :article }
   

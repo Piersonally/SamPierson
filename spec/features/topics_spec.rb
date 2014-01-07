@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature "Topics", type: :feature, js: true do
-  let(:user) { FactoryGirl.create :account }
+  let(:user) { FactoryGirl.create :admin_account }
   let!(:topic) { FactoryGirl.create :topic }
 
   before { login_as user }

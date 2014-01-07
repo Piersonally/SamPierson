@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe TopicsController do
-  let(:user) { FactoryGirl.create :account }
+  let(:user) { FactoryGirl.create :admin_account }
   let!(:topic) { FactoryGirl.create :topic }
   
   let(:valid_attributes) { { name: "computers" } }

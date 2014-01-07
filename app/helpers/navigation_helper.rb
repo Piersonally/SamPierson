@@ -14,7 +14,7 @@ module NavigationHelper
           {
             label: 'Articles', href: articles_path,
             active: /^\/articles/,
-            if: user_logged_in?
+            if: user_logged_in? && current_user.is_admin?
           }
         ]
       },
@@ -24,7 +24,7 @@ module NavigationHelper
           {
             label: 'Topics', href: topics_path,
             active: /^\/topics/,
-            if: user_logged_in?
+            if: user_logged_in? && current_user.is_admin?
           }
         ]
       },
