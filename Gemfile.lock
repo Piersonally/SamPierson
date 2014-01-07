@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 3a48b83e5eec62a5d2bfab1a118c24b45345388c
+  revision: 032ab5064b7b436c3ec71373d5faadceb273477e
   specs:
     actionmailer (4.1.0.beta1)
       actionpack (= 4.1.0.beta1)
@@ -64,7 +64,7 @@ GEM
     byebug (2.5.0)
       columnize (~> 0.3.6)
       debugger-linecache (~> 1.2.0)
-    capybara (2.2.0)
+    capybara (2.2.1)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
@@ -105,7 +105,7 @@ GEM
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     ffi (1.9.3)
-    foreigner (1.6.0)
+    foreigner (1.6.1)
       activerecord (>= 3.0.0)
     foreigner-matcher (0.2.3)
       foreigner (>= 1.0.0)
@@ -126,7 +126,7 @@ GEM
     guard-rspec (4.2.3)
       guard (~> 2.1)
       rspec (>= 2.14, < 4.0)
-    haml (4.0.4)
+    haml (4.0.5)
       tilt
     haml-rails (0.5.3)
       actionpack (>= 4.0.1)
