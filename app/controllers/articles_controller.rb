@@ -1,6 +1,7 @@
 class ArticlesController < LoggedInController
   respond_to :html, :js
   skip_before_filter :require_user_is_logged_in, only: :show
+  before_filter :require_admin, except: [ :show ]
 
   def index
     @articles = Article.includes(:topics)

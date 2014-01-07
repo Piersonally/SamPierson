@@ -2,6 +2,7 @@ class TopicsController < LoggedInController
   respond_to :html, :js
   before_action :load_topic, only: [:show, :edit, :update, :destroy, :publish]
   skip_before_filter :require_user_is_logged_in, only: :show
+  before_filter :require_admin, except: [ :show ]
 
   def index
     @topics = Topic.order(:name).page(params[:page]).per(15)

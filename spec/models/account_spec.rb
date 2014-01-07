@@ -9,7 +9,9 @@ describe Account do
     it { should have_many :articles }
   end
 
-  describe "attributes"
+  describe "attributes" do
+    it { should serialize(:roles).as(Array) }
+  end
 
   describe "validations" do
     before { FactoryGirl.create :account }
@@ -41,6 +43,18 @@ describe Account do
       it "should elide a blank last name" do
         account = Account.new first_name: 'Englebert', last_name: nil
         expect(account.full_name).to eq 'Englebert'
+      end
+    end
+
+    describe "is_admin?" do
+      subject { account.is_admin? }
+      context "for a non-admin account" do
+        let(:account) { FactoryGirl.create :account }
+        it { should be_false }
+      end
+      context "for an admin account" do
+        let(:account) { FactoryGirl.create :admin_account }
+        it { should be_true }
       end
     end
   end

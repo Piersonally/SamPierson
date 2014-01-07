@@ -1,6 +1,7 @@
 module FeatureHelpers
   def login_as(account)
     visit login_path
+    click_link "Log In Using Local ID"
     fill_in 'Email', with: account.email
     fill_in 'Password', with: 'secret'
     click_button 'Log In'

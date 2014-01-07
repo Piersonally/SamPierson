@@ -28,6 +28,8 @@ gem 'coderay'                                   # Syntax highlighting
 gem 'kaminari'                                  # Pagination
 gem 'kaminari-bootstrap'
 gem 'newrelic_rpm'
+gem 'omniauth'
+gem 'omniauth-github'
 
 group :development do
   gem 'haml-rails'                              # use haml as templating engine in generators

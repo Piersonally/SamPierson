@@ -8,4 +8,8 @@ class LoggedInController < ApplicationController
       redirect_to login_path, alert: 'You need to be logged in to do that.'
     end
   end
+
+  def require_admin
+    raise "Authorization Error" unless current_user.is_admin?
+  end
 end

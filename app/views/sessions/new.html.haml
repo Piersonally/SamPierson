@@ -1,30 +1,33 @@
 - title 'Log In'
 
-= bootstrap_form_for :login, url: login_path do |f|
-  = f.input :email
-  = f.input :password
-  .form-group
-    .col-sm-offset-3.col-sm-2
-      = submit_tag 'Log In', class: 'btn btn-primary'
+.row
+  .col-sm-offset-3.col-sm-6
 
+    .panel.panel-default#login-panel
+      .panel-body
+        %ul.nav.nav-tabs
+          %li.active
+            %a{ href: '#login-github', data: { toggle: "tab" } }
+              Log in using GitHub
+          %li
+            %a{ href: '#login-local', data: { toggle: "tab" } }
+              Log In Using Local ID
 
--#= form_tag login_path, class:'form-horizontal', role: 'form' do |f|
--#
--#  .col-sm-offset-2.col-sm-8
--#    .form-group
--#      = label_tag :email, nil, class: 'col-sm-3 control-label'
--#      .col-sm-6
--#        = text_field_tag :email, nil, class: 'form-control',
--#                                      placeholder: 'Email',
--#                                      type: 'email'
--#
--#    .form-group
--#      = label_tag :password, nil, class: 'col-sm-3 control-label'
--#      .col-sm-4
--#        = text_field_tag :password, nil, class: 'form-control',
--#                                         placeholder: 'Password',
--#                                         type: 'password'
--#
--#    .form-group
--#      .col-sm-offset-3.col-sm-2
--#        = submit_tag 'Log In', class: 'btn btn-primary'
+        .tab-content
+          .tab-pane.active#login-github
+            %br
+            %br
+            .center
+              = link_to '/auth/github', class: 'btn btn-lg btn-primary' do
+                Log In using your
+                %br
+                GitHub Account
+
+          .tab-pane#login-local
+            %br
+            = bootstrap_form_for :login, url: login_path do |f|
+              = f.input :email
+              = f.input :password
+              .form-group
+                .col-sm-offset-3.col-sm-2
+                  = submit_tag 'Log In', class: 'btn btn-primary'

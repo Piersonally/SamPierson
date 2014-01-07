@@ -11,7 +11,7 @@
 .article_body
   ~ markdown @article.body
 
-- if user_logged_in?
+- if user_logged_in? && current_user.is_admin?
   = link_to 'Edit', [:edit, @article], class: 'btn btn-info'
 
   = link_to 'Publish', [:publish, @article], method: :patch,

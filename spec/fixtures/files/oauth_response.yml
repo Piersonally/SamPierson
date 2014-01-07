@@ -1,0 +1,46 @@
+--- !ruby/hash:OmniAuth::AuthHash
+provider: github
+uid: '441066'
+info: !ruby/hash:OmniAuth::AuthHash::InfoHash
+  nickname: sampierson
+  email: sam@example.com
+  name: Sam Pierson
+  image: https://gravatar.com/avatar/e0e82cf76295338274c08b92840fe1fa?d=https%3A%2F%2Fidenticons.github.com%2F05835dd221e04b552982c34e6286e1db.png&r=x
+  urls: !ruby/hash:OmniAuth::AuthHash
+    GitHub: https://github.com/sampierson
+    Blog: http://sampierson.com
+credentials: !ruby/hash:OmniAuth::AuthHash
+  token: 9b541cdbf7f45b894dfee3c53eb51fd9c14d1e97
+  expires: false
+extra: !ruby/hash:OmniAuth::AuthHash
+  raw_info: !ruby/hash:OmniAuth::AuthHash
+    login: sampierson
+    id: 441066
+    avatar_url: https://gravatar.com/avatar/e0e82cf76295338274c08b92840fe1fa?d=https%3A%2F%2Fidenticons.github.com%2F05835dd221e04b552982c34e6286e1db.png&r=x
+    gravatar_id: e0e82cf76295338274c08b92840fe1fa
+    url: https://api.github.com/users/sampierson
+    html_url: https://github.com/sampierson
+    followers_url: https://api.github.com/users/sampierson/followers
+    following_url: https://api.github.com/users/sampierson/following{/other_user}
+    gists_url: https://api.github.com/users/sampierson/gists{/gist_id}
+    starred_url: https://api.github.com/users/sampierson/starred{/owner}{/repo}
+    subscriptions_url: https://api.github.com/users/sampierson/subscriptions
+    organizations_url: https://api.github.com/users/sampierson/orgs
+    repos_url: https://api.github.com/users/sampierson/repos
+    events_url: https://api.github.com/users/sampierson/events{/privacy}
+    received_events_url: https://api.github.com/users/sampierson/received_events
+    type: User
+    site_admin: false
+    name: Sam Pierson
+    company:
+    blog: http://sampierson.com
+    location: San Carlos, CA
+    email:
+    hireable: false
+    bio:
+    public_repos: 16
+    public_gists: 2
+    followers: 2
+    following: 0
+    created_at: '2010-10-15T17:44:09Z'
+    updated_at: '2014-01-06T01:24:30Z'

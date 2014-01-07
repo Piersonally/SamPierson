@@ -5,6 +5,7 @@ SamPierson::Application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy', as: 'logout'
+  match '/auth/:provider/callback', to: 'sessions#create_oauth', via:[:get, :post]
 
   get 'signup', to: 'accounts#new', as: 'signup'
 
