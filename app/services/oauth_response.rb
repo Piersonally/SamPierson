@@ -27,13 +27,14 @@ class OauthResponse
 
   private
 
+  # Return a 2 element array containing first and last names
   def group_names_into_first_and_last_name(full_name)
     names = full_name.split /\s/
     case names.count
       when 0; raise("This person has no name")
       when 1; [full_name, full_name]
       when 2; names
-      else [names.first, names[1..-1].join(" ")]
+      else [names[0..-2].join(" "), names.last]
     end
   end
 end
