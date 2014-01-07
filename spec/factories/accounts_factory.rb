@@ -6,4 +6,8 @@ FactoryGirl.define do
     password 'secret'
     password_confirmation 'secret'
   end
+
+  factory :admin_account, parent: :account do
+    roles %w[admin]
+  end
 end
