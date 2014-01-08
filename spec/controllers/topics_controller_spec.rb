@@ -12,13 +12,27 @@ describe TopicsController do
     [ :delete, :destroy, { id: 1 }        ]
   ]
 
-  let(:user) { FactoryGirl.create :admin_account }
+  context "when logged in as a regular user" do
+    let(:user) { FactoryGirl.create :account }
+    before { session[:account_id] = user.id }
+
+    describe "authorization" do
+      before { bypass_rescue }
+      it { expect { get :index             }.to raise_error NotAuthorizedError }
+      it { expect { get :new               }.to raise_error NotAuthorizedError }
+      it { expect { post :create           }.to raise_error NotAuthorizedError }
+      it { expect { get :edit, id: 1       }.to raise_error NotAuthorizedError }
+      it { expect { patch :update, id: 1   }.to raise_error NotAuthorizedError }
+      it { expect { delete :destroy, id: 1 }.to raise_error NotAuthorizedError }
+    end
+  end
+
+  let(:admin) { FactoryGirl.create :admin_account }
   let!(:topic) { FactoryGirl.create :topic }
-  
   let(:valid_attributes) { { name: "computers" } }
 
-  context "while logged in" do
-    before { session[:account_id] = user.id }
+  context "while logged in as an admin" do
+    before { session[:account_id] = admin.id }
     
     describe "GET index" do
       before { get :index }
