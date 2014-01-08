@@ -1,3 +1,5 @@
+class NotAuthorizedError < StandardError; end
+
 class LoggedInController < ApplicationController
   before_filter :require_user_is_logged_in
 
@@ -10,6 +12,13 @@ class LoggedInController < ApplicationController
   end
 
   def require_admin
-    raise "Authorization Error" unless current_user.is_admin?
+    raise NotAuthorizedError unless current_user.is_admin?
+  end
+
+  rescue_from NotAuthorizedError, with: :user_not_authorized
+
+  def user_not_authorized
+    flash[:error] = "Sorry, you're not allowed to do that."
+    redirect_to request.headers["Referer"] || root_path
   end
 end
