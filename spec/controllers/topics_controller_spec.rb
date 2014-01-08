@@ -1,22 +1,22 @@
 require 'spec_helper'
 
 describe TopicsController do
+
+  it_should_behave_like "requires login for actions", [
+    [ :get,    :index,   { }              ],
+    [ :get,    :show,    { id: 1 }        ],
+    [ :get,    :new,     { }              ],
+    [ :post,   :create,  { title: 'foo' } ],
+    [ :get,    :edit,    { id: 1 }        ],
+    [ :patch,  :update,  { id: 1 }        ],
+    [ :delete, :destroy, { id: 1 }        ]
+  ]
+
   let(:user) { FactoryGirl.create :admin_account }
   let!(:topic) { FactoryGirl.create :topic }
   
   let(:valid_attributes) { { name: "computers" } }
 
-  # TODO it should require user to be logged in to access ALL actions
-  
-  context "while not logged in" do
-    describe "GET index" do
-      subject { get :index }
-      
-      it { expect(subject).to redirect_to login_path }
-      it { subject; expect(flash[:alert]).to be_present }
-    end
-  end
-  
   context "while logged in" do
     before { session[:account_id] = user.id }
     

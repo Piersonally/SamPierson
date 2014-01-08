@@ -1,21 +1,23 @@
 require 'spec_helper'
 
 describe ArticlesController do
+
+  it_should_behave_like "requires login for actions", [
+    [ :get,    :index,   { }              ],
+    [ :get,    :new,     { }              ],
+    [ :post,   :create,  { title: 'foo' } ],
+    [ :get,    :edit,    { id: 1 }        ],
+    [ :patch,  :update,  { id: 1 }        ],
+    [ :delete, :destroy, { id: 1 }        ],
+    [ :patch,  :publish, { id: 1 }        ]
+  ]
+
   let(:author) { FactoryGirl.create :admin_account }
   let!(:article1) { FactoryGirl.create :article, author: author }
   let!(:article2) { FactoryGirl.create :article }
-  
   let(:valid_attributes) { {title: "Sex life of the Ping Pong ball" } }
 
   context "while not logged in" do
-    describe "GET index" do
-      # TODO test it requires user to be logged in to access ALL actions
-      subject { get :index }
-      
-      it { expect(subject).to redirect_to login_path }
-      it { subject; expect(flash[:alert]).to be_present }
-    end
-
     describe "GET show" do
       subject { get :show, id: article.to_param }
 
