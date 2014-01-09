@@ -9,7 +9,7 @@
     %h4 More Articles
     %ul
       - @index_page_data[:articles].offset(10).each do |article|
-        %li= link_to article.title, article
+        %li= link_to article.title, article_path(article, anchor: 'disqus_thread')
 
     %h4 Tags
     %ul
@@ -18,3 +18,7 @@
           = link_to topic.name, topic
           = surround("(", ")") do
             = topic.article_count
+
+- unless Rails.env.test?
+  :javascript
+    Sam.Disqus.setupCommentCountLinks();

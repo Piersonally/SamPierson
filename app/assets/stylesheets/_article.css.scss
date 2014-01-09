@@ -11,14 +11,19 @@ article {
   a { color: #333388 }
 }
 
+.article_synopsis {
+  clear: both;
+}
+
 .article_date {
   float: left;
-  padding: 8px 0 0 10px;
   color: $light_gray;
 }
 
-.article_synopsis {
-  clear: both;
+.article_comment_count {
+  float: left;
+  margin-left: 10px;
+  a { color: $light_gray; }
 }
 
 .article_more {
@@ -35,4 +40,8 @@ article {
   li {
     margin-bottom: 5px;
   }
+}
+
+#disqus_thread {
+  margin-top: 40px;
 }

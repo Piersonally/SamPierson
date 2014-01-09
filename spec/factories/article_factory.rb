@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :article do
     title { Faker::Lorem.sentence }
-    body { Faker::Lorem.paragraph 100 }
+    body { Faker::Lorem.paragraph 10 }
     association :author, factory: :account
   end
 

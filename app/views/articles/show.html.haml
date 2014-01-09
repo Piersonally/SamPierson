@@ -20,3 +20,8 @@
   = link_to 'Destroy', @article, method: :delete,
                              class: 'btn btn-danger',
                              data: { confirm: 'Are you sure?' }
+
+- unless Rails.env.test?
+  #disqus_thread
+    :javascript
+      Sam.Disqus.embedCommentConversation("#{@article.to_param}");
