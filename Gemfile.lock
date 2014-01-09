@@ -123,7 +123,7 @@ GEM
     guard-markdown (0.2.0)
       guard (>= 0.2.2)
       kramdown (~> 0.13.3)
-    guard-rspec (4.2.3)
+    guard-rspec (4.2.4)
       guard (~> 2.1)
       rspec (>= 2.14, < 4.0)
     haml (4.0.5)
