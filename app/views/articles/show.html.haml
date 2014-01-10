@@ -21,7 +21,9 @@
                              class: 'btn btn-danger',
                              data: { confirm: 'Are you sure?' }
 
+#disqus_thread
+
 - unless Rails.env.test?
-  #disqus_thread
+  - content_for :javascripts do
     :javascript
       Sam.Disqus.embedCommentConversation("#{@article.to_param}");

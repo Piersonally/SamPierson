@@ -21,5 +21,6 @@
             = topic.article_count
 
 - unless Rails.env.test?
-  :javascript
-    Sam.Disqus.setupCommentCountLinks();
+  - content_for :javascripts do
+    :javascript
+      Sam.Disqus.setupCommentCountLinks();

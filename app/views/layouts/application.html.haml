@@ -6,7 +6,6 @@
     %link{ href: '/assets/favicon.ico', rel: 'shortcut icon' }
     = stylesheet_link_tag    'application', media: 'all',
                                             'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
     = navbar_random_image_helper
 
@@ -26,3 +25,7 @@
       = page_heading_helper
 
       = yield
+
+    #load-javascripts
+      = javascript_include_tag 'application'
+      = content_for :javascripts
