@@ -34,8 +34,9 @@
 
       .col-sm-4.center
         = link_to "http://www.linkedin.com/in/sampierson" do
-          = image_tag "linkedin_132x32.png", alt: "linkedin.com logo"
-          sampierson
+          %ul.nostyle
+            %li= image_tag "linkedin_132x32.png", alt: "linkedin.com logo"
+            %li sampierson
 
       .col-sm-4.center
         %ul.nostyle
