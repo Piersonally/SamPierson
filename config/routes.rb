@@ -1,6 +1,7 @@
 SamPierson::Application.routes.draw do
 
   root 'home#index'
+  get 'about', to: 'home#about', as: 'about'
 
   get 'login', to: 'sessions#new', as: 'login'
   post 'login', to: 'sessions#create'

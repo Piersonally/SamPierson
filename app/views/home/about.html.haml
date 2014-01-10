@@ -1,0 +1,46 @@
+- title "About"
+- @heading = false
+
+%h2 Rubyist, CTO
+
+.row
+  .col-sm-8
+    %p
+      I lead Agile software teams and build web software systems using
+      Ruby on Rails and other technologies.
+    %p
+      I've been developing software or managing teams since 1985.
+      During that time I've seen codebases die of the entropy introduced
+      by poor coding practices, which is why I am now  passionate about
+      = succeed "." do
+        = link_to "software craftsmanship", topic_path(id: "craftsmanship")
+    %p
+      I'm CTO of Nexus Retail, where we are using technology and innovative
+      financing techniques to systematize, scale and bring efficiency to
+      Retail store development.
+    %p
+      Find me on, or contact me via:
+
+    .row#find_me_on
+      .col-sm-4.center
+        %ul.nostyle
+          %li
+            = link_to "https://github.com/sampierson" do
+              = image_tag "github.png", alt: "GitHub logo"
+          %li
+            = link_to "Piersonally", "https://github.com/piersonally"
+          %li
+            = link_to "sampierson", "https://github.com/sampierson"
+
+      .col-sm-4.center
+        = link_to "http://www.linkedin.com/in/sampierson" do
+          = image_tag "linkedin_132x32.png", alt: "linkedin.com logo"
+          sampierson
+
+      .col-sm-4.center
+        %ul.nostyle
+          %li= image_tag "twitter.png", alt: "Twitter logo"
+          %li= link_to "@spierson", "https://twitter.com/spierson"
+
+  .col-sm-4
+    = image_tag "Sam-x480.jpg", alt: "Picture of Sam", id: 'sam'

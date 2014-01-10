@@ -30,6 +30,12 @@ module NavigationHelper
       },
       {
         type: :nav,
+        items: [
+          { label: 'About', href: about_path }
+        ]
+      },
+      {
+        type: :nav,
         class: 'navbar-right',
         items: [
           { label: 'Log In', href: login_path }
