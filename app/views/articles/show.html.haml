@@ -1,4 +1,6 @@
 - title @article.title
+- content_for :head do
+  %link{ rel: "canonical", href: article_url(@article) }
 
 %p
   %b Posted:
@@ -26,9 +28,13 @@
     data: { via: "spierson",
     text: "#{@article.title} #{article_url(@article)}" } } Tweet
 
-  .fb-like{ data: { href: article_url(@article),
+  .fb-like{ data: { href: article_path(@article),
                     layout: "button_count", action: "like",
                     "show-faces" => "true", share: "false" } }
+
+  .g-plusone{ data: { href: article_path(@article),
+                      size: "medium", annotation: "bubble", width: "300" } }
+
   #fb-root
 
 #disqus_thread
@@ -38,4 +44,5 @@
     :javascript
       Sam.Twitter.setupTweetButtons();
       Sam.Facebook.setupLikeButtons();
+      Sam.GooglePlus.setupPlusButtons();
       Sam.Disqus.embedCommentConversation("#{@article.to_param}");
