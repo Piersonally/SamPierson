@@ -17,7 +17,7 @@
 //= require jquery.datetimepicker
 //= require ./sam
 //= require_tree ./sam
-//= require_tree .
+//= require ./google_analytics
 
 $(document).on('page:change', function() {
   $('input[type=datetime]').datetimepicker({
