@@ -15,8 +15,8 @@
 //= require turbolinks
 //= require bootstrap
 //= require jquery.datetimepicker
-//= require ./Sam
-//= require_tree ./Sam
+//= require ./sam
+//= require_tree ./sam
 //= require_tree .
 
 $(document).on('page:change', function() {
