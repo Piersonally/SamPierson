@@ -21,9 +21,14 @@
                              class: 'btn btn-danger',
                              data: { confirm: 'Are you sure?' }
 
+%a.twitter-share-button{ href: "https://twitter.com/share",
+  data: { via: "spierson",
+  text: "#{@article.title} #{article_url(@article)}" } } Tweet
+
 #disqus_thread
 
 - unless Rails.env.test?
   - content_for :javascripts do
     :javascript
+      Sam.Twitter.setupTweetButtons();
       Sam.Disqus.embedCommentConversation("#{@article.to_param}");
