@@ -28,11 +28,11 @@
     data: { via: "spierson",
     text: "#{@article.title} #{article_url(@article)}" } } Tweet
 
-  .fb-like{ data: { href: article_path(@article),
+  .fb-like{ data: { href: article_url(@article),
                     layout: "button_count", action: "like",
                     "show-faces" => "true", share: "false" } }
 
-  .g-plusone{ data: { href: article_path(@article),
+  .g-plusone{ data: { href: article_url(@article),
                       size: "medium", annotation: "bubble", width: "300" } }
 
   #fb-root
