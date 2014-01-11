@@ -23,23 +23,22 @@
                              class: 'btn btn-danger',
                              data: { confirm: 'Are you sure?' }
 
-#social_media
-  %a.twitter-share-button{ href: "https://twitter.com/share",
-    data: { via: "spierson",
-    text: "#{@article.title} #{article_url(@article)}" } } Tweet
-
-  .fb-like{ data: { href: article_url(@article),
-                    layout: "button_count", action: "like",
-                    "show-faces" => "true", share: "false" } }
-
-  .g-plusone{ data: { href: article_url(@article), size: "medium",
-                      annotation: "bubble", width: "300", align: 'right' } }
-
-  #fb-root
-
-#disqus_thread
-
 - unless Rails.env.test?
+  #social_media
+    %a.twitter-share-button{ href: "https://twitter.com/share",
+      data: { via: "spierson", text: @article.title } } Tweet
+
+    .fb-like{ data: { href: article_url(@article),
+                      layout: "button_count", action: "like",
+                      "show-faces" => "true", share: "false" } }
+
+    .g-plusone{ data: { href: article_url(@article), size: "medium",
+                        annotation: "bubble", width: "300", align: 'right' } }
+
+    #fb-root
+
+  #disqus_thread
+
   - content_for :javascripts do
     :javascript
       Sam.Twitter.setupTweetButtons();
