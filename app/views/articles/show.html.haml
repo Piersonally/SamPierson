@@ -21,9 +21,15 @@
                              class: 'btn btn-danger',
                              data: { confirm: 'Are you sure?' }
 
-%a.twitter-share-button{ href: "https://twitter.com/share",
-  data: { via: "spierson",
-  text: "#{@article.title} #{article_url(@article)}" } } Tweet
+#social_media
+  %a.twitter-share-button{ href: "https://twitter.com/share",
+    data: { via: "spierson",
+    text: "#{@article.title} #{article_url(@article)}" } } Tweet
+
+  .fb-like{ data: { href: article_url(@article),
+                    layout: "button_count", action: "like",
+                    "show-faces" => "true", share: "false" } }
+  #fb-root
 
 #disqus_thread
 
@@ -31,4 +37,5 @@
   - content_for :javascripts do
     :javascript
       Sam.Twitter.setupTweetButtons();
+      Sam.Facebook.setupLikeButtons();
       Sam.Disqus.embedCommentConversation("#{@article.to_param}");
