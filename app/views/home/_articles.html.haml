@@ -10,7 +10,7 @@
         = article.published_at.to_date.strftime('%b %e, %Y')
 
     .article_comment_count
-      = link_to 'Comments',
+      = link_to '0 Comments',
                 article_path(article, anchor: 'disqus_thread'),
                 data: { 'disqus-identifier' => article.to_param }
 
