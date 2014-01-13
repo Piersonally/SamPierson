@@ -10,7 +10,9 @@
         = article.published_at.to_date.strftime('%b %e, %Y')
 
     .article_comment_count
-      = link_to 'Comments', article_path(article, anchor: 'disqus_thread')
+      = link_to 'Comments',
+                article_path(article, anchor: 'disqus_thread'),
+                data: { 'disqus-identifier' => article.to_param }
 
     - unless article.synopsis_covers_everything?
       .article_more

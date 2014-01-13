@@ -10,7 +10,7 @@
     %ul
       - @index_page_data[:articles].offset(10).each do |article|
         %li
-          = link_to article.title, article_path(article, anchor: 'disqus_thread')
+          = link_to article.title, article_path(article)
 
     %h4 Tags
     %ul
