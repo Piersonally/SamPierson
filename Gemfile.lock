@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/Piersonally/shoulda-matchers.git
-  revision: d9a342fd3ff78fc59115bebaef6f73fb29b02850
+  revision: 6f1f22285080321b3dcb9aab08b7bf8f406db2c4
   specs:
-    shoulda-matchers (2.4.0)
+    shoulda-matchers (2.5.0)
       activesupport (>= 3.0.0)
 
 GIT
@@ -169,7 +169,7 @@ GEM
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_portile (0.5.2)
-    minitest (5.2.0)
+    minitest (5.2.1)
     multi_json (1.8.2)
     multipart-post (1.2.0)
     newrelic_rpm (3.7.1.182)
