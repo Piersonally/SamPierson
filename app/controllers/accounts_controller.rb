@@ -1,3 +1,5 @@
+# Accounts controller handles the sign-up process.
+#
 class AccountsController < ApplicationController
   before_filter :redirect_unless_signup_is_enabled
 

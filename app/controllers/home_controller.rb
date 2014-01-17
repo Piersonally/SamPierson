@@ -1,3 +1,5 @@
+# HomeController handles display of the blog front page.
+#
 class HomeController < ApplicationController
 
   def index

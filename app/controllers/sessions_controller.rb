@@ -5,8 +5,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    account = Account.find_by_email params[:login][:email]
-    if account && account.authenticate(params[:login][:password])
+    account = Account.find_by_email login_params[:email]
+    if account && account.authenticate(login_params[:password])
       log_user_in account
       redirect_to root_url, notice: "You logged in successfully."
     else
@@ -26,5 +26,11 @@ class SessionsController < ApplicationController
   def destroy
     log_out
     redirect_to root_path, notice: "You are now logged out."
+  end
+
+  private
+
+  def login_params
+    params.require(:login).permit :email, :password
   end
 end

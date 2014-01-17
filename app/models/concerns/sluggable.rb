@@ -21,8 +21,9 @@ module Sluggable
 
   def generate_slug
     return unless slugged_column.present?
-    if slug.blank? && send(slugged_column).present?
-      self.slug = send(slugged_column).parameterize
+    if slug.blank?
+      new_slug = send slugged_column
+      self.slug = new_slug.parameterize unless new_slug.blank?
     end
   end
 

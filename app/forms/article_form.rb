@@ -22,7 +22,7 @@ class ArticleForm
 
   def save
     if valid?
-      persist!
+      persist
       true
     else
       false
@@ -53,7 +53,7 @@ class ArticleForm
     @article.assign_attributes attrs
   end
 
-  def persist!
+  def persist
     @article.transaction do
       @article.save
       update_article_topics
@@ -62,7 +62,7 @@ class ArticleForm
 
   def update_article_topics
     topics = retrieve_existing_topics_matching_names
-    create_new_topics_where_necessary! topics
+    create_new_topics_where_necessary topics
     @article.topics = topics # HABTM: this line updates DB
   end
 
@@ -70,9 +70,12 @@ class ArticleForm
     Topic.where name: @topic_names
   end
 
-  def create_new_topics_where_necessary!(topics)
+  # Compares a the list of topic names (@topic_names)
+  # with an array of Topics, creating any Topics where required to
+  # make the array contain all Topics mentioned in @topic_names
+  def create_new_topics_where_necessary(topics)
     @topic_names.each do |topic_name|
-      unless topics.detect { |t| t.name == topic_name }
+      unless topics.detect { |topic| topic.name == topic_name }
         topics << Topic.create!(name: topic_name)
       end
     end

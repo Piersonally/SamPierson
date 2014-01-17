@@ -1,3 +1,8 @@
+# ArticlesController handles the management of blog articles,
+# and the display of individual articles (show).
+#
+# Note that display of the blog index is handled be HomeController.
+#
 class ArticlesController < LoggedInController
   respond_to :html, :js
   skip_before_filter :require_user_is_logged_in, only: :show
@@ -53,11 +58,14 @@ class ArticlesController < LoggedInController
   private
 
   def article
-    @article ||=
+    @article ||= find_article params[:id]
+  end
+
+  def find_article(article_slug)
     if user_logged_in?
-      Article.find_by_slug! params[:id]
+      Article.find_by_slug! article_slug
     else
-      Article.visible.find_by_slug! params[:id]
+      Article.visible.find_by_slug! article_slug
     end
   end
 

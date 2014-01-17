@@ -10,7 +10,8 @@ module Concerns
     end
 
     def current_user
-      @current_user ||= Account.find session[:account_id] if session[:account_id]
+      account_id = session[:account_id]
+      @current_user ||= Account.find account_id if account_id
     end
 
     def user_logged_in?
