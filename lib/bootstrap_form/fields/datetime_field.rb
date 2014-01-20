@@ -7,14 +7,20 @@ module BootstrapForm
       def input_tag
         @template.content_tag(:div, class: 'col-sm-6') do
           @template.content_tag :div, class: 'input-group' do
-              @form_builder.text_field(@name, input_options) +
-            @template.content_tag(:div, class: 'input-group-addon') do
-              @template.content_tag(:span, '',
-                class: 'glyphicon glyphicon-calendar',
-                data: { 'activate-datepicker' => "##{tag_id}" }
-              )
-            end
+            @form_builder.text_field(@name, input_options) +
+            calendar_icon
           end
+        end
+      end
+
+      private
+
+      def calendar_icon
+        @template.content_tag(:div, class: 'input-group-addon') do
+          @template.content_tag(:span, '',
+            class: 'glyphicon glyphicon-calendar',
+            data: { 'activate-datepicker' => "##{tag_id}" }
+          )
         end
       end
 
