@@ -6,7 +6,10 @@
     = render 'articles', articles: @blog_data[:articles].limit(10)
 
   .col-sm-3.archive
-    %h4 More Articles
+    %h4
+      More Articles
+      = link_to rss_blog_url(format: 'xml'), class: 'rss_feed' do
+        = image_tag 'rss.png', alt: 'RSS Feed'
     %ul
       - @blog_data[:articles].offset(10).each do |article|
         %li
