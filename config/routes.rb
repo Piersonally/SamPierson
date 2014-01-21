@@ -18,7 +18,9 @@ SamPierson::Application.routes.draw do
     end
   end
 
-  resource :blog, controller:'blog', only:[:show]
+  resource :blog, controller:'blog', only:[:show] do
+    get :rss
+  end
 
   resources :topics
 

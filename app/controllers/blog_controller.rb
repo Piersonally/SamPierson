@@ -6,4 +6,8 @@ class BlogController < ApplicationController
       topics: Topic.topics_with_article_counts
     )
   end
+
+  def rss
+    @articles = Article.visible.limit(10)
+  end
 end
