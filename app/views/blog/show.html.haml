@@ -3,18 +3,18 @@
 
 .row
   .col-sm-9
-    = render 'articles', articles: @index_page_data[:articles].limit(10)
+    = render 'articles', articles: @blog_data[:articles].limit(10)
 
   .col-sm-3.archive
     %h4 More Articles
     %ul
-      - @index_page_data[:articles].offset(10).each do |article|
+      - @blog_data[:articles].offset(10).each do |article|
         %li
           = link_to article.title, article_path(article)
 
     %h4 Tags
     %ul
-      - @index_page_data[:topics].each do |topic|
+      - @blog_data[:topics].each do |topic|
         %li
           = link_to topic.name, topic
           = surround "(", ")" do

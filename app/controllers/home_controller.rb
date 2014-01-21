@@ -1,11 +1,8 @@
-# HomeController handles display of the blog front page.
+# Landing page is rendered by BlogController#show
+# This controller only handles miscellaneous items at present.
 #
 class HomeController < ApplicationController
 
-  def index
-    @index_page_data = OpenStruct.new(
-      articles: Article.visible,
-      topics: Topic.topics_with_article_counts
-    )
+  def about
   end
 end

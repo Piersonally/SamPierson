@@ -1,6 +1,6 @@
 SamPierson::Application.routes.draw do
 
-  root 'home#index'
+  root 'blog#show'
   get 'about', to: 'home#about', as: 'about'
 
   get 'login', to: 'sessions#new', as: 'login'
@@ -17,6 +17,8 @@ SamPierson::Application.routes.draw do
       patch :publish
     end
   end
+
+  resource :blog, controller:'blog', only:[:show]
 
   resources :topics
 
