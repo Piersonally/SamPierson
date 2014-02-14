@@ -30,6 +30,7 @@ gem 'kaminari-bootstrap'
 gem 'newrelic_rpm'
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'simple_bootstrap_form'
 
 group :development do
   gem 'haml-rails'                              # use haml as templating engine in generators
