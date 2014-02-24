@@ -15,7 +15,7 @@
       = navbar_helper main_navbar_content_data
 
       - flash.each do |type, msg|
-        .alert{ class: "alert-#{type == :notice ? 'success' : 'danger'}" }
+        .alert{ class: "alert-#{type.to_s == 'notice' ? 'success' : 'danger'}" }
           %button.close{ type: 'button',
                          data: { dismiss: 'alert'},
                          'aria-hidden' => 'true'}
