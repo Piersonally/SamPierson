@@ -19,8 +19,11 @@ work.
 * Zeus, Guard, guard-rspec, guard-livereload
 * Bootstrap 3 (bootstrap-sass)
 * [Authentication from scratch](http://railscasts.com/episodes/250-authentication-from-scratch-revised)
-* A form builder I wrote for Bootstrap 3 (BootstrapForm), using a similar API
-  to simple\_form, as at the time I started this project, simple\_form was not
+* A form builder I wrote for Bootstrap 3
+  ([simple_bootstrap_form](https://github.com/Piersonally/simple_bootstrap_form)),
+  which has a similar API
+  to [simple\_form](https://github.com/plataformatec/simple_form),
+  as at the time I started this project, simple\_form was not
   yet Bootstrap 3 compatible.
 
 ## Methodology
