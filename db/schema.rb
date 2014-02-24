@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140107031717) do
+ActiveRecord::Schema.define(version: 20140224214401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,18 @@ ActiveRecord::Schema.define(version: 20140107031717) do
   add_index "articles_topics", ["article_id"], name: "index_articles_topics_on_article_id", using: :btree
   add_index "articles_topics", ["topic_id"], name: "index_articles_topics_on_topic_id", using: :btree
 
+  create_table "quotations", force: true do |t|
+    t.integer  "quoter_id"
+    t.text     "quote"
+    t.string   "author"
+    t.string   "source"
+    t.string   "when"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "quotations", ["quoter_id"], name: "index_quotations_on_quoter_id", using: :btree
+
   create_table "topics", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -70,5 +82,7 @@ ActiveRecord::Schema.define(version: 20140107031717) do
 
   add_foreign_key "articles_topics", "articles", name: "articles_topics_article_id_fk"
   add_foreign_key "articles_topics", "topics", name: "articles_topics_topic_id_fk"
+
+  add_foreign_key "quotations", "accounts", name: "quotations_quoter_id_fk", column: "quoter_id"
 
 end

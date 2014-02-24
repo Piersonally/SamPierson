@@ -7,6 +7,7 @@ describe Account do
 
   describe "associations" do
     it { should have_many :articles }
+    it { should have_many :quotations }
   end
 
   describe "attributes" do

@@ -1,5 +1,6 @@
 class Account < ActiveRecord::Base
   has_many :articles, foreign_key: 'author_id', inverse_of: :author
+  has_many :quotations, foreign_key: 'quoter_id', inverse_of: :quoter
 
   has_secure_password
 
