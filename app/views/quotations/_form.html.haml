@@ -1,0 +1,9 @@
+= bootstrap_form_for @quote do |f|
+  = f.input :author
+  = f.input :quote, rows: 10
+  = f.input :source
+  = f.input :when
+
+  .form-group
+    .col-sm-offset-3.col-sm-2
+      = f.submit 'Save', class: 'btn btn-primary'

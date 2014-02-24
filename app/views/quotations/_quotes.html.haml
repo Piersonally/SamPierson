@@ -1,0 +1,22 @@
+%table.table
+  %thead
+    %tr
+      %th Author
+      %th Quote
+      %th Source
+      %th When
+      %th
+  %tbody
+    - quotes.each do |quote|
+      %tr{ id: dom_id(quote) }
+        %td= quote.author
+        %td= link_to truncate(quote.quote), quote
+        %td= quote.source
+        %td= quote.when
+        %td
+          = link_to 'Edit', edit_quotation_path(quote), class: 'btn btn-xs btn-info'
+          = link_to 'Delete', quotation_path(quote), method: 'delete',
+                                                     class: 'btn btn-xs btn-danger',
+                                                     data: { confirm: 'Are you sure?' }
+
+= paginate quotes, remote: true

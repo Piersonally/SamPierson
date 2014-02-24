@@ -15,6 +15,11 @@ module NavigationHelper
             label: 'Articles', href: articles_path,
             active: /^\/articles/,
             if: user_logged_in? && current_user.is_admin?
+          },
+          {
+            label: 'Quotes', href: quotations_path,
+            active: /^\/quotation/,
+            if: user_logged_in? && current_user.is_admin?
           }
         ]
       },
