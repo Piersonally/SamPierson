@@ -1,4 +1,5 @@
 = bootstrap_form_for @article_form do |f|
+  = f.input :body_lang, label: 'Format', collection: %w[markdown html]
   = f.input :title
   = f.input :published_at
   = f.input :visible

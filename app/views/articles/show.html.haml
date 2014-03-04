@@ -11,7 +11,10 @@
   = @article.topics.map { |t| link_to t.name, t }.join(', ').html_safe
 
 .article_body
-  ~ markdown @article.body
+  - if @article.markdown?
+    ~ markdown @article.body
+  - else
+    ~ @article.body.html_safe
 
 - if user_logged_in? && current_user.is_admin?
   = link_to 'Edit', [:edit, @article], class: 'btn btn-info'
