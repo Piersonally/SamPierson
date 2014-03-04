@@ -3,6 +3,7 @@ deployment:
     branch: master
     commands:
       - heroku maintenance:on --app sampierson
+      - '[[ ! -s "$(git rev-parse --git-dir)/shallow" ]] || git fetch --unshallow'
       - "git push git@heroku.com:sampierson.git $CIRCLE_SHA1:master":
           {timeout: 600}
       - heroku run rake db:migrate --app sampierson
