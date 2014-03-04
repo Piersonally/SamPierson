@@ -6,7 +6,7 @@ class Article < ActiveRecord::Base
   include Sluggable
   self.generate_slugs_from_column = :title
 
-  validates :title, :author_id, presence: true
+  validates :title, :author_id, :body_lang, presence: true
 
   scope :visible, -> {
     where(visible: true).order('published_at DESC')
@@ -30,5 +30,13 @@ class Article < ActiveRecord::Base
 
   def synopsis_covers_everything?
     body.split(PARAGRAPH_DIVIDER).count == 1
+  end
+
+  def markdown?
+    body_lang == 'markdown'
+  end
+
+  def html?
+    body_lang == 'html'
   end
 end
