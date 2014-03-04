@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140303204015) do
+ActiveRecord::Schema.define(version: 20140304011557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,8 +40,9 @@ ActiveRecord::Schema.define(version: 20140303204015) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
-    t.boolean  "visible",      default: false
-    t.string   "body_lang",    default: "markdown"
+    t.boolean  "visible",         default: false
+    t.string   "body_lang",       default: "markdown"
+    t.text     "custom_synopsis"
   end
 
   add_index "articles", ["author_id"], name: "index_articles_on_author_id", using: :btree

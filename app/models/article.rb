@@ -25,7 +25,7 @@ class Article < ActiveRecord::Base
   PARAGRAPH_DIVIDER = "\r\n\r\n"  # What the <textarea> tag uses.
 
   def synopsis
-    body.split(PARAGRAPH_DIVIDER).first
+    custom_synopsis || body.split(PARAGRAPH_DIVIDER).first
   end
 
   def synopsis_covers_everything?

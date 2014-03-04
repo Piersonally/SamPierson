@@ -11,8 +11,8 @@ class ArticleForm
     assign_attributes attributes
   end
 
-  delegate :body_lang, :title, :body, :author_id, :published_at, :visible,
-           :persisted?, :column_for_attribute,
+  delegate :body_lang, :title, :custom_synopsis, :body, :author_id,
+           :published_at, :visible, :persisted?, :column_for_attribute,
            :to => :article
 
   def update(attributes)
