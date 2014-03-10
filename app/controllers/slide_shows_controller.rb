@@ -53,7 +53,7 @@ class SlideShowsController < LoggedInController
 
   def slide_show_params
     params.require(:slide_show).permit(
-      :title, :slug, :content
+      :theme, :title, :slug, :content
     )
   end
 end

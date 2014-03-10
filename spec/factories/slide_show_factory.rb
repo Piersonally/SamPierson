@@ -3,7 +3,8 @@
 FactoryGirl.define do
   factory :slide_show do
     title { Faker::Lorem.sentence }
-    content{ Faker::Lorem.paragraph 10 }
+    theme { SlideShow::THEMES.sample }
+    content { Faker::Lorem.paragraph 10 }
     association :author, factory: :account
   end
 end

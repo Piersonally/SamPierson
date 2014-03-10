@@ -6,4 +6,6 @@ class SlideShow < ActiveRecord::Base
   self.generate_slugs_from_column = :title
 
   validates :author_id, :title, presence: true
+
+  THEMES = %w[default beige blood moon night serif simple sky solarized]
 end

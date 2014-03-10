@@ -1,4 +1,5 @@
 = bootstrap_form_for @slide_show do |f|
+  = f.input :theme, collection: SlideShow::THEMES
   = f.input :title
   = f.input :slug
   = f.input :content, rows: 10

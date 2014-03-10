@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140310180024) do
+ActiveRecord::Schema.define(version: 20140310185935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20140310180024) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "theme",      default: "default"
   end
 
   add_index "slide_shows", ["author_id"], name: "index_slide_shows_on_author_id", using: :btree

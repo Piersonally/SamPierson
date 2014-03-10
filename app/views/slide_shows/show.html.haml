@@ -1,11 +1,19 @@
-- title "Slide Show by #{@slide_show.author}"
+- title "Slide Show: #{@slide_show.title}"
 
+%p
+  %b Author:
+  = @slide_show.author.full_name
+%p
+  %b Theme:
+  = @slide_show.theme
 %p
   %b Title:
   = @slide_show.title
 %p
   %b Content:
-  = @slide_show.content
+  = truncate @slide_show.content
+
+= link_to 'Present', [:present, @slide_show], class: 'btn btn-success'
 
 - if user_logged_in? && current_user.is_admin?
   = link_to 'Edit', [:edit, @slide_show], class: 'btn btn-info'
