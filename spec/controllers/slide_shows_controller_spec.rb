@@ -17,10 +17,11 @@ describe SlideShowsController do
   let(:valid_attributes) { {title: "Sex life of the Ping Pong ball"} }
 
   context "while not logged in" do
-    describe "GET show" do
-      subject { get :show, id: slide_show1.to_param }
+    describe "GET present" do
+      subject { get :present, id: slide_show1.to_param }
 
-      it { should render_template 'show' }
+      it { should render_template 'present' }
+      it { should render_template 'layouts/reveal' }
     end
   end
 
@@ -31,6 +32,7 @@ describe SlideShowsController do
     describe "authorization" do
       before { bypass_rescue }
       it { expect { get :index             }.to raise_error NotAuthorizedError }
+      it { expect { get :show, id: 1       }.to raise_error NotAuthorizedError }
       it { expect { get :new               }.to raise_error NotAuthorizedError }
       it { expect { post :create           }.to raise_error NotAuthorizedError }
       it { expect { get :edit, id: 1       }.to raise_error NotAuthorizedError }

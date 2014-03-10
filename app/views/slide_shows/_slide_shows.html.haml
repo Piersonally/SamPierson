@@ -10,6 +10,7 @@
         %td= slide_show.author.full_name
         %td= link_to truncate(slide_show.title), slide_show
         %td
+          = link_to 'Present', present_slide_show_path(slide_show), class: 'btn btn-xs btn-success'
           = link_to 'Edit', edit_slide_show_path(slide_show), class: 'btn btn-xs btn-info'
           = link_to 'Delete', slide_show_path(slide_show), method: 'delete',
                                                      class: 'btn btn-xs btn-danger',

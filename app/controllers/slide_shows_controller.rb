@@ -1,7 +1,8 @@
 class SlideShowsController < LoggedInController
   respond_to :html, :js
-  skip_before_filter :require_user_is_logged_in, only: :show
-  before_filter :require_admin, except: [ :show ]
+  skip_before_filter :require_user_is_logged_in, only: :present
+  before_filter :require_admin, except: [ :present ]
+  layout 'reveal', only: [:present]
 
   def index
     @slide_shows = SlideShow.page(params[:page]).per(15)
@@ -38,6 +39,10 @@ class SlideShowsController < LoggedInController
     slide_show.destroy
     flash[:notice] = %(Slide show "#{slide_show.title}" was successfully destroyed.)
     respond_with slide_show
+  end
+
+  def present
+    respond_with @slide_show = slide_show
   end
 
   private
