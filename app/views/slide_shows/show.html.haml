@@ -1,0 +1,16 @@
+- title "Slide Show by #{@slide_show.author}"
+
+%p
+  %b Title:
+  = @slide_show.title
+%p
+  %b Content:
+  = @slide_show.content
+
+- if user_logged_in? && current_user.is_admin?
+  = link_to 'Edit', [:edit, @slide_show], class: 'btn btn-info'
+
+  = link_to 'Delete', @slide_show, method: :delete,
+                              class: 'btn btn-danger',
+                              data: { confirm: 'Are you sure?' }
+

@@ -1,0 +1,7 @@
+- title "Listing Slide Shows"
+
+#slide_shows
+  = render 'slide_shows', slide_shows: @slide_shows
+
+%br
+= link_to 'New Slide Show', new_slide_show_path, class: 'btn btn-primary'

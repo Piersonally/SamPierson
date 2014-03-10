@@ -20,6 +20,8 @@ SamPierson::Application.routes.draw do
 
   resources :quotations
 
+  resources :slide_shows
+
   resource :blog, controller:'blog', only:[:show] do
     get :rss
   end

@@ -20,6 +20,11 @@ module NavigationHelper
             label: 'Quotes', href: quotations_path,
             active: /^\/quotation/,
             if: user_logged_in? && current_user.is_admin?
+          },
+          {
+            label: 'Slide Shows', href: slide_shows_path,
+            active: /^\/slide_show/,
+            if: user_logged_in? && current_user.is_admin?
           }
         ]
       },

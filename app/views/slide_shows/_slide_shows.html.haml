@@ -1,0 +1,18 @@
+%table.table
+  %thead
+    %tr
+      %th Author
+      %th Title
+      %th
+  %tbody
+    - slide_shows.each do |slide_show|
+      %tr{ id: dom_id(slide_show) }
+        %td= slide_show.author.full_name
+        %td= link_to truncate(slide_show.title), slide_show
+        %td
+          = link_to 'Edit', edit_slide_show_path(slide_show), class: 'btn btn-xs btn-info'
+          = link_to 'Delete', slide_show_path(slide_show), method: 'delete',
+                                                     class: 'btn btn-xs btn-danger',
+                                                     data: { confirm: 'Are you sure?' }
+
+= paginate slide_shows, remote: true
