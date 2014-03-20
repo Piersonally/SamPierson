@@ -1,0 +1,594 @@
+<style type="text/css">
+  .reveal section img {
+    border: none;
+    background: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+</style>
+<div class="slides">
+  <section>
+    <h1><br></h1>
+    <h1>Unix O/S<br>&nbsp;INTERNALS</h1>
+    <div>Some Concepts /</div>
+    <div>A Trip Down the Rabbit-hole</div>
+  </section>
+
+  <section>
+    <section>
+      <h2>Unix</h2>
+      <div class="absolute-element"
+           style="position: absolute; width: 457px; height: 230px; z-index: 4; left: 76px; top: 153px;">
+        <ul>
+          <li>
+            <span style="text-align: center;">Operating System</span>
+          </li>
+          <li>
+            <span style="text-align: center;">Developed in the 1970s</span>
+            <br>
+          </li>
+          <li>
+            <span style="text-align: center;">Now exists in may variants</span>
+          </li>
+          <li>
+            <span style="text-align: center;">Inspiration for Linux</span>
+          </li>
+          <li>
+            <span style="text-align: center;">Foundation for Mac OS X</span>
+          </li>
+        </ul>
+      </div>
+      <img
+        src="https://s3.amazonaws.com/media-p.slid.es/uploads/sampierson/images/283811/beastie_300.png"
+        class="absolute-element"
+        style="position: absolute; max-height: none; max-width: none; width: 308px; height: 333px; z-index: 4; left: 577px; top: 298px;">
+    </section>
+
+    <section>
+      <h2>The Unix Philosophy</h2>
+      <div>
+        <br>
+      </div>
+      <div>
+        <ul>
+          <ul>
+            <li>
+              <span style="text-align: center;">a set of simple tools&nbsp;that each perform a limited, well-defined function</span>
+            </li>
+            <li>
+              <span style="text-align: center;">a unified filesystem as the main means of communication</span>
+              <br>
+            </li>
+            <li>
+              <span style="text-align: center;">a shell scripting and command language&nbsp;</span>
+              <span style="text-align: center;">to combine the tools to perform complex workflows</span>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    </section>
+
+    <section data-background-color="rgba( 255, 255, 255, 0.6 )">
+      <h2>Variants</h2>
+      <div>
+        <img
+          src="http://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Unix_history-simple.svg/1000px-Unix_history-simple.svg.png"
+          style="width: 774.1878172588832px; height: 517px; max-height: none; max-width: none;">
+        <br>
+      </div>
+    </section>
+  </section>
+
+  <section>
+    <h2>Things we will cover</h2>
+    <div><br></div>
+    <div>How programs are run</div>
+    <div><br></div>
+    <div>Virtual memory</div>
+    <div>Memory addressing</div>
+    <div>Swapping</div>
+    <div><br></div>
+    <div>Files, inodes</div>
+  </section>
+
+  <section>
+    <section>
+      <h2>By Example</h2>
+      <div><br></div>
+      <div>What happens when you type:</div>
+      <div><br></div>
+      <div>
+        <pre><code style="text-align: center; "><font style="font-size: 36px;">$ ls &gt; my_files </font></code></pre>
+      </div>
+      <div><br></div>
+    </section>
+
+    <section data-transition="none">
+      <h2>By Example</h2>
+      <div><br></div>
+      <div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          What happens when you type:
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          <br>
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          <pre><code style="text-align: center;"><font style="font-size: 36px;"><font color="#ffff00">$</font> ls &gt; my_files </font></code></pre>
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          <br>
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          <ul>
+            <li style="text-align: left;">
+              <font color="#ffff00">tell the shell (bash)</font>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section data-transition="none">
+      <h2>By Example</h2>
+      <div><br></div>
+      <div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          What happens when you type:
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          <br>
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          <pre><code style="text-align: center;"><font style="font-size: 36px;">$ <font color="#ffff00">ls</font> &gt; my_files </font></code></pre>
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          <br>
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          <ul>
+            <li style="text-align: left;">tell the shell (bash)</li>
+            <li style="text-align: left;">
+              <font color="#ffff00">run the&nbsp;<i>list
+                files</i>&nbsp;program</font>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section data-transition="none">
+      <h2>By Example</h2>
+      <div><br></div>
+      <div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          What happens when you type:
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          <br>
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          <pre><code style="text-align: center;"><font style="font-size: 36px;">$ ls <font color="#ffff00">&gt; my_files</font></font></code></pre>
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          <br>
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          <ul>
+            <li style="text-align: left;">tell the shell (bash)</li>
+            <li style="text-align: left;">run the&nbsp;<i>list files</i>&nbsp;program </li>
+            <li style="text-align: left;">
+              <font color="#ffff00">save the output to file&nbsp;<i>my_files</i></font>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <section>
+    <section>
+      <h2>Run</h2>
+
+      <div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          <br>
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          But what does "run" actually mean?
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          <br>
+        </div>
+        <div style="font-size: 36px; font-variant: normal;">
+          <span style="font-style: normal;">How do </span>
+          <i>programs</i>
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          (binary code on disk)
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          <br>
+        </div>
+        <div style="font-size: 36px; font-variant: normal;">
+          <span style="font-style: normal;">get turned into </span>
+          <i>processes</i>
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          (running code in memory)
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>FORK/EXEC</h2>
+
+      <div>An elegant mechanism</div>
+      <div>
+        <br>
+      </div>
+      <div>
+        <b>Fork</b>
+      </div>
+      <div>clone the current process</div>
+      <div>
+        <br>
+      </div>
+      <div>
+        <b>Exec</b>
+      </div>
+      <div>replace current process with new program</div>
+    </section>
+
+    <section>
+      <h2>Fork</h2>
+
+      <div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          <br>
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          How does the o/s&nbsp;<i>fork</i>&nbsp;a process?
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          <br>
+        </div>
+        <div style="font-size: 36px; font-style: normal; font-variant: normal;">
+          Wait a minute, what&nbsp;<i>is</i>&nbsp;a process?
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <section>
+    <section>
+      <h2>A Process</h2>
+
+      <div>
+        <br>
+      </div>
+      <div>
+        <b>Code</b>
+      </div>
+      <p>"The program" - compiled machine instructions</p>
+
+      <div>
+        <br>
+      </div>
+      <div>
+        <b>Data</b>
+      </div>
+      <p>Data the program "brought with it"<br>Data created during execution</p>
+
+      <div>
+        <br>
+      </div>
+      <div>
+        <b>Execution state</b>
+      </div>
+      <p>What is the next instruction to execute<br>How did we get here (who
+        called who)</p>
+    </section>
+
+    <section>
+      <h2>Process Memory</h2>
+
+      <div>
+        <br>
+      </div>
+      <img
+        src="https://s3.amazonaws.com/media-p.slid.es/uploads/sampierson/images/283828/process.png">
+    </section>
+
+    <section>
+      <h2>The Process table</h2>
+
+      <div>
+        <br>
+      </div>
+      <div>Where the kernel keeps track of all&nbsp;<span>running processes</span>
+      </div>
+      <div>
+  <span>
+      <br>
+  </span>
+      </div>
+      <div>
+        <span>This table is what you are looking at when you run:</span>
+      </div>
+      <div>
+  <span>
+      <br>
+  </span>
+      </div>
+      <div style="color: rgb(220, 220, 220); font-family: monospace; font-style: normal; font-variant: normal; white-space: pre-wrap; background-color: rgb(63, 63, 63);"><font style="font-size: 54px;">ps</font></div>
+    </section>
+
+    <section>
+      <h2 class="absolute-element"
+          style="position: absolute; width: 966px; height: 616px; z-index: 4; left: -1px; top: 21px;">
+        Virtual Memory<br>
+        <br>
+        <img
+          src="https://s3.amazonaws.com/media-p.slid.es/uploads/sampierson/images/283745/virt-va-phys.png">
+      </h2>
+    </section>
+
+    <section>
+      <h2>Tracking Process Memory</h2>
+      <div><br></div>
+      <div>
+        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/sampierson/images/286163/memory-structures.png">
+        <br>
+      </div>
+    </section>
+
+    <section>
+      <h2>Page Table Entry</h2>
+      <div>
+        <br>
+      </div>
+      <div>Metadata</div>
+      <div>
+        <ul>
+          <li>
+            <span style="text-align: center;">valid</span>
+            <br>
+          </li>
+          <li>
+            <span style="text-align: center;">dirty</span>
+          </li>
+          <li>
+            <span style="text-align: center;">age</span>
+          </li>
+          <li>
+            <span style="text-align: center;">CoW</span>
+            <br>
+          </li>
+          <li>
+            <span style="text-align: center;">protect</span>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <br>
+      </div>
+      <div>Page base address</div>
+      <div>
+        <br>
+      </div>
+    </section>
+
+    <section>
+      <h2>32 Bit Addressing</h2>
+      <div>Given a 32 bit address size and 4k page size:</div>
+      <div>
+        <img
+          src="https://s3.amazonaws.com/media-p.slid.es/uploads/sampierson/images/283926/32bit_address.png">
+        <br>
+      </div>
+    </section>
+  </section>
+
+  <section>
+    <section>
+      <h2>Fork</h2>
+      <div>
+        <br>
+      </div>
+      <div>Create a new clone of an existing process</div>
+      <div>
+        <ul>
+          <li>
+            <span style="text-align: center;">Memory</span>
+            <br>
+          </li>
+          <li>
+            <span style="text-align: center;">Open files</span>
+            <br>
+          </li>
+          <li>
+            <span style="text-align: center;">Execution state</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Fork</h2>
+      <div>Process memory, before:</div>
+      <h2>
+        <img
+          src="https://s3.amazonaws.com/media-p.slid.es/uploads/sampierson/images/284295/fork-memory-before.png">
+      </h2>
+    </section>
+
+    <section>
+      <h2>Fork</h2>
+      <div>Process memory, after:</div>
+      <div>
+        <img
+          src="https://s3.amazonaws.com/media-p.slid.es/uploads/sampierson/images/284296/fork-memory-after.png">
+        <br>
+      </div>
+    </section>
+  </section>
+
+  <section>
+    <section>
+      <h2>File I/O</h2>
+      <div>
+        <br>
+      </div>
+      <div>File Descriptors</div>
+      <div>
+        <br>
+      </div>
+      <div>Small integers describing open files</div>
+      <div>
+        <br>
+      </div>
+      <div
+        style="text-align: left; position: absolute; width: 488px; height: 140px; z-index: 4; left: 264px; top: 336px;"
+        class="absolute-element">0 = Standard Input (STDIN)<br>1 = Standard Output
+        (STDOUT)<br>2 = Standard Error (STDERR)
+      </div>
+      <div style="text-align: left; ">
+        <br>
+      </div>
+    </section>
+
+    <section>
+      <h2>File I/O</h2>
+      <div>
+        <img
+          src="https://s3.amazonaws.com/media-p.slid.es/uploads/sampierson/images/286236/files.png">
+        <br>
+      </div>
+      <div>
+        <br>
+      </div>
+    </section>
+
+    <section>
+      <h2>Files</h2>
+      <div>After Fork</div>
+      <div>
+        <img
+          src="https://s3.amazonaws.com/media-p.slid.es/uploads/sampierson/images/286240/file-after-fork.png">
+        <br>
+      </div>
+    </section>
+  </section>
+
+  <section>
+    <section>
+      <h2>
+        <span
+          style="color: rgb(220, 220, 220); font-family: monospace; font-size: 31.466331481933594px; font-style: normal; font-variant: normal; text-transform: none; white-space: pre-wrap; background-color: rgb(63, 63, 63);">$ ls &gt; my_files</span>
+      </h2>
+      <div>
+        <span>Before</span>
+        <br>
+      </div>
+      <div>
+        <img
+          src="https://s3.amazonaws.com/media-p.slid.es/uploads/sampierson/images/286300/example-1.png">
+        <br>
+      </div>
+      <div>
+        <br>
+      </div>
+    </section>
+
+    <section>
+      <h2>
+        <span
+          style="color: rgb(220, 220, 220); font-family: monospace; font-size: 31.466331481933594px; font-style: normal; font-variant: normal; text-transform: none; white-space: pre-wrap; background-color: rgb(63, 63, 63);">$ ls &gt; my_files</span>
+        <br>
+      </h2>
+      <div>
+        <div
+          style="font-size: 36.500946044921875px; font-style: normal; font-variant: normal;">
+          <span>Step 1: Fork</span>
+        </div>
+        <div
+          style="font-size: 36.500946044921875px; font-style: normal; font-variant: normal;">
+          <img
+            src="https://s3.amazonaws.com/media-p.slid.es/uploads/sampierson/images/286302/example-2.png">
+          <br>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>
+        <span
+          style="color: rgb(220, 220, 220); font-family: monospace; font-size: 31.466331481933594px; font-style: normal; font-variant: normal; text-transform: none; white-space: pre-wrap; background-color: rgb(63, 63, 63);">$ ls &gt; my_files</span>
+        <br>
+      </h2>
+      <div>
+        <div
+          style="font-size: 36.500946044921875px; font-style: normal; font-variant: normal;">
+          <span>Step 2: Close STDOUT</span>
+          <br>
+        </div>
+      </div>
+      <div
+        style="font-size: 36.500946044921875px; font-style: normal; font-variant: normal;">
+        <img
+          src="https://s3.amazonaws.com/media-p.slid.es/uploads/sampierson/images/286305/example-3.png">
+              <span>
+                  <br>
+              </span>
+      </div>
+    </section>
+
+    <section>
+      <h2>
+        <span
+          style="color: rgb(220, 220, 220); font-family: monospace; font-size: 31.466331481933594px; font-style: normal; font-variant: normal; text-transform: none; white-space: pre-wrap; background-color: rgb(63, 63, 63);">$ ls &gt; my_files</span>
+        <br>
+      </h2>
+      <div>
+        <div
+          style="font-size: 36.500946044921875px; font-style: normal; font-variant: normal;">
+          <span>Step 3: Open my_files (as STDOUT)</span>
+          <br>
+        </div>
+      </div>
+      <div
+        style="font-size: 36.500946044921875px; font-style: normal; font-variant: normal;">
+        <img
+          src="https://s3.amazonaws.com/media-p.slid.es/uploads/sampierson/images/286308/example-4.png">
+              <span>
+                  <br>
+              </span>
+      </div>
+    </section>
+
+    <section>
+      <h2>
+        <span
+          style="color: rgb(220, 220, 220); font-family: monospace; font-size: 31.466331481933594px; font-style: normal; font-variant: normal; text-transform: none; white-space: pre-wrap; background-color: rgb(63, 63, 63);">$ ls &gt; my_files</span>
+        <br>
+      </h2>
+      <div>
+        <div
+          style="font-size: 36.500946044921875px; font-style: normal; font-variant: normal;">
+          <span>Step 5: Exec /bin/ls</span>
+          <br>
+        </div>
+      </div>
+      <div
+        style="font-size: 36.500946044921875px; font-style: normal; font-variant: normal;">
+        <img
+          src="https://s3.amazonaws.com/media-p.slid.es/uploads/sampierson/images/286313/example-5.png">
+              <span>
+                  <br>
+              </span>
+      </div>
+    </section>
+  </section>
+</div>
