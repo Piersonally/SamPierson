@@ -3,11 +3,12 @@ ruby '2.1.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', github: 'rails/rails'
+gem 'arel', github: 'rails/arel', branch: 'master'
 
 gem 'pg'
 gem 'foreigner'
 
-gem 'sass-rails', '~> 4.0.0'                    # Use SCSS for stylesheets
+gem 'sass-rails', github: 'rails/sass-rails'    # Use SCSS for stylesheets
 gem 'uglifier', '>= 1.3.0'                      # Use Uglifier as compressor for JavaScript assets
 gem 'coffee-rails', '~> 4.0.0'                  # Use CoffeeScript for .js.coffee assets and views
 # gem 'therubyracer', platforms: :ruby          # See https://github.com/sstephenson/execjs#readme for more supported runtimes

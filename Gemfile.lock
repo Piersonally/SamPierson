@@ -6,8 +6,15 @@ GIT
       activesupport (>= 3.0.0)
 
 GIT
+  remote: git://github.com/rails/arel.git
+  revision: 51d552c2cdcb749c2aaa96e982b5789b73f12f56
+  branch: master
+  specs:
+    arel (6.0.0.20140505020427)
+
+GIT
   remote: git://github.com/rails/rails.git
-  revision: 9a976ab5756371dd434adda2ff01af3a83d0f63c
+  revision: ea58684b579beb8fbf87dde5dbf8694c453d10f9
   specs:
     actionmailer (4.2.0.alpha)
       actionpack (= 4.2.0.alpha)
@@ -28,7 +35,7 @@ GIT
     activerecord (4.2.0.alpha)
       activemodel (= 4.2.0.alpha)
       activesupport (= 4.2.0.alpha)
-      arel (~> 5.0.0)
+      arel (~> 6.0.0)
     activesupport (4.2.0.alpha)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
@@ -44,19 +51,27 @@ GIT
       activesupport (= 4.2.0.alpha)
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.0.alpha)
-      sprockets-rails (~> 2.0.0)
+      sprockets-rails (~> 2.1)
     railties (4.2.0.alpha)
       actionpack (= 4.2.0.alpha)
       activesupport (= 4.2.0.alpha)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
 
+GIT
+  remote: git://github.com/rails/sass-rails.git
+  revision: 3a9e47db7d769221157c82229fc1bade55b580f0
+  specs:
+    sass-rails (4.0.1)
+      railties (>= 4.0.0, < 5.0)
+      sass (~> 3.2)
+      sprockets (~> 2.12)
+      sprockets-rails (~> 2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.3.6)
-    arel (5.0.0)
-    atomic (1.1.16)
     bcrypt (3.1.7)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
@@ -174,8 +189,8 @@ GEM
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_portile (0.5.3)
-    minitest (5.3.1)
-    multi_json (1.9.2)
+    minitest (5.3.3)
+    multi_json (1.10.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     newrelic_rpm (3.7.3.204)
@@ -226,7 +241,7 @@ GEM
       rails_stdout_logging
     rails_serve_static_assets (0.0.2)
     rails_stdout_logging (0.0.3)
-    rake (10.2.0)
+    rake (10.3.1)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.3)
       ffi (>= 0.5.0)
@@ -249,12 +264,7 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
-    sass (3.2.18)
-    sass-rails (4.0.2)
-      railties (>= 4.0.0, < 5.0)
-      sass (~> 3.2.0)
-      sprockets (~> 2.8, <= 2.11.0)
-      sprockets-rails (~> 2.0.0)
+    sass (3.3.7)
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
@@ -266,19 +276,18 @@ GEM
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
     slop (3.5.0)
-    sprockets (2.11.0)
+    sprockets (2.12.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sprockets-rails (2.0.1)
+    sprockets-rails (2.1.3)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     terminal-notifier-guard (1.5.3)
     thor (0.19.1)
-    thread_safe (0.3.1)
-      atomic (>= 1.1.7, < 2)
+    thread_safe (0.3.3)
     tilt (1.4.1)
     timers (1.1.0)
     treetop (1.4.15)
@@ -301,6 +310,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  arel!
   bcrypt-ruby (~> 3.1.2)
   bootstrap-sass
   byebug
@@ -334,7 +344,7 @@ DEPENDENCIES
   rails_12factor
   redcarpet
   rspec-rails
-  sass-rails (~> 4.0.0)
+  sass-rails!
   sdoc
   shoulda-matchers!
   simple_bootstrap_form
