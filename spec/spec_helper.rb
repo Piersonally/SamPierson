@@ -1,15 +1,18 @@
-#require "codeclimate-test-reporter"
-#CodeClimate::TestReporter.start
-if ENV['COVERAGE'] || ENV['CIRCLECI']
-  require 'simplecov'
-  SimpleCov.start 'rails' do
-    if ENV['CIRCLE_ARTIFACTS']
-      coverage_dir File.join ENV['CIRCLE_ARTIFACTS'], 'coverage'
-    else
-      coverage_dir 'tmp/test_artifacts/coverage'
-    end
-  end
-end
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
+# Generate code coverage report on CircleCI.
+#
+# if ENV['COVERAGE'] || ENV['CIRCLECI']
+#   require 'simplecov'
+#   SimpleCov.start 'rails' do
+#     if ENV['CIRCLE_ARTIFACTS']
+#       coverage_dir File.join ENV['CIRCLE_ARTIFACTS'], 'coverage'
+#     else
+#       coverage_dir 'tmp/test_artifacts/coverage'
+#     end
+#   end
+# end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'

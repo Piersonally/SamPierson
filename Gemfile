@@ -59,8 +59,8 @@ group :test do
   gem 'factory_girl_rails'                      # If you use factory_girl for fixture replacement, ensure that factory_girl_rails is available in the development group. If it's not, Rails will generate standard yml files instead of factory files.
   gem 'faker'
   gem 'foreigner-matcher'
-  #gem 'codeclimate-test-reporter', require: nil
-  gem 'simplecov', require: false
+  gem 'codeclimate-test-reporter', require: nil
+  # gem 'simplecov', require: false
 end
 
 group :production do
