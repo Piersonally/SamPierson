@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BootstrapHelper do
+describe BootstrapHelper, type: :helper do
 
   def navbar_with_content(content)
     '<nav class="navbar navbar-default" role="navigation">' +
@@ -13,7 +13,7 @@ describe BootstrapHelper do
         '</button>' +
         '<a class="navbar-brand" href="/">Sam Pierson</a>' +
       '</div>' +
-      '<div class="collapse navbar-collapse" id="bs-navbar-collapse-1">' +
+      '<div id="bs-navbar-collapse-1" class="collapse navbar-collapse">' +
          content +
       '</div>' +
     '</nav>'
@@ -23,14 +23,14 @@ describe BootstrapHelper do
     match do |actual|
       expect(actual).to eq navbar_with_content(expected_content)
     end
-    failure_message_for_should do |actual|
-      "expected #{actual} to contain #{expected_content}"
+    failure_message do |actual|
+      "expected #{actual}\nto contain #{expected_content}"
     end
   end
 
   describe "#navbar_helper" do
     subject { helper.navbar_helper content_data }
-    before { helper.stub_chain(:request, :path).and_return('/foo') }
+    before { allow(helper).to receive_message_chain(:request, :path).and_return('/foo') }
 
     describe "simple navbar" do
       let(:content_data) {
@@ -90,7 +90,7 @@ describe BootstrapHelper do
         }
 
         context "when the request path matches exactly" do
-          before { helper.stub_chain(:request, :path).and_return('/posts') }
+          before { allow(helper).to receive_message_chain(:request, :path).and_return('/posts') }
 
           it "should be marked active" do
             expect(subject).to be_navbar_with_content(
@@ -102,7 +102,7 @@ describe BootstrapHelper do
         end
 
         context "when the request path doesn't match exactly" do
-          before { helper.stub_chain(:request, :path).and_return('/posts/1') }
+          before { allow(helper).to receive_message_chain(:request, :path).and_return('/posts/1') }
 
           it "should not be marked active" do
             expect(subject).to be_navbar_with_content(
@@ -127,7 +127,7 @@ describe BootstrapHelper do
         }
 
         context "when the request path matches exactly" do
-          before { helper.stub_chain(:request, :path).and_return('/posts') }
+          before { allow(helper).to receive_message_chain(:request, :path).and_return('/posts') }
 
           it "should be marked active" do
             expect(subject).to be_navbar_with_content(
@@ -139,7 +139,7 @@ describe BootstrapHelper do
         end
 
         context "when the request path doesn't match exactly" do
-          before { helper.stub_chain(:request, :path).and_return('/posts/1') }
+          before { allow(helper).to receive_message_chain(:request, :path).and_return('/posts/1') }
 
           it "should be marked active" do
             expect(subject).to be_navbar_with_content(

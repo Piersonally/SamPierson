@@ -71,7 +71,7 @@ describe ArticleForm do
       end
 
       it "should return false" do
-        expect(subject).to be_false
+        expect(subject).to be_falsey
       end
     end
 
@@ -84,7 +84,7 @@ describe ArticleForm do
       end
 
       it "should return true" do
-        expect(subject).to be_true
+        expect(subject).to be_truthy
       end
     end
   end

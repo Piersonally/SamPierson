@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe LoggedInController do
+describe LoggedInController, type: :controller do
   controller(LoggedInController) do
     def index
       raise NotAuthorizedError

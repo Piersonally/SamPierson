@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe ArticlesController do
+describe ArticlesController, type: :routing do
   describe "routing" do
 
     it { expect(get '/articles'            ).to route_to('articles#index') }

@@ -6,8 +6,8 @@ feature 'Home page', type: :feature, js: true do
 
   scenario 'it displays published articles' do
     visit root_path
-    page.should have_content article1.title
-    page.should have_content article2.title
+    expect(page).to have_content article1.title
+    expect(page).to have_content article2.title
     take_screenshot 'home_page'
   end
 end

@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe MarkdownHelper do
+describe MarkdownHelper, type: :helper do
   describe "#markdown" do
     context "for regular markdown" do
       let(:some_markdown) { "Heading\n=======\n\nBody\n" }
       let(:rendered_markdown) { "<h1>Heading</h1>\n\n<p>Body</p>\n" }
 
       it "should render markdown" do
-        helper.markdown(some_markdown).should eq rendered_markdown
+        expect(helper.markdown some_markdown).to eq rendered_markdown
       end
     end
 
@@ -21,7 +21,7 @@ describe MarkdownHelper do
       }
 
       it "should syntax highlight code" do
-        helper.markdown(markdown).should eq rendered_markdown
+        expect(helper.markdown markdown).to eq rendered_markdown
       end
     end
 

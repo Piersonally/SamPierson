@@ -93,13 +93,9 @@ ActiveRecord::Schema.define(version: 20140310185935) do
   add_index "topics", ["name"], name: "index_topics_on_name", unique: true, using: :btree
   add_index "topics", ["slug"], name: "index_topics_on_slug", unique: true, using: :btree
 
-  add_foreign_key "articles", "accounts", name: "articles_author_id_fk", column: "author_id"
-
+  add_foreign_key "articles", "accounts", column: "author_id", name: "articles_author_id_fk"
   add_foreign_key "articles_topics", "articles", name: "articles_topics_article_id_fk"
   add_foreign_key "articles_topics", "topics", name: "articles_topics_topic_id_fk"
-
-  add_foreign_key "quotations", "accounts", name: "quotations_quoter_id_fk", column: "quoter_id"
-
-  add_foreign_key "slide_shows", "accounts", name: "slide_shows_author_id_fk", column: "author_id"
-
+  add_foreign_key "quotations", "accounts", column: "quoter_id", name: "quotations_quoter_id_fk"
+  add_foreign_key "slide_shows", "accounts", column: "author_id", name: "slide_shows_author_id_fk"
 end

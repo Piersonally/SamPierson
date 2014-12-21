@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ApplicationHelper do
+describe ApplicationHelper, type: :helper do
   describe "#page_heading_helper" do
     subject { helper.page_heading_helper }
 
@@ -10,7 +10,7 @@ describe ApplicationHelper do
       end
 
       context "when there is a title set" do
-        before { helper.stub(:title) { 'test title' } }
+        before { allow(helper).to receive(:title) { 'test title' } }
         it { should eq "<h1>test title</h1>" }
 
         context "and @heading is set" do

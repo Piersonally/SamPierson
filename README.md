@@ -12,8 +12,8 @@ work.
 
 ## Technology
 
-* Ruby 2.1
-* Edge Rails (\>= 4.0.1.beta1)
+* Ruby 2.1.x
+* Rails 4.2.x
 * PostgreSQL, foreigner
 * RSpec 3, FactoryGirl, Capybara, Poltergeist (phanjomjs), SimpleCov
 * Zeus, Guard, guard-rspec, guard-livereload

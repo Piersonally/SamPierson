@@ -8,7 +8,7 @@ describe SlideShow do
   describe "database" do
     it { should have_db_index(:author_id) }
     it { should have_db_index(:slug).unique(true) }
-    it { should have_foreign_key_for :accounts, column: 'author_id' }
+    # it { should have_foreign_key_for :accounts, column: 'author_id' }
   end
 
   describe "associations" do

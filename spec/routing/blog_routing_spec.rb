@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe BlogController do
+describe BlogController, type: :routing do
   describe "routing" do
 
     it { expect(get "/"        ).to route_to("blog#show") }

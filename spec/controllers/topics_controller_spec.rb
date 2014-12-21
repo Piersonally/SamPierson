@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe TopicsController do
+describe TopicsController, type: :controller do
 
   it_should_behave_like "requires login for actions", [
     [ :get,    :index,   { }              ],
@@ -81,7 +81,7 @@ describe TopicsController do
 
           it { expect(assigns :topic).to eq created_topic }
           it { expect(created_topic.name).to eq name }
-          it { should redirect_to created_topic }
+          it { expect(response).to redirect_to created_topic }
           it { expect(flash[:notice]).to be_present }
         end
       end
@@ -128,7 +128,7 @@ describe TopicsController do
       describe "and" do
         before { subject }
 
-        it { response.should redirect_to topics_url }
+        it { expect(response).to redirect_to topics_url }
         it { expect(flash[:notice]).to be_present }
       end
     end

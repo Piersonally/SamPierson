@@ -8,7 +8,7 @@ feature "Topics", type: :feature, js: true do
 
   scenario "displays the index" do
     click_link 'Topics'
-    page.should have_content topic.name
+    expect(page).to have_content topic.name
     take_screenshot 'topics_index'
   end
 
@@ -21,7 +21,7 @@ feature "Topics", type: :feature, js: true do
     scenario "with errors" do
       fill_in 'Name', with: "   "
       click_button 'Save'
-      page.should have_content "can't be blank"
+      expect(page).to have_content "can't be blank"
       take_screenshot 'topics_new_with_error'
     end
 
@@ -29,8 +29,8 @@ feature "Topics", type: :feature, js: true do
       fill_in 'Name', with: "new-topic"
       take_screenshot 'topics_new_before'
       click_button 'Save'
-      page.should have_content 'Topic was successfully created'
-      page.should have_content "new-topic"
+      expect(page).to have_content 'Topic was successfully created'
+      expect(page).to have_content "new-topic"
       take_screenshot 'topics_new_after'
     end
   end
@@ -44,7 +44,7 @@ feature "Topics", type: :feature, js: true do
     fill_in 'Name', with: 'updated-name'
     take_screenshot 'topics_edit_edited'
     click_button 'Save'
-    page.should have_content 'Topic was successfully updated'
+    expect(page).to have_content 'Topic was successfully updated'
     take_screenshot 'topics_edit_saved'
   end
 
@@ -54,7 +54,7 @@ feature "Topics", type: :feature, js: true do
     within "##{rails_dom_id topic}" do
       click_link 'Destroy'
     end
-    page.should have_content "was successfully destroyed"
+    expect(page).to have_content "was successfully destroyed"
     take_screenshot 'topics_destroy_after'
   end
 end

@@ -1,7 +1,0 @@
-@import 'bootstrap';
-@import 'jquery.datetimepicker';
-@import 'coderay-theme-github';
-// Even though this is a .scss file, the asset pipeline is sandboxing everthing
-// imported here.  So I'm moving all @imports that need to share, down to
-// _application.css.scss
-@import '_application';

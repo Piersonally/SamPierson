@@ -26,7 +26,7 @@ describe Heroku::Backup do
       subject { backup.uri }
 
       it "should execute a command to get a URI for the backup" do
-        heroku.should_receive(:run)
+        expect(heroku).to receive(:run)
               .with("pgbackups:url b002")
               .and_return(%("#{backup_url}"))
         expect(subject).to be_a URI
@@ -37,13 +37,13 @@ describe Heroku::Backup do
 
     describe "#get" do
       subject { backup.get }
-      before { backup.stub(:uri) { URI.parse backup_url } }
+      before { allow(backup).to receive(:uri) { URI.parse backup_url } }
 
       it "should execute a curl command to download the backup to the tmp folder" do
-        backup.should_receive(:execute)
+        expect(backup).to receive(:execute)
               .with("curl -o tmp/b002.dump '#{backup_url}'")
               .and_return("")
-        subject.should eq "tmp/b002.dump"
+        expect(subject).to eq "tmp/b002.dump"
       end
     end
 
@@ -51,7 +51,7 @@ describe Heroku::Backup do
       subject { backup.destroy }
 
       it "should send a command to heroku to destory the backup" do
-        heroku.should_receive(:run).with("pgbackups:destroy b002")
+        expect(heroku).to receive(:run).with("pgbackups:destroy b002")
         subject
       end
     end

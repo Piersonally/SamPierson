@@ -37,11 +37,13 @@ module BootstrapForm
     end
 
     def attr_column_type(attr)
-      object.try(:column_for_attribute, attr).try(:type) || :string
+      ActiveSupport::Deprecation.silence do
+        object.try(:column_for_attribute, attr).try(:type) || :string
+      end
     end
 
     def string_field_class_prefix_based_on_column_name(attr)
-      x = case
+      case
       when attr.to_s =~ /email/i    ; 'Email'
       when attr.to_s =~ /password/i ; 'Password'
       else 'Text'

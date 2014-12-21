@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe TopicsController do
+describe TopicsController, type: :routing do
   describe "routing" do
 
     it { expect(get '/topics'       ).to route_to('topics#index') }

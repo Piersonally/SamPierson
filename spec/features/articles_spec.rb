@@ -12,7 +12,7 @@ feature "Articles", type: :feature, js: true do
   context "When not logged in" do
     scenario "you can view an article" do
       visit article_path article1
-      page.should have_content article1.title
+      expect(page).to have_content article1.title
       take_screenshot 'articles_show'
     end
   end
@@ -23,7 +23,7 @@ feature "Articles", type: :feature, js: true do
     
     scenario "you can view an article" do
       visit article_path article2
-      page.should have_content article2.title
+      expect(page).to have_content article2.title
       take_screenshot 'articles_show'
     end
   end
@@ -33,8 +33,8 @@ feature "Articles", type: :feature, js: true do
     
     scenario "displays the index" do
       click_link 'Articles'
-      page.should have_content article1.title
-      page.should have_content article2.title
+      expect(page).to have_content article1.title
+      expect(page).to have_content article2.title
       take_screenshot 'articles_index'
     end
   
@@ -47,7 +47,7 @@ feature "Articles", type: :feature, js: true do
       scenario "with errors" do
         fill_in 'Title', with: "   "
         click_button 'Save'
-        page.should have_content "can't be blank"
+        expect(page).to have_content "can't be blank"
         take_screenshot 'articles_new_with_error'
       end
   
@@ -57,10 +57,10 @@ feature "Articles", type: :feature, js: true do
         fill_in 'Tags', with: "tag1, tag2"
         take_screenshot 'articles_new_before'
         click_button 'Save'
-        page.should have_content 'Article was successfully created'
-        page.should have_content "New Article Title"
-        page.should have_content "New Article Body"
-        page.should have_content "tag1, tag2"
+        expect(page).to have_content 'Article was successfully created'
+        expect(page).to have_content "New Article Title"
+        expect(page).to have_content "New Article Body"
+        expect(page).to have_content "tag1, tag2"
         take_screenshot 'articles_new_after'
       end
     end
@@ -74,7 +74,7 @@ feature "Articles", type: :feature, js: true do
       fill_in 'Title', with: 'Updated Title'
       take_screenshot 'articles_edit_edited'
       click_button 'Save'
-      page.should have_content 'Article was successfully updated'
+      expect(page).to have_content 'Article was successfully updated'
       take_screenshot 'articles_edit_saved'
     end
   
@@ -83,7 +83,7 @@ feature "Articles", type: :feature, js: true do
       click_link article1.title
       take_screenshot 'articles_destroy_before'
       click_link 'Destroy'
-      page.should have_content "was successfully destroyed"
+      expect(page).to have_content "was successfully destroyed"
       take_screenshot 'articles_destroy_after'
     end
   end

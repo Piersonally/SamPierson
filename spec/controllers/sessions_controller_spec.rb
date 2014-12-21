@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SessionsController do
+describe SessionsController, type: :controller do
   let(:account) { FactoryGirl.create :account }
 
   describe "GET new" do
@@ -50,7 +50,7 @@ describe SessionsController do
 
       it "should log the user in" do
         subject
-        session[:account_id].should == account.id
+        expect(session[:account_id]).to eq account.id
       end
     end
   end

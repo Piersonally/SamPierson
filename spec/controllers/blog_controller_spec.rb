@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BlogController do
+describe BlogController, type: :controller do
 
   describe "GET show" do
     let!(:article1) { FactoryGirl.create :published_article, published_at: 1.day.ago }
@@ -18,7 +18,7 @@ describe BlogController do
       ).to eq Topic.topics_with_article_counts
     end
 
-    it { response.should render_template "show" }
+    it { expect(response).to render_template "show" }
   end
 
   describe "GET rss" do

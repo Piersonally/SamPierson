@@ -88,7 +88,7 @@ describe CssClassList do
   end
 
   describe "#any?" do
-    it { expect( CssClassList.new.any? ).to be_false }
-    it { expect( CssClassList.new('v').any? ).to be_true }
+    it { expect( CssClassList.new.any? ).to be_falsey }
+    it { expect( CssClassList.new('v').any? ).to be_truthy }
   end
 end

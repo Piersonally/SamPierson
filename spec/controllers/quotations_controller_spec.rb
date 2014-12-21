@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe QuotationsController do
+describe QuotationsController, type: :controller do
 
   it_should_behave_like "requires login for actions", [
     [ :get,    :index,   { }              ],
@@ -104,7 +104,7 @@ describe QuotationsController do
           it { expect(created_quote.source).to eq source }
           it { expect(created_quote.when).to eq _when }
           it { expect(flash[:notice]).to be_present }
-          it { should redirect_to created_quote }
+          it { expect(response).to redirect_to created_quote }
         end
       end
   
@@ -151,7 +151,7 @@ describe QuotationsController do
       describe "and" do
         before { subject }
 
-        it { response.should redirect_to quotations_url }
+        it { expect(response).to redirect_to quotations_url }
         it { expect(flash[:notice]).to be_present }
       end
     end

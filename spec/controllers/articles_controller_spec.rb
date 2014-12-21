@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ArticlesController do
+describe ArticlesController, type: :controller do
 
   it_should_behave_like "requires login for actions", [
     [ :get,    :index,   { }              ],
@@ -106,7 +106,7 @@ describe ArticlesController do
           it { expect(created_article.topics.size).to eq 2 }
           it { expect(created_article.topics.map(&:name)).to eq %w(tag1 tag2) }
           it { expect(flash[:notice]).to be_present }
-          it { should redirect_to created_article }
+          it { expect(response).to redirect_to created_article }
         end
       end
   
@@ -154,7 +154,7 @@ describe ArticlesController do
       describe "and" do
         before { subject }
 
-        it { response.should redirect_to articles_url }
+        it { expect(response).to redirect_to articles_url }
         it { expect(flash[:notice]).to be_present }
       end
     end

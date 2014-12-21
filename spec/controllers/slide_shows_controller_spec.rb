@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SlideShowsController do
+describe SlideShowsController, type: :controller do
 
   it_should_behave_like "requires login for actions", [
     [ :get,    :index,   { }              ],
@@ -93,7 +93,7 @@ describe SlideShowsController do
           it { expect(created_slide_show.author_id).to eq author.id }
           it { expect(created_slide_show.title).to eq title }
           it { expect(flash[:notice]).to be_present }
-          it { should redirect_to created_slide_show }
+          it { expect(response).to redirect_to created_slide_show }
         end
       end
   
@@ -141,7 +141,7 @@ describe SlideShowsController do
       describe "and" do
         before { subject }
 
-        it { response.should redirect_to slide_shows_url }
+        it { expect(response).to redirect_to slide_shows_url }
         it { expect(flash[:notice]).to be_present }
       end
     end

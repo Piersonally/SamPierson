@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Quotation do
   describe "database" do
     it { should have_db_index(:quoter_id) }
-    it { should have_foreign_key_for :accounts, column: 'quoter_id' }
+    # it { should have_foreign_key_for :accounts, column: 'quoter_id' }
   end
 
   describe "associations" do

@@ -1,14 +1,15 @@
 source 'https://rubygems.org'
-ruby '2.1.1'
+ruby '2.1.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', github: 'rails/rails'
-gem 'arel', github: 'rails/arel', branch: 'master'
+gem 'rails', '~> 4.2.0'
+gem 'arel'
+gem 'responders'
 
 gem 'pg'
-gem 'foreigner'
+# gem 'foreigner', github: 'matthuhiggins/foreigner'
 
-gem 'sass-rails', github: 'rails/sass-rails'    # Use SCSS for stylesheets
+gem 'sass-rails'                                # Use SCSS for stylesheets
 gem 'uglifier', '>= 1.3.0'                      # Use Uglifier as compressor for JavaScript assets
 gem 'coffee-rails', '~> 4.0.0'                  # Use CoffeeScript for .js.coffee assets and views
 # gem 'therubyracer', platforms: :ruby          # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -53,7 +54,8 @@ group :development, :test do
 end
 
 group :test do
-  gem 'shoulda-matchers', github: 'Piersonally/shoulda-matchers'
+  gem 'rspec-its'
+  gem 'shoulda-matchers'#, github: 'Piersonally/shoulda-matchers'
   gem 'factory_girl_rails'                      # If you use factory_girl for fixture replacement, ensure that factory_girl_rails is available in the development group. If it's not, Rails will generate standard yml files instead of factory files.
   gem 'faker'
   gem 'foreigner-matcher'

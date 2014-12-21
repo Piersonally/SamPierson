@@ -1,23 +1,23 @@
 require 'spec_helper'
 
-describe AccountsController do
+describe AccountsController, type: :controller do
 
   describe "#new" do
     subject { get :new }
 
     context "if signup is disabled" do
       # This is currently the default
-      # before { controller.stub(:signup_enabled?){ false } }
+      # before { allow(controller).to receive(:signup_enabled?) { false } }
       # Don't stub out signup_enabled?
       # This way we get test covreage of the signup_enabled?
 
       before { subject }
-      it { should redirect_to root_path }
+      it { expect(response).to redirect_to root_path }
       it { expect(flash[:alert]).to be_present }
     end
 
-    context "if signup is enaabled" do
-      before { controller.stub(:signup_enabled?){ true } }
+    context "if signup is enabled" do
+      before { allow(controller).to receive(:signup_enabled?).and_return(true) }
 
       before { subject }
       it { expect(response).to render_template :new }
@@ -32,25 +32,25 @@ describe AccountsController do
       let(:account_params) { { email: '' } }
 
       context "if signup is disabled" do
-        before { controller.stub(:signup_enabled?){ false } }
+        before { allow(controller).to receive(:signup_enabled?).and_return(false) }
 
         before { subject }
-        it { should redirect_to root_path }
+        it { expect(response).to redirect_to root_path }
         it { expect(flash[:alert]).not_to be_blank }
       end
 
-      context "if signup is enaabled" do
-        before { controller.stub(:signup_enabled?){ true } }
+      context "if signup is enabled" do
+        before { allow(controller).to receive(:signup_enabled?).and_return(true) }
 
         it { expect { subject }.not_to change(Account, :count) }
         it { expect(subject).to render_template :new }
         it "should set errors" do
           subject
           account = assigns :account
-          expect(account).to have(1).errors_on :email
-          expect(account).to have(1).errors_on :first_name
-          expect(account).to have(1).errors_on :last_name
-          expect(account).to have(1).errors_on :password
+          expect(account.errors[:email].count).to eq 1
+          expect(account.errors[:first_name].count).to eq 1
+          expect(account.errors[:last_name].count).to eq 1
+          expect(account.errors[:password].count).to eq 1
         end
       end
     end
@@ -66,15 +66,15 @@ describe AccountsController do
       let(:account) { account = Account.last }
 
       context "if signup is disabled" do
-        before { controller.stub(:signup_enabled?){ false } }
+        before { allow(controller).to receive(:signup_enabled?).and_return(false) }
 
         before { subject }
-        it { should redirect_to root_path }
+        it { expect(response).to redirect_to root_path }
         it { expect(flash[:alert]).to be_present }
       end
 
-      context "if signup is enaabled" do
-        before { controller.stub(:signup_enabled?){ true } }
+      context "if signup is enabled" do
+        before { allow(controller).to receive(:signup_enabled?).and_return(true) }
 
         it "should create a new account" do
           expect { subject }.to change(Account, :count).by(1)
@@ -84,7 +84,7 @@ describe AccountsController do
 
         it "should leave the new user logged in" do
           subject
-          session[:account_id].should == assigns(:account).id
+          expect(session[:account_id]).to eq assigns(:account).id
         end
 
         it { expect(subject).to redirect_to root_path }

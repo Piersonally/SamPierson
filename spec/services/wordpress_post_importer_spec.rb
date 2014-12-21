@@ -141,10 +141,10 @@ describe WordpressPostImporter do
         }.to change(Article, :count).by(1)
 
         a = Article.last
-        a.author_id.should == author.id
-        a.title.should == "post 17 title"
-        a.body.should == "post 17 content"
-        a.published_at.should == Time.gm(2008, 8, 13, 23, 0, 0)
+        expect(a.author_id).to eq author.id
+        expect(a.title).to eq "post 17 title"
+        expect(a.body).to eq "post 17 content"
+        expect(a.published_at).to eq Time.gm(2008, 8, 13, 23, 0, 0)
       end
     end
 
@@ -153,7 +153,7 @@ describe WordpressPostImporter do
         yaml_header + invalid_post_yaml + published_post_yaml +
           inherit_revision_yaml + yaml_footer
       }
-      before { importer.stub :puts } # suppress output during tests
+      before { allow(importer).to receive(:puts) {} } # suppress output during tests
 
       it "should keep going if it encounters an exception" do
         expect {
