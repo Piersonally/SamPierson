@@ -29,7 +29,3 @@ guard :livereload do
   # Rails Assets Pipeline
   watch(%r{(app|vendor)(/assets/\w+/(.+\.(css|js|html))).*}) { |m| "/assets/#{m[3]}" }
 end
-
-guard :markdown, convert_on_start: true do
-  watch(/(README)\.md/) { |match| "#{match[1]}.md|tmp/#{match[1]}.html" }
-end
