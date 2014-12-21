@@ -51,8 +51,7 @@ work.
 
 Know what you are doing, skip the steps you don't need:
 
-    brew install postgres
-    brew install phantomjs
+    brew install postgres phantomjs terminal-notifier
 
     git clone git@github.com:Piersonally/SamPierson.git
     rvm install `cat SamPierson/.ruby-version`
