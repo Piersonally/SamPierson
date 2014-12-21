@@ -1,8 +1,8 @@
 # README
 
 ![CiecleCI Build Status](https://circleci.com/gh/Piersonally/SamPierson.png?circle-token=602cdb7505a807118fe29db1dba3b4e489e12dff)
-
 [![Code Climate](https://codeclimate.com/github/Piersonally/SamPierson.png)](https://codeclimate.com/github/Piersonally/SamPierson)
+[![Test Coverage](https://codeclimate.com/github/Piersonally/SamPierson/badges/coverage.svg)](https://codeclimate.com/github/Piersonally/SamPierson)
 
 This is the source for the website [sampierson.com](http://www.sampierson.com).
 
