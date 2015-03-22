@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20140310185935) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "accounts", force: true do |t|
+  create_table "accounts", force: :cascade do |t|
     t.string   "email"
     t.string   "first_name"
     t.string   "last_name"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20140310185935) do
   add_index "accounts", ["email"], name: "index_accounts_on_email", unique: true, using: :btree
   add_index "accounts", ["oauth_provider", "oauth_uid"], name: "index_accounts_on_oauth_provider_and_oauth_uid", using: :btree
 
-  create_table "articles", force: true do |t|
+  create_table "articles", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
     t.integer  "author_id"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20140310185935) do
   add_index "articles", ["slug"], name: "index_articles_on_slug", using: :btree
   add_index "articles", ["visible"], name: "index_articles_on_visible", using: :btree
 
-  create_table "articles_topics", force: true do |t|
+  create_table "articles_topics", force: :cascade do |t|
     t.integer "article_id"
     t.integer "topic_id"
   end
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20140310185935) do
   add_index "articles_topics", ["article_id"], name: "index_articles_topics_on_article_id", using: :btree
   add_index "articles_topics", ["topic_id"], name: "index_articles_topics_on_topic_id", using: :btree
 
-  create_table "quotations", force: true do |t|
+  create_table "quotations", force: :cascade do |t|
     t.integer  "quoter_id"
     t.text     "quote"
     t.string   "author"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20140310185935) do
 
   add_index "quotations", ["quoter_id"], name: "index_quotations_on_quoter_id", using: :btree
 
-  create_table "slide_shows", force: true do |t|
+  create_table "slide_shows", force: :cascade do |t|
     t.integer  "author_id"
     t.string   "title"
     t.string   "slug"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20140310185935) do
   add_index "slide_shows", ["author_id"], name: "index_slide_shows_on_author_id", using: :btree
   add_index "slide_shows", ["slug"], name: "index_slide_shows_on_slug", unique: true, using: :btree
 
-  create_table "topics", force: true do |t|
+  create_table "topics", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -93,9 +93,9 @@ ActiveRecord::Schema.define(version: 20140310185935) do
   add_index "topics", ["name"], name: "index_topics_on_name", unique: true, using: :btree
   add_index "topics", ["slug"], name: "index_topics_on_slug", unique: true, using: :btree
 
-  add_foreign_key "articles", "accounts", column: "author_id", name: "articles_author_id_fk"
-  add_foreign_key "articles_topics", "articles", name: "articles_topics_article_id_fk"
-  add_foreign_key "articles_topics", "topics", name: "articles_topics_topic_id_fk"
-  add_foreign_key "quotations", "accounts", column: "quoter_id", name: "quotations_quoter_id_fk"
-  add_foreign_key "slide_shows", "accounts", column: "author_id", name: "slide_shows_author_id_fk"
+  add_foreign_key "articles", "accounts", column: "author_id"
+  add_foreign_key "articles_topics", "articles"
+  add_foreign_key "articles_topics", "topics"
+  add_foreign_key "quotations", "accounts", column: "quoter_id"
+  add_foreign_key "slide_shows", "accounts", column: "author_id"
 end
