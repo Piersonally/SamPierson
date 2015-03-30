@@ -16,7 +16,7 @@ work.
 * Ruby 2.1.x
 * Rails 4.2.x
 * PostgreSQL, foreigner
-* RSpec 3, FactoryGirl, Capybara, Poltergeist (phanjomjs), SimpleCov
+* RSpec 3, FactoryGirl, Capybara, Poltergeist (phanjomjs)
 * Zeus, Guard, guard-rspec, guard-livereload
 * Bootstrap 3 (bootstrap-sass)
 * [Authentication from scratch](http://railscasts.com/episodes/250-authentication-from-scratch-revised)
@@ -26,6 +26,11 @@ work.
   to [simple\_form](https://github.com/plataformatec/simple_form),
   as at the time I started this project, simple\_form was not
   yet Bootstrap 3 compatible.
+
+## Services
+
+* CirleCI for Continuous Integration.
+* CodeClimate for code complexity and coverage analysis.
 
 ## Methodology
 
@@ -68,3 +73,8 @@ server, and guard.  Press return in the guard window to run all tests.
 ## Deployment
 
 This app is continuously deployed to Heroku by CircleCI upon a successful build.
+
+## TO DO
+
+* Attachments
+* Search
