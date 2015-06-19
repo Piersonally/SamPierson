@@ -14,7 +14,7 @@ describe OauthResponse do
     before { oauth_data["info"]["name"]= "" }
 
     it "should raise an exception" do
-      expect { subject }.to raise_error
+      expect { subject }.to raise_error RuntimeError
     end
   end
   context "When the name has only one word" do
