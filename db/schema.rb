@@ -17,31 +17,31 @@ ActiveRecord::Schema.define(version: 20140310185935) do
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
-    t.string   "email"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "password_digest"
+    t.string   "email",           limit: 255
+    t.string   "first_name",      limit: 255
+    t.string   "last_name",       limit: 255
+    t.string   "password_digest", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "oauth_provider"
-    t.string   "oauth_uid"
-    t.string   "gravatar_id"
-    t.string   "roles"
+    t.string   "oauth_provider",  limit: 255
+    t.string   "oauth_uid",       limit: 255
+    t.string   "gravatar_id",     limit: 255
+    t.string   "roles",           limit: 255
   end
 
   add_index "accounts", ["email"], name: "index_accounts_on_email", unique: true, using: :btree
   add_index "accounts", ["oauth_provider", "oauth_uid"], name: "index_accounts_on_oauth_provider_and_oauth_uid", using: :btree
 
   create_table "articles", force: :cascade do |t|
-    t.string   "title"
+    t.string   "title",           limit: 255
     t.text     "body"
     t.integer  "author_id"
     t.datetime "published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "slug"
-    t.boolean  "visible",         default: false
-    t.string   "body_lang",       default: "markdown"
+    t.string   "slug",            limit: 255
+    t.boolean  "visible",                     default: false
+    t.string   "body_lang",       limit: 255, default: "markdown"
     t.text     "custom_synopsis"
   end
 
@@ -61,9 +61,9 @@ ActiveRecord::Schema.define(version: 20140310185935) do
   create_table "quotations", force: :cascade do |t|
     t.integer  "quoter_id"
     t.text     "quote"
-    t.string   "author"
-    t.string   "source"
-    t.string   "when"
+    t.string   "author",     limit: 255
+    t.string   "source",     limit: 255
+    t.string   "when",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -72,30 +72,30 @@ ActiveRecord::Schema.define(version: 20140310185935) do
 
   create_table "slide_shows", force: :cascade do |t|
     t.integer  "author_id"
-    t.string   "title"
-    t.string   "slug"
+    t.string   "title",      limit: 255
+    t.string   "slug",       limit: 255
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "theme",      default: "default"
+    t.string   "theme",      limit: 255, default: "default"
   end
 
   add_index "slide_shows", ["author_id"], name: "index_slide_shows_on_author_id", using: :btree
   add_index "slide_shows", ["slug"], name: "index_slide_shows_on_slug", unique: true, using: :btree
 
   create_table "topics", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "slug"
+    t.string   "slug",       limit: 255
   end
 
   add_index "topics", ["name"], name: "index_topics_on_name", unique: true, using: :btree
   add_index "topics", ["slug"], name: "index_topics_on_slug", unique: true, using: :btree
 
-  add_foreign_key "articles", "accounts", column: "author_id"
-  add_foreign_key "articles_topics", "articles"
-  add_foreign_key "articles_topics", "topics"
-  add_foreign_key "quotations", "accounts", column: "quoter_id"
-  add_foreign_key "slide_shows", "accounts", column: "author_id"
+  add_foreign_key "articles", "accounts", column: "author_id", name: "articles_author_id_fk"
+  add_foreign_key "articles_topics", "articles", name: "articles_topics_article_id_fk"
+  add_foreign_key "articles_topics", "topics", name: "articles_topics_topic_id_fk"
+  add_foreign_key "quotations", "accounts", column: "quoter_id", name: "quotations_quoter_id_fk"
+  add_foreign_key "slide_shows", "accounts", column: "author_id", name: "slide_shows_author_id_fk"
 end
