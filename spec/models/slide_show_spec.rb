@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SlideShow do
+describe SlideShow, type: :model do
   describe "mixins" do
     it_should_behave_like "a model that slugs column", :title
   end

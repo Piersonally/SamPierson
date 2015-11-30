@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Topic do
+describe Topic, type: :model  do
 
   describe "mixins" do
     it_should_behave_like "a model that slugs column", :name

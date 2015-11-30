@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Sluggable do
+describe Sluggable, type: :model do
   let(:test_model) { Article }
   let(:model_factory) { :article }
   let(:slugged_column) { :title }

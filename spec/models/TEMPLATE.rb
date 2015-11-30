@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Model (remove quotes)" do
+describe "Model (remove quotes)", type: :model do
 
   describe "database" do
     #it { should have_db_index(:foo_id).unique(true) }

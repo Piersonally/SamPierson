@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Account do
+describe Account, type: :model do
   describe "database" do
     it { should have_db_index(:email).unique(true) }
   end
