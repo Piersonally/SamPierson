@@ -10,7 +10,7 @@ describe Sluggable, type: :model do
     after { test_model.generate_slugs_from_column = :title }
 
     it "the model should still function" do
-      expect { FactoryGirl.create test_model }.not_to raise_error
+      expect { FactoryGirl.create :article }.not_to raise_error
     end
   end
 

@@ -13,7 +13,7 @@ work.
 
 ## Technology
 
-* Ruby 2.2.x
+* Ruby 2.3.x
 * Rails 4.2.x
 * PostgreSQL, foreigner
 * RSpec 3, FactoryGirl, Capybara, Poltergeist (phanjomjs)
