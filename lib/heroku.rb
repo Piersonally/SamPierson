@@ -9,8 +9,9 @@ class Heroku
   end
 
   def list_backups
-    pgbackups_output = run "pgbackups"
-    pgbackups_output.split("\n").from(2).map do |line|
+    pgbackups_output = run "pg:backups"
+    backups_list_with_header = paragraphs(pgbackups_output)[0]
+    backups_list_with_header.split("\n").from(3).map do |line|
       Backup.new line, self
     end
   end
@@ -24,6 +25,10 @@ class Heroku
   end
 
   private
+
+  def paragraphs(string_content)
+    string_content.split("\n\n")
+  end
 
   def execute_and_capture_output(shell_command)
     notice shell_command
